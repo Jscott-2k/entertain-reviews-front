@@ -1,1 +1,112 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 1rem;
+}
+
+.text {
+    &--lg {
+        font-size: 1.67rem;
+    }
+
+    &--md {
+        font-size: 1.34rem;
+    }
+
+    &--sm {
+        font-size: 1rem;
+    }
+}
+
+.float {
+    &--right {
+        float: right;
+    }
+
+    &--left {
+        float: left;
+    }
+}
+
+.flex-spacer {
+    &--5 {
+        flex: .05 1 auto;
+    }
+
+    &--25 {
+        flex: .25 1 auto;
+    }
+
+    &--100 {
+        flex: 1 1 auto;
+    }
+}
+
+
+.flexbox {
+    display: flex;
+
+    &--row {
+        flex-direction: row;
+    }
+
+    &--column {
+        flex-direction: column;
+    }
+
+    &--justify-center {
+        justify-content: center;
+    }
+
+    &--align-center {
+        align-items: center;
+    }
+}
+
+$score-background-default: red;
+$score-background-low: red;
+$score-background-mid: yellow;
+$score-background-high: green;
+$score-background-perfect: black;
+
+
+$score-text-default: white;
+$score-text-low: white;
+$score-text-mid: black;
+$score-text-high: white;
+$score-text-perfect: white;
+
+.score {
+    &--default {
+        background-color: $score-background-default;
+        color: $score-text-default;
+    }
+    &--low {
+        background-color: $score-background-low;
+        color: $score-text-low;
+    }
+
+    &--mid {
+        background-color: $score-background-mid;
+        color: $score-text-mid;
+    }
+    &--high {
+        background-color: $score-background-high;
+        color: $score-text-high;
+    }
+
+    &--perfect {
+        background-color: $score-background-perfect;
+        color: $score-text-perfect;
+    }
+}
+
+.full-width{
+    width: 100%;
+}

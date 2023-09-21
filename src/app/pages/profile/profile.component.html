@@ -1,0 +1,40 @@
+<app-auth-wrapper>
+  <mat-grid-list cols="4" rowHeight="52px" role="list">
+    
+    <mat-grid-tile [colspan]="4" [rowspan]="1" role="listitem">
+      powerlevel: {{powerlevel}}
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2" [rowspan]="4" role="listitem">
+      <app-avatar [index]="avatarIndex"></app-avatar>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1" role="listitem">
+      total reviews: {{totalReviews}}
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1" role="listitem">
+      helpfuls: {{helpfuls}}
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1" role="listitem">
+      account age: {{accountAge}}
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1" [rowspan]="1" role="listitem">
+      average playtime: {{averagePlaytime}}
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2" [rowspan]="2" role="listitem">
+      <button mat-stroked-button role="button">View All Reviews</button>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="1" role="listitem">
+
+      {{displayName}}
+
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="4" [rowspan]="1" role="listitem">
+      most recent review
+    </mat-grid-tile>
+  </mat-grid-list>
+</app-auth-wrapper>

@@ -1,0 +1,13 @@
+<div class="grid-container">
+    <ng-container *ngFor="let game of reviewedGames$ | async">
+        <app-entertainment-card 
+            [type]=cardTypes.Game
+            [title]="game.title"
+            [summary]="game.summary"
+            [platforms]="game.platforms"
+            [firstReleaseDate]="game.firstReleaseDate"
+            [coverImageURL]="game.coverImageURL"
+            class="grid-item"
+            > </app-entertainment-card>
+    </ng-container>
+</div>

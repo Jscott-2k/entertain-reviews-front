@@ -1,0 +1,107 @@
+<form [formGroup]="form">
+    <mat-vertical-stepper [linear]="true">
+        <!-- Step 1: Consent Group -->
+        <mat-step [formGroup]="consentGroup" [stepControl]="consentGroup">
+            <ng-template matStepLabel>Disclaimer & Consent</ng-template>
+            <!-- Your content for consentGroup step -->
+            <!-- Disclaimer List -->
+            <h3>Disclaimer</h3>
+            <div></div>
+            <h3>Consent</h3>
+            <div></div>
+            <app-checkbox formControlName="ConsentCheckbox"
+                label="I hereby consent to the terms stated above"></app-checkbox>
+            <div>
+                <button mat-button [disabled]="consentGroup.invalid" matStepperNext>Next</button>
+            </div>
+        </mat-step>
+
+        <!-- Step 2: Game Details Group -->
+        <mat-step [formGroup]="gameDetailsGroup" [stepControl]="gameDetailsGroup">
+            <ng-template matStepLabel>Select Game, Platform & Playtime</ng-template>
+            <app-select formControlName="GameSelect" [selectConfig]="gameSelectConfig"
+                labelName="Select your game"></app-select>
+            <div>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+
+        <!-- Step 3: Written Review Group -->
+        <mat-step [formGroup]="writtenReviewGroup" [stepControl]="writtenReviewGroup" *ngIf="writtenReviewGroup">
+            <ng-template matStepLabel>Write Review</ng-template>
+            <!-- Your content for writtenReviewGroup step -->
+            <mat-form-field appearance="fill" hintLabel="Minimum 100 words, maximum 10000 characters"
+                class="full-width">
+                <mat-label>Write your review</mat-label>
+                <textarea #reviewInput formControlName="WrittenReview" required matInput
+                    placeholder="Ex. A slightly flawed masterpiece, but a..."
+                    [errorStateMatcher]="errorStateMatcher"></textarea>
+
+                <mat-hint align="end"><span [ngClass]="{ 'red-text': !(reviewInput.value | wordCount).isFull,
+                        'green-text': (reviewInput.value | wordCount).isFull}">
+                        {{ (reviewInput.value | wordCount).count }} /{{ WrittenReviewWordCountRequired }} words</span>,
+                    {{ reviewInput.value.length }} chars.
+                </mat-hint>
+                <mat-error *ngIf="isInvalid(writtenReviewGroup, 'WrittenReview')">
+                    <div class="error-text">
+                        <span>{{ getError(writtenReviewGroup,'WrittenReview') }}</span>
+                        <span>
+                            <span>{{ (reviewInput.value | wordCount).count }} /{{ WrittenReviewWordCountRequired }}
+                                words</span>,
+                            {{ reviewInput.value.length }} chars.
+                        </span>
+                    </div>
+                </mat-error>
+            </mat-form-field>
+            <div>
+                <button mat-button [disabled]="writtenReviewGroup.invalid" matStepperNext>Next</button>
+            </div>
+        </mat-step>
+
+        <!-- Step 4: General Score Group -->
+        <mat-step [formGroup]="generalScoreGroup" [stepControl]="generalScoreGroup" *ngIf="generalScoreGroup">
+            <ng-template matStepLabel>General Scoring</ng-template>
+            <!-- Your content for generalScoreGroup step -->
+            <div *ngFor="let sliderName of sliderControlNames; let i = index; let even = even">
+                <div *ngIf="even" class="flexbox review-sliders-container">
+                    <app-slider [formControlName]="sliderName" [labelName]="getLabelName(sliderName)"></app-slider>
+                    <app-slider [formControlName]="sliderControlNames[i + 1]"
+                        [labelName]="getLabelName(sliderControlNames[i + 1])"
+                        *ngIf="sliderControlNames[i + 1]"></app-slider>
+                </div>
+                <ng-container *ngIf="!even">
+                    <mat-divider></mat-divider>
+                </ng-container>
+            </div>
+            <p>Weighted Average: {{ weightedAverageValue }}</p>
+            <p>Unweighted Average: {{ unweightedAverageValue }}</p>
+            <div>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </mat-step>
+
+        <!-- Step 5: Pro Cons Group -->
+        <mat-step [stepControl]="proConsGroup">
+            <ng-template matStepLabel>Pros & Cons</ng-template>
+            <!-- Your content for proConsGroup step -->
+        </mat-step>
+
+        <!-- Step 6: Technical Group -->
+        <mat-step [stepControl]="technicalGroup">
+            <ng-template matStepLabel>Techincal</ng-template>
+            <!-- Your content for technicalGroup step -->
+        </mat-step>
+
+        <!-- Step 7: Config Group -->
+        <mat-step [stepControl]="previewGroup">
+            <ng-template matStepLabel>Preferences & Preview</ng-template>
+            <!-- Your content for configGroup step -->
+        </mat-step>
+
+        <!-- Step 8: Submit Group -->
+        <mat-step [stepControl]="submitGroup">
+            <ng-template matStepLabel>Submit</ng-template>
+            <!-- Your content for configGroup step -->
+        </mat-step>
+    </mat-vertical-stepper>
+</form>

@@ -1,0 +1,13 @@
+<div class="slider-container">
+    <div class="slider-label-container">
+        <label id="slider-name-label" class="slider-name-label">{{labelName}}</label>
+        <label class="slider-value-label">{{value}}</label>
+    </div>
+    <mat-slider 
+        [min]="sliderConfig.minValue"
+        [max]="sliderConfig.maxValue"
+        [step]="sliderConfig.stepValue"
+        (input)="onInput($event)" discrete>
+        <input matSliderThumb/>
+    </mat-slider>
+</div>

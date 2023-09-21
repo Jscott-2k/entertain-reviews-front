@@ -1,0 +1,8 @@
+<mat-checkbox
+[checked]="value"
+(change)="onChange($event.checked)"
+(blur)="onTouch()"
+[disabled]="disabled"
+>
+{{ label }}
+</mat-checkbox>

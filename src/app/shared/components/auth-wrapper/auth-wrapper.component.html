@@ -1,0 +1,8 @@
+<ng-container *ngIf="isAllowed; else notAllowed">
+    <ng-content></ng-content>
+</ng-container>
+<ng-template #notAllowed>
+    <div>
+      <p>You need to be signed in to view this page.</p>
+    </div>
+</ng-template>

@@ -1,0 +1,72 @@
+.entertainment-card {
+    &--game {
+        position: relative;
+        height: 300px;
+        &--content-container {
+            padding-top: 14px;
+            height: 164px;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        &--header {
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+
+            &--image-and-subtitle {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+        }
+        &--content{
+            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 1);
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            opacity: 1;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        &--content-container:hover {
+            opacity: 1;
+        }
+        &--content-container:hover &--content {
+            opacity: 0; 
+        }
+
+
+    }
+
+    &--game img {
+        width: 64px;
+        height: 90px;
+
+    }
+
+    &--actions {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+
+}
+
+
+mat-card-title-group {
+    flex-direction: column;
+}
+
+mat-card-title {
+    font-size: 1rem;
+    height: 32px;
+    overflow-x: hidden;
+    white-space: nowrap;
+}

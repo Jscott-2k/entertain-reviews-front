@@ -1,0 +1,40 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    position: sticky;
+    bottom: 0;
+    background-color: #f0f0f0;
+    padding: 10px;
+}
+
+
+/* Vendor Prefixes for Browser Compatibility */
+/* For Safari */
+_:-webkit-full-screen,
+:root footer {
+    position: fixed;
+}
+
+/* For Firefox */
+@supports (-moz-appearance: none) {
+    footer {
+        position: fixed;
+    }
+}
+
+/* For IE and Edge */
+@supports (-ms-ime-align: auto) {
+    footer {
+        position: fixed;
+    }
+}

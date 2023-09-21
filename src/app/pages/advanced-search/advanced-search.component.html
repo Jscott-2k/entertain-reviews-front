@@ -1,0 +1,53 @@
+<div class="search-container">
+
+    <button mat-stroked-button>Clear Fields</button>
+    <mat-form-field>
+        <mat-label>Name Contains</mat-label>
+        <input matInput>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Name Exact</mat-label>
+        <input matInput>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Platforms</mat-label>
+        <mat-select multiple>
+            <mat-option>PC</mat-option>
+
+            <mat-option>Switch</mat-option>
+            <mat-option>PS5</mat-option>
+            <mat-option>Xbox Series X</mat-option>
+
+            <mat-option>PS4</mat-option>
+            <mat-option>Xbox One</mat-option>
+            <mat-option>Wii U</mat-option>
+            <mat-option>Wii</mat-option>
+            <mat-option>Xbox 360</mat-option>
+            <mat-option>PS3</mat-option>
+
+            <mat-option>3DS</mat-option>
+            <mat-option>DS</mat-option>
+            <mat-option>PSP</mat-option>
+            <mat-option>Gameboy Advance</mat-option>
+            <mat-option>Gameboy Color</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Released Before</mat-label>
+        <input matInput [matDatepicker]="beforePicker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="beforePicker"></mat-datepicker-toggle>
+        <mat-datepicker #beforePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Released After</mat-label>
+        <input matInput [matDatepicker]="afterPicker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="afterPicker"></mat-datepicker-toggle>
+        <mat-datepicker #afterPicker></mat-datepicker>
+    </mat-form-field>
+    <button mat-stroked-button>Search</button>
+</div>

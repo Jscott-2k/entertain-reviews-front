@@ -1,0 +1,82 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+
+    <button mat-button class="text--lg" [routerLink]="'/'">Entertainment Reviews</button>
+    <span class="flex-spacer--25"></span>
+
+    <button mat-button [routerLink]="'/news'">
+      <span>News</span>
+      <mat-icon>article</mat-icon>
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="ReviewsMenu">
+      <span>Reviews</span>
+      <mat-icon iconPositionEnd>expand_more</mat-icon>
+    </button>
+
+    <mat-menu #ReviewsMenu="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="GamesPlatformMenu" [routerLink]="'/entertainment/games'">Games</button>
+      <button mat-menu-item [routerLink]="'/entertainment/movies'">Movies</button>
+      <button mat-menu-item [routerLink]="'/entertainment/tv'">TV</button>
+      <button mat-menu-item [routerLink]="'/search'">Advanced Search</button>
+    </mat-menu>
+
+    <mat-menu #GamesPlatformMenu="matMenu">
+      <button mat-menu-item [routerLink]="'/entertainment/games'">All platforms</button>
+      <button mat-menu-item [matMenuTriggerFor]="GamesPlatformConsoleMenu">Consoles</button>
+      <button mat-menu-item [matMenuTriggerFor]="GamesPlatformHandheldMenu">Handhelds</button>
+      <button mat-menu-item [matMenuTriggerFor]="GamesPlatformOtherMenu">Other</button>
+    </mat-menu>
+
+    <mat-menu #GamesPlatformConsoleMenu="matMenu">
+      <button mat-menu-item *ngFor="let platform of consolePlatforms | platformSort" [platformNavigation]="platform">
+        {{ platform.name }}
+      </button>
+
+    </mat-menu>
+
+    <mat-menu #GamesPlatformHandheldMenu="matMenu">
+      <button mat-menu-item *ngFor="let platform of handheldPlatforms | platformSort" [platformNavigation]="platform">
+        {{ platform.name }}
+      </button>
+    </mat-menu>
+
+    <mat-menu #GamesPlatformOtherMenu="matMenu">
+
+      <button mat-menu-item *ngFor="let platform of otherPlatforms | platformSort" [platformNavigation]="platform">
+        {{ platform.name }}
+      </button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="ProfileMenu">
+      <span>Profile</span>
+      <mat-icon iconPositionEnd>expand_more</mat-icon>
+    </button>
+
+    <mat-menu #ProfileMenu="matMenu">
+      <button mat-menu-item [routerLink]="'/profile/'">My profile</button>
+      <button mat-menu-item [routerLink]="'/profile/reviews'">Find User</button>
+      <button mat-menu-item [routerLink]="'/profile/settings'">Settings</button>
+    </mat-menu>
+
+    <span class="flex-spacer--100"></span>
+
+    <div matTooltip="Please login to use this feature" matTooltipPosition="below" [matTooltipDisabled]="isLoggedIn">
+      <button mat-raised-button [disabled]="!isLoggedIn" [routerLink]="'/create'">Write Review</button>
+    </div>
+
+
+    <span class="flex-spacer--5"></span>
+
+
+    <button mat-raised-button *ngIf="isLoggedIn" (click)="logout()">Sign Out</button>
+    <asl-google-signin-button *ngIf="!isLoggedIn" type='standard' size='large'></asl-google-signin-button>
+    <span class="flex-spacer--5"></span>
+    <div *ngIf="user" class="text--sm">
+      Logged in as {{user.firstName}}
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="flexbox flexbox--row flexbox--justify-center flexbox--align-center">
+  <h1 class="pageTitle">{{title}}</h1>
+</div>

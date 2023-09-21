@@ -1,0 +1,26 @@
+$avatarStyles: (
+  0: (-58px, -58px),
+  1: (-320px, -58px),
+  2: (-582px, -58px),
+  3: (-58px, -320px),
+  4: (-320px, -320px),
+  5: (-582px, -320px),
+  6: (-58px, -582px),
+  7: (-320px, -582px),
+  8: (-582px, -582px),
+);
+
+@mixin define-avatar {
+  @each $index, $values in $avatarStyles {
+    $right: nth($values, 1);
+    $top: nth($values, 2);
+
+    .avatar-icon__#{$index} {
+      background: url('/assets/avatars-profile.png') no-repeat $right $top;
+      width: 212px;
+      height: 212px;
+    }
+  }
+}
+
+@include define-avatar;
