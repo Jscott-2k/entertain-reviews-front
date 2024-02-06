@@ -1,26 +1,47 @@
 .entertainment-card {
-    &--game {
+    &__game {
         position: relative;
         height: 300px;
-        &--content-container {
+        &__content-container {
             padding-top: 14px;
             height: 164px;
             overflow-y: auto;
             position: relative;
         }
         
-        &--header {
+        &__header {
             height: 80px;
             display: flex;
             flex-direction: column;
 
-            &--image-and-subtitle {
+            mat-card-title {
+                span:first-child {
+                  max-width: 200px;
+                  overflow-x:hidden;
+                  text-overflow: ellipsis;
+                  white-space: nowrap; 
+                  transition: transform 5s ease; 
+                  opacity: 1;
+                }
+              
+                &:hover {
+                  span:first-child {
+                    transform: translateX(-100%);
+                    overflow: visible;
+                  }
+                  app-rating{
+                    opacity: 0;
+                  }
+                }
+              }
+
+            &__image-and-subtitle {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
             }
         }
-        &--content{
+        &__content{
             pointer-events: none;
             position: absolute;
             top: 0;
@@ -35,23 +56,23 @@
             pointer-events: none;
             transition: opacity 0.3s ease;
         }
-        &--content-container:hover {
-            opacity: 1;
-        }
-        &--content-container:hover &--content {
-            opacity: 0; 
-        }
+        // &__content-container:hover {
+        //     opacity: 1;
+        // }
+        // &__content-container:hover &--content {
+        //     opacity: 0; 
+        // }
 
 
     }
 
-    &--game img {
+    &__game img {
         width: 64px;
         height: 90px;
 
     }
 
-    &--actions {
+    &__actions {
         position: absolute;
         bottom: 0;
         right: 0;

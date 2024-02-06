@@ -9,6 +9,8 @@ import { SharedModule } from './shared/shared.module';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleLoginProvider, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { environment } from '../../environments/environment'; // Import the environment (make sure file env replacements are correct)
+
 import { 
     AccountHistoryComponent,
     AccountSettingsComponent,
@@ -19,7 +21,8 @@ import {
     ReviewListComponent } from './pages';
 import { CoreModule } from './core/core.module';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ConsentStepComponent } from './pages/create-review/review-form/consent-step/consent-step.component';
+import { GameDetailsStepComponent } from './pages/create-review/review-form/game-details-step/game-details-step.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReviewDetailedComponent,
     AccountHistoryComponent,
     AccountSettingsComponent,
-    AdvancedSearchComponent
+    AdvancedSearchComponent,
+    ConsentStepComponent,
+    GameDetailsStepComponent
   ], 
   imports: [
     CommonModule,
@@ -47,7 +52,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         {
           id: GoogleLoginProvider.PROVIDER_ID,
           provider: new GoogleLoginProvider(
-            process.env['googleProvider'] || ""
+            environment.googleProvider
           )
         }
       ],

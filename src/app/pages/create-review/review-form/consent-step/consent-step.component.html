@@ -1,0 +1,10 @@
+<!-- Your content for consentGroup step -->
+<!-- Disclaimer List -->
+<h3>Disclaimer</h3>
+<div></div>
+<h3>Consent</h3>
+<div></div>
+<app-checkbox formControlName="ConsentCheckbox" label="I hereby consent to the terms stated above"></app-checkbox>
+<div>
+    <button mat-button [disabled]="consentGroup.invalid" matStepperNext>Next</button>
+</div>

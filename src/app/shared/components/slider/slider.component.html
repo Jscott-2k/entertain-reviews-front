@@ -8,6 +8,6 @@
         [max]="sliderConfig.maxValue"
         [step]="sliderConfig.stepValue"
         (input)="onInput($event)" discrete>
-        <input matSliderThumb/>
+        <input matSliderThumb [value]="value"/>
     </mat-slider>
 </div>

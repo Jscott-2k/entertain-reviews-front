@@ -67,6 +67,10 @@ html {
     &--align-center {
         align-items: center;
     }
+
+    &--justify-space-between {
+        justify-content: space-between;
+    }
 }
 
 $score-background-default: red;

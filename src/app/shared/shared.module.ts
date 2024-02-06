@@ -23,15 +23,16 @@ import { SharedMaterialModule } from './shared-material.module';
 import { TextAreaComponent } from './components/text-area/text-area.component';
 import { ToggleComponent } from './components/toggle/toggle.component';
 import { SliderComponent } from './components/slider/slider.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScoreClassPipe } from './pipes/score-class.pipe';
 import { TextTruncatePipe } from './pipes/text-truncate.pipe';
 import { AbsPipe } from './pipes/abs.pipe';
 import { WordCountPipe } from './pipes/word-count.pipe';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { SelectComponent } from './components/select/select.component';
-
-
+import { AutoCompleteComponent } from './components/auto-complete/auto-complete.component';
+import { RangePipe } from './pipes/range.pipe';
+import { RangeDirective } from './directives/range/range.directive';
 
 @NgModule({
   declarations: [
@@ -58,12 +59,16 @@ import { SelectComponent } from './components/select/select.component';
     WordCountPipe,
     CheckboxComponent,
     SelectComponent,
+    AutoCompleteComponent,
+    RangePipe,
+    RangeDirective,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     BrowserAnimationsModule,
     SocialLoginModule,
     SharedMaterialModule,
@@ -90,7 +95,10 @@ import { SelectComponent } from './components/select/select.component';
     ReactiveFormsModule,
     AbsPipe,
     WordCountPipe,
-    SelectComponent
+    SelectComponent,
+    AutoCompleteComponent,
+    RangePipe,
+    RangeDirective
   ]
 })
 export class SharedModule { }

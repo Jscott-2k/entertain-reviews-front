@@ -1,0 +1,13 @@
+<div class="auto-complete__container">
+    <mat-form-field>
+
+        <mat-label>{{labelName}}</mat-label>
+        <input type="text" [placeholder]="placeholder" [ariaLabel]="labelName" matInput [matAutocomplete]="auto"
+            (input)="onInput($event)">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event)">
+            <mat-option *ngFor="let option of filteredOptions" [value]="option">
+                {{ option }}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</div>

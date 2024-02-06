@@ -61,7 +61,24 @@ export class ReviewService {
   searchMovieByName(){}
   searchTVByName(){}
 
-  createReview(){}
   deleteReview(){}
   getReview(){}
+
+
+  private reviews: any[] = []; // Array to store reviews (replace with actual model)
+
+  createReview(reviewData: any): Observable<any> {
+    // Assuming you have an API endpoint for posting reviews
+    const apiEndpoint = 'https://api.example.com/reviews';
+
+    // For a real application, make an HTTP POST request to the server
+    // Example using Angular's HttpClient:
+    // return this.httpClient.post(apiEndpoint, reviewData);
+
+    // For simplicity, we'll just store the review locally in this example
+    this.reviews.push(reviewData);
+    console.info(reviewData);
+    // Simulate an asynchronous operation (replace with actual HTTP request)
+    return of({ success: true, message: 'Review posted successfully' });
+  }
 }

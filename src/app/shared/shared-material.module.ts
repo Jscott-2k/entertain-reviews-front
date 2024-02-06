@@ -19,7 +19,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipsModule} from '@angular/material/chips';
-
+import { MatTableModule } from '@angular/material/table';
 
 
 
@@ -44,7 +44,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatListModule,
     MatCheckboxModule,
     MatAutocompleteModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTableModule
   ],
   exports:[
     MatMenuModule, 
@@ -65,7 +66,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatListModule,
     MatCheckboxModule,
     MatAutocompleteModule,
-    MatChipsModule
+    MatChipsModule,
+    MatTableModule
   ]
 })
 export class SharedMaterialModule { }

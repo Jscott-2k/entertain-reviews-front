@@ -1,17 +1,5 @@
 <mat-label>{{labelName}}</mat-label>
-
 <mat-select (selectionChange)="onSelectionChange($event)" [value]="values" [multiple]="selectConfig.multi">
-    <mat-chip-grid *ngIf="selectConfig.multi" #chipGrid aria-label="Fruit selection">
-        <mat-chip-row *ngFor="let value of values" (removed)="removeValue(value)">
-            {{value}}
-            <button matChipRemove [attr.aria-label]="'remove ' + value">
-                <mat-icon >cancel</mat-icon>
-            </button>
-        </mat-chip-row>
-        </mat-chip-grid>
-
-        <input (input)="onSearchInput($event)" matInput>
-        <mat-select-trigger *ngIf="!selectConfig.multi">{{ values[0] }}</mat-select-trigger>
         <mat-option value="none">None</mat-option>
-        <mat-option *ngFor="let option of filteredOptions" [value]="option.value">{{option.viewValue}}</mat-option>
+        <mat-option *ngFor="let option of selectConfig.options" [value]="option.value">{{option.viewValue}}</mat-option>
 </mat-select>

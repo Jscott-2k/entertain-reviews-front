@@ -1,13 +1,14 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from '../../../environments/environment'; // Import the environment (make sure file env replacements are correct)
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   
-  private readonly backendBaseUrl = process.env['apiUrl'];
+  private readonly backendBaseUrl = environment.apiUrl;
 
   constructor(private http:HttpClient) { }
 

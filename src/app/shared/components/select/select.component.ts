@@ -26,10 +26,8 @@ export class SelectComponent<T = string> implements ControlValueAccessor, OnInit
   };
   @Input() labelName: string = "";
 
-  searchTerm: string = '';
   private _defaultValues?: T[] = this.selectConfig?.defaultValues;
   private _selectedValues: T[] = [];
-  filteredOptions: SelectOption<T>[] = [];
 
   private onChange: any = () => { };
   private onTouch: any = () => { };
@@ -47,13 +45,8 @@ export class SelectComponent<T = string> implements ControlValueAccessor, OnInit
   ngOnInit(): void {
     if (this._defaultValues) {
       this._selectedValues = this._defaultValues.slice();
+
     }
-  }
-  onSearchInput(event: Event) {
-    this.searchTerm = (event.target as HTMLInputElement).value;
-    this.filteredOptions = this.selectConfig.options.filter((option) =>
-      option.viewValue.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
   }
   onSelectionChange(event: MatSelectChange) {
 
