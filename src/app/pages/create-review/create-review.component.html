@@ -1,4 +1,4 @@
-<form [formGroup]="mainform" (ngSubmit)="postReview()">
+<form [formGroup]="mainform" (ngSubmit)="postReview($event)">
     <mat-vertical-stepper [linear]="true">
 
         <!-- Step 1: Consent Group -->
@@ -162,8 +162,8 @@
                 </div>
             </div>
 
-            <button mat-button (click)="addPro()">Add Pro</button>
-            <button mat-button (click)="addCon()">Add Con</button>
+            <button mat-button type="button" (click)="addPro()">Add Pro</button>
+            <button mat-button type="button" (click)="addCon()">Add Con</button>
             <div>
                 <button mat-button type="button" [disabled]="prosConsGroup.invalid" matStepperNext>Next</button>
             </div>
@@ -283,35 +283,48 @@
                         <div class="pros-cons-container">
                             <div class="pros">
                                 <h4>Pros</h4>
-                                <mat-card *ngFor="let proGroup of prosListControlsGroup">
-                                    <mat-card-content>
-                                        <p><strong>Description:</strong> {{
-                                            proGroup.get('description')?.value }} </p>
-                                        <p> <strong>Modifier:</strong> {{
-                                            proGroup.get('modifier')?.value }} </p>
-                                    </mat-card-content>
-                                </mat-card>
+                                <ng-container *ngIf="prosListControlsGroup.length > 0; else noProsPreview">
+                                    <mat-card *ngFor="let proGroup of prosListControlsGroup">
+                                        <mat-card-content>
+                                            <p><strong>Description:</strong> {{
+                                                proGroup.get('description')?.value }} </p>
+                                            <p> <strong>Modifier:</strong> {{
+                                                proGroup.get('modifier')?.value }} </p>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </ng-container>
+                                <ng-template #noProsPreview>
+                                    <p>No cons</p>
+                                </ng-template>
                                 <p><strong>Total Pros Modifier:</strong> {{ prosTotalModifier$ | async }}</p>
+
                             </div>
                             <div class="cons">
                                 <h4>Cons</h4>
-                                <mat-card *ngFor="let conGroup of consListControlsGroup">
-                                    <mat-card-content>
-                                        <p> <strong>Description:</strong> {{
-                                            conGroup.get('description')?.value }} </p>
-                                        <p> <strong>Modifier:</strong> {{
-                                            conGroup.get('modifier')?.value }} </p>
-                                    </mat-card-content>
-                                </mat-card>
+
+                                <ng-container *ngIf="consListControlsGroup.length > 0; else noConsPreview">
+                                    <mat-card *ngFor="let conGroup of consListControlsGroup">
+                                        <mat-card-content>
+                                            <p><strong>Description:</strong> {{ conGroup.get('description')?.value }}
+                                            </p>
+                                            <p><strong>Modifier:</strong> {{ conGroup.get('modifier')?.value }}</p>
+                                        </mat-card-content>
+                                    </mat-card>
+                                    <p><strong>Total Co...</strong></p>
+                                </ng-container>
+
+                                <ng-template #noConsPreview>
+                                    <p>No cons</p>
+                                </ng-template>
                                 <p><strong>Total Cons Modifier:</strong> {{ consTotalModifier$ | async }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div>
+                    <button mat-button type="button" matStepperNext>Next</button>
+                </div>
             </ng-template>
-            <div>
-                <button mat-button type="button" matStepperNext>Next</button>
-            </div>
         </mat-step>
 
         <!-- Step 8: Submit Group -->

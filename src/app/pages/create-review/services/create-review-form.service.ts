@@ -64,7 +64,7 @@ export class CreateReviewFormService {
     return this.formBuilder.group({
       GameAutoComplete: ["", [Validators.required]],
       PlatformAutoComplete: ["", [Validators.required]],
-      TotalPlaytime: [0, [Validators.required, Validators.min(1), Validators.pattern("^[0-9]*$"), Validators.minLength(1)]]
+      TotalPlaytime: ["", [Validators.required, Validators.min(1), Validators.pattern("^[1-9][0-9]*$"), Validators.minLength(1)]]
     });
   }
   private buildProConsForm() {

@@ -36,16 +36,13 @@ export class CreateReviewComponent implements OnInit, OnDestroy {
   private _overallWeightedScore: number = 0;
   private _overallUnweightedScore: number = 0;
 
-
   private _scoreToWeightMapping: { [key: string]: string } = {};
   private _generalScoreLabelObject: { [key: string]: { label: string } } | null = null;
   private _allGeneralScoreSliderKeys: string[] | null = null;
 
   private _subscriptions: Subscription[] = [];
 
-  
   scoreSliderDataSource!: MatTableDataSource<string>;
-
 
   constructor(private formBuilder: FormBuilder,
     private formService: CreateReviewFormService,
@@ -119,7 +116,6 @@ export class CreateReviewComponent implements OnInit, OnDestroy {
       this._scoreToWeightMapping[scoreControlName] = weightControlName;
     }
   }
-
 
   private getGameAutoCompleteControl(): FormControl {
     return this.formService.gameDetailsGroup.get("GameAutoComplete") as FormControl;
@@ -416,7 +412,8 @@ export class CreateReviewComponent implements OnInit, OnDestroy {
     return false;
   }
 
-  postReview() {
+  postReview(event: Event) {
+    event.preventDefault();
     if (this.mainform.valid) {
       this.reviewService.createReview(this.mainform.value).subscribe({
         next: (response: any) => {
