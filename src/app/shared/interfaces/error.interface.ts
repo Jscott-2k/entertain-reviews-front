@@ -50,11 +50,9 @@ export const errorMessageMap: {[key in ErrorType]:(control: AbstractControl) => 
       }
       return `Weighted score must be between ${lowerBound} and ${upperBound}.`;
     }
-    
     if (unweightedScore < lowerBound || unweightedScore > upperBound) {
       return `Unweighted score must be between ${lowerBound} and ${upperBound}.`;
     }
-    
     return `Invalid overall scores: Weighted: ${weightedScore}, Unweighted: ${unweightedScore}.`;
   }, 
 };

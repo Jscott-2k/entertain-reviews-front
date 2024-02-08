@@ -10,8 +10,6 @@ export class GameCardComponent {
   @Input() game!:IGameDisplay;
   @Input() score!:number;
 
-
-
   constructor(){
     
   }

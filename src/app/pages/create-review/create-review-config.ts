@@ -1,5 +1,3 @@
-
-
 // Interface for a slider mapping
 export interface SliderMapping {
     [key: string]: string;

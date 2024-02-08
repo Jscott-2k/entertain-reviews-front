@@ -2,10 +2,10 @@
   <mat-card-header class="entertainment-card__game__header" [ngClass]="score | scoreClass">
     <mat-card-title-group>
       <mat-card-title>
-        <div class="flexbox flexbox--justify-space-between"> 
-      <span>{{game.title}} </span>
-      <app-rating [score]="score"></app-rating> 
-      </div>
+        <div class="flexbox flexbox--justify-space-between">
+          <span>{{game.title}} </span>
+          <app-rating [score]="score"></app-rating>
+        </div>
       </mat-card-title>
       <div class="entertainment-card__game--header__image-and-subtitle">
         <mat-card-subtitle [ngClass]="score | scoreClass">

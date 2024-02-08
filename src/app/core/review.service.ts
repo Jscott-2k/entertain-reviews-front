@@ -14,10 +14,8 @@ export class ReviewService {
 
   private reviewedGameDisplayListSubject = new Subject<IReviewedGameCardDisplay[]>();
   
-
   constructor(private apiService:ApiService, private igdbImageService: IgdbImageService) {  }
   
-
   private filterPlatform(selectedPlatforms:string[], responseArray:IGameResponseObject[]){
     if(selectedPlatforms.length == 0 || selectedPlatforms.includes("any")){
 
@@ -46,7 +44,7 @@ export class ReviewService {
   }
 
   async getReviewedGames(selectedPlatforms:string[]):Promise<any> {
-    return this.apiService.post<IGameResponseObject[]>("reviewgames").pipe(
+    return this.apiService.post<IGameResponseObject[]>("review-games").pipe(
       map((responseArray:IGameResponseObject[]) => this.filterPlatform(selectedPlatforms,responseArray))).subscribe((response:IGameResponseObject[]) => {
         const gamesCards:IReviewedGameCardDisplay[] = this.mapResponseToGameCard(response);
         this.reviewedGameDisplayListSubject.next(gamesCards);
@@ -76,6 +74,9 @@ export class ReviewService {
     // return this.httpClient.post(apiEndpoint, reviewData);
 
     // For simplicity, we'll just store the review locally in this example
+
+    this.apiService.post("create-review")
+
     this.reviews.push(reviewData);
     console.info(reviewData);
     // Simulate an asynchronous operation (replace with actual HTTP request)

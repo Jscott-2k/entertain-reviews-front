@@ -30,9 +30,9 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
   private onTouch: any = () => {};
 
   ngOnInit(): void {
-    if (this.sliderConfig) {
-      this.writeValue(this.defaultValue);
-    }
+    // if (this.sliderConfig) {
+    //   this.writeValue(this.defaultValue);
+    // }
   }
 
   get value(): number {
@@ -43,7 +43,6 @@ export class SliderComponent implements ControlValueAccessor, OnInit {
     this._value = val;
     this.onChange(val);
     this.onTouch(val);
-    
   }
 
   onInput(event: Event) {

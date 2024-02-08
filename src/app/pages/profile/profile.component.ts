@@ -18,7 +18,7 @@ export class ProfileComponent{
 
   powerlevel:number = 0;
   avatarIndex:number = 1;
-  averagePlaytime:number=0;
+  totalPlaytime:number=0;
   accountAge:number = 0;
   gameBacklog:number[] = [];
   totalReviews:number = 0;
