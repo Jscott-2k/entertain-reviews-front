@@ -14,33 +14,33 @@
 
         <!-- Step 3: Written Review Group -->
         <mat-step [formGroup]="writtenReviewGroup" [stepControl]="writtenReviewGroup" *ngIf="writtenReviewGroup">
-            <ng-template matStepLabel>Write Review</ng-template>\
-            <app-written-review-step [writtenReviewGroup]="writtenReviewGroup"></app-written-review-step>
+            <ng-template matStepLabel>Write Review</ng-template>
+            <app-written-review-step [writtenReviewGroup]="writtenReviewGroup" [errorStateMatcher]="errorStateMatcher"></app-written-review-step>
         </mat-step>
 
         <!-- Step 4: General Score Group -->
         <mat-step [formGroup]="generalScoreGroup" [stepControl]="generalScoreGroup" *ngIf="generalScoreGroup">
             <ng-template matStepLabel>General Scoring</ng-template>
-            <app-general-score-step [generalScoreGroup]="generalScoreGroup"> </app-general-score-step>
+            <app-general-score-step [generalScoreGroup]="generalScoreGroup" (onScoreChange)="updateScores()"> </app-general-score-step>
         </mat-step>
 
         <!-- Step 5: Pro Cons Group -->
         <mat-step [formGroup]="prosConsGroup" [stepControl]="prosConsGroup" *ngIf="prosConsGroup" [optional]="true">
             <ng-template matStepLabel>Pros & Cons</ng-template>
-            <app-pros-cons-step [prosConsGroup]="prosConsGroup"> </app-pros-cons-step>
+            <app-pros-cons-step (onProConListChange)="updateScores()" [prosConsGroup]="prosConsGroup"> </app-pros-cons-step>
         </mat-step>
 
         <!-- Step 6: Technical Group -->
-        <mat-step [stepControl]="technicalGroup" [formGroup]="technicalGroup" *ngIf="technicalGroup" [optional]="true">
+        <mat-step [stepControl]="technicalGroup" [formGroup]="technicalGroup" *ngIf="technicalGroup" [optional]="true" >
             <ng-template matStepLabel>Technical</ng-template>
+            <app-technical-review-step (onTechnicalModifierChange)="updateScores()" [technicalGroup]="technicalGroup" [errorStateMatcher]="errorStateMatcher"></app-technical-review-step>
         </mat-step>
 
         <!-- Step 7: Preview Group -->
         <mat-step [stepControl]="previewGroup">
-
             <ng-template matStepLabel>Preview</ng-template>
             <ng-template matStepContent>
-                <app-preview-step [previewGroup]="previewGroup"></app-preview-step>
+                <app-preview-step (onOverallScoreChange)="updateValidatorsAndValidity($event)" [previewGroup]="previewGroup" ></app-preview-step>
             </ng-template>
         </mat-step>
 

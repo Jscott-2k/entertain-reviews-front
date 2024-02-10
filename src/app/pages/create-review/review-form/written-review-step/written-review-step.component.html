@@ -8,14 +8,14 @@
 
         <mat-hint align="end"><span [ngClass]="{ 'red-text': !(reviewInput.value | wordCount).isFull,
                         'green-text': (reviewInput.value | wordCount).isFull}">
-                {{ (reviewInput.value | wordCount).count }} /{{ writtenReviewWordCountRequired }} words</span>,
+                {{ (reviewInput.value | wordCount).count }} /{{ requiredWordCount }} words</span>,
             {{ reviewInput.value.length }} chars.
         </mat-hint>
         <mat-error *ngIf="isInvalid(writtenReviewGroup, 'WrittenReview')">
             <div class="error-text">
                 <span>{{ getError(writtenReviewGroup,'WrittenReview') }}</span>
                 <span>
-                    <span>{{ (reviewInput.value | wordCount).count }} /{{ writtenReviewWordCountRequired }}
+                    <span>{{ (reviewInput.value | wordCount).count }} /{{ requiredWordCount }}
                         words</span>,
                     {{ reviewInput.value.length }} chars.
                 </span>

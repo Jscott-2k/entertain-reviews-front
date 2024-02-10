@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/custom.validation';
-import { scoreControlNames, weightControlNames } from '../create-review-config';
+import { CreateReviewFormConfig } from '../review-form/create-review-form-config';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,6 @@ export class CreateReviewFormService {
   previewGroup!: FormGroup;
   submitGroup!: FormGroup;
 
-  readonly WrittenReviewWordCountRequired = 100;
-
   constructor(private formBuilder: FormBuilder) { }
 
   buildMainForm() {
@@ -29,7 +27,7 @@ export class CreateReviewFormService {
     this.previewGroup = this.buildPreviewForm();
     this.consentGroup = this.buildConsentForm();
     this.consentGroup.updateValueAndValidity();
-    
+
     this.gameDetailsGroup = this.buildGameDetailsForm();
     this.gameDetailsGroup.updateValueAndValidity();
 
@@ -45,7 +43,7 @@ export class CreateReviewFormService {
       proConsGroup: this.prosConsGroup,
       technicalGroup: this.technicalGroup,
       previewGroup: this.previewGroup,
-      submitGroup:this.submitGroup
+      submitGroup: this.submitGroup
     });
     // form.setValidators(CustomValidators.overallScoreValidator(this._overallWeightedScore, this._overallUnweightedScore, 0, 10));
     return form;
@@ -92,9 +90,9 @@ export class CreateReviewFormService {
    */
   private buildGeneralScoreForm(): FormGroup {
 
-    const formGroupScoreConfig = scoreControlNames
+    const formGroupScoreConfig = CreateReviewFormConfig.scoreControlNames
       .reduce((config, scoreControlName, index) => {
-        const weightControlName = weightControlNames[index];
+        const weightControlName = CreateReviewFormConfig.weightControlNames[index];
         config[scoreControlName] = [0];
         config[weightControlName] = [10];
         return config;
@@ -106,7 +104,22 @@ export class CreateReviewFormService {
   private buildWrittenReviewForm(): FormGroup {
     return this.formBuilder.group({
       WrittenReview: ['', [Validators.required,
-      Validators.maxLength(10000), CustomValidators.minWordCount(this.WrittenReviewWordCountRequired)]]
+      Validators.maxLength(10000), CustomValidators.minWordCount(CreateReviewFormConfig.writtenReviewWordCountRequired)]]
     });
   }
+
+  get prosList(): FormArray {
+    return this.prosConsGroup.get('prosList') as FormArray;
+  }
+  get consList(): FormArray {
+    return this.prosConsGroup.get('consList') as FormArray;
+  }
+
+  get prosListControlsGroup(): AbstractControl[] {
+    return this.prosList?.controls
+  }
+  get consListControlsGroup(): AbstractControl[] {
+    return this.consList?.controls
+  }
+
 }

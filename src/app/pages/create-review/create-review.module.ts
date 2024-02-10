@@ -10,6 +10,7 @@ import { GeneralScoreStepComponent } from './review-form/general-score-step/gene
 import { ProsConsStepComponent } from './review-form/pros-cons-step/pros-cons-step.component';
 import { PreviewStepComponent } from './review-form/preview-step/preview-step.component';
 import { TechnicalReviewStepComponent } from './review-form/technical-review-step/technical-review-step.component';
+import { FormStepComponent } from './form-step/form-step.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { TechnicalReviewStepComponent } from './review-form/technical-review-ste
     ProsConsStepComponent,
     TechnicalReviewStepComponent,
     PreviewStepComponent,
+    FormStepComponent,
   ],
   imports: [
     CoreModule,

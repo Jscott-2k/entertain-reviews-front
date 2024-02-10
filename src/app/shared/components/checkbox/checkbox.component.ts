@@ -37,7 +37,6 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit {
     this._checked = val;
     this.onChange(val);
     this.onTouch(val);
-
   }
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;

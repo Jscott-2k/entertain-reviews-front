@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject, combineLatest, take } from 'rxjs';
-import { scoreControlNames, weightControlNames } from '../create-review-config';
+import { CreateReviewFormConfig } from '../review-form/create-review-form-config';
+import { CreateReviewFormService } from './create-review-form.service';
 
 
 @Injectable({
@@ -32,18 +33,17 @@ export class CreateReviewLogicService {
 
   technicalModifier$ = this.technicalModifierSubject.asObservable();
 
-  constructor() { }
+  constructor(private formService:CreateReviewFormService) { }
 
-  updateScores(
-    prosListControls: AbstractControl[],
-    consListControls: AbstractControl[],
-    technicalModifier: number,
-    generalScoreGroup: FormGroup
-  ) {
+  updateScores() {
+    let technicalModiferControl = this.formService.technicalGroup.get("TechnicalReviewScoreModifier");
+    let generalScoreGroup = this.formService.generalScoreGroup;
+    let prosListControls = this.formService.prosListControlsGroup;
+    let consListControls = this.formService.consListControlsGroup;
     this.updateGeneralScoreAverages(generalScoreGroup);
     this.updateProsModifier(prosListControls);
     this.updateConsModifier(consListControls);
-    this.updateTechnicalModifier(technicalModifier);
+    this.updateTechnicalModifier(technicalModiferControl?.value || 0);
     this.updateOverallScores();
   }
 
@@ -62,9 +62,9 @@ export class CreateReviewLogicService {
     let totalValue = 0;
     let totalWeight = 0;
 
-    weightControlNames.forEach((weightControlName, index) => {
+    CreateReviewFormConfig.weightControlNames.forEach((weightControlName, index) => {
       const weightValue = generalScoreGroup.get(weightControlName)?.value || 0;
-      const correspondingScoreName = scoreControlNames[index];
+      const correspondingScoreName = CreateReviewFormConfig.scoreControlNames[index];
       const scoreValue = generalScoreGroup.get(correspondingScoreName)?.value || 0;
 
       totalValue += scoreValue * weightValue;
@@ -159,8 +159,9 @@ export class CreateReviewLogicService {
   }
 
   updateGeneralScoreAverages(generalScoreGroup: FormGroup): { unweightedAverage: number; weightedAverage: number } {
-    const unweightedAverageValue = this.updateUnweightedAverage(scoreControlNames, generalScoreGroup);
+    const unweightedAverageValue = this.updateUnweightedAverage(CreateReviewFormConfig.scoreControlNames, generalScoreGroup);
     const weightedAverageValue = this.updateWeightedAverage(generalScoreGroup);
     return { unweightedAverage: unweightedAverageValue, weightedAverage: weightedAverageValue };
   }
+
 }
