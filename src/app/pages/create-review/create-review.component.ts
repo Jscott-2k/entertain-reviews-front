@@ -15,6 +15,7 @@ import { CreateReviewUiService } from './services/create-review-ui.service';
 import { scoreControlNames, weightControlNames, scoreLabelMapping, weightLabelMapping } from './create-review-config';
 import { ReviewService } from 'src/app/core/review.service';
 
+import { ConsentStepComponent } from './review-form/consent-step/consent-step.component';
 
 @Component({
   selector: 'app-create-review',
@@ -117,26 +118,6 @@ export class CreateReviewComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getGameAutoCompleteControl(): FormControl {
-    return this.formService.gameDetailsGroup.get("GameAutoComplete") as FormControl;
-  }
-  private getPlatformAutoCompleteControl(): FormControl {
-    return this.formService.gameDetailsGroup.get("PlatformAutoComplete") as FormControl;
-  }
-
-  get SelectedGame(): string {
-    return this.getGameAutoCompleteControl()?.value;
-  }
-
-  get SelectedGameName(): string {
-
-    return this.getGameAutoCompleteControl()?.value;
-  }
-
-  get SelectedPlatformName(): string {
-    return this.getPlatformAutoCompleteControl()?.value;
-  }
-
   getGeneralScoreSliderControl(name: string): FormControl {
     return this.formService.generalScoreGroup.get(name) as FormControl;
   }
@@ -205,19 +186,6 @@ export class CreateReviewComponent implements OnInit, OnDestroy {
 
   calculateConsModifier(): number {
     return this.logicService.updateConsModifier(this.consListControlsGroup);
-  }
-
-  /**
-   * Update later with entries requested from igdb asynchronously 
-   */
-  private _gameAutoCompleteConfig: string[] = ["My First Game", "My Seconds Game", "My Thirds Game"]
-  get gameAutoCompleteConfig(): string[] {
-    return this._gameAutoCompleteConfig;
-  }
-
-  private _platformAutoCompleteConfig: string[] = ["My First Platform", "My Seconds Platform", "My Thirds Platform"]
-  get platformAutoCompleteConfig(): string[] {
-    return this._platformAutoCompleteConfig;
   }
 
   get ScoreSliderConfig(): SliderConfig {

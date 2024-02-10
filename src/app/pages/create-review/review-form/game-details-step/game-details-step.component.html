@@ -1,1 +1,27 @@
-<p>game-details-step works!</p>
+<div [formGroup]="gameDetailsGroup">
+    <app-auto-complete formControlName="GameAutoComplete" [options]="gameAutoCompleteConfig" labelName="Find your game"
+        placeholder="The Legend of Zelda: Tears of the Kingdom">
+    </app-auto-complete>
+
+    <div class="selected-game">
+        <h5>{{SelectedGameName}}</h5>
+    </div>
+
+    <app-auto-complete formControlName="PlatformAutoComplete" [options]="platformAutoCompleteConfig"
+        labelName="Find your platform" placeholder="PS5">
+    </app-auto-complete>
+
+
+    <div class="selected-platform">
+        <h5>{{SelectedPlatformName}}</h5>
+    </div>
+
+    <mat-form-field>
+        <mat-label>Playtime (hours)</mat-label>
+        <input type="text" placeholder="Enter total playtime (hours)" ariaLabel="total playtime" matInput
+            formControlName="TotalPlaytime">
+    </mat-form-field>
+    <div>
+        <button type="button" mat-button [disabled]="gameDetailsGroup.invalid" matStepperNext>Next</button>
+    </div>
+</div>

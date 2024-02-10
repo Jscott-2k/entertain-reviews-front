@@ -1,5 +1,4 @@
-<mat-step [formGroup]="consentGroup" [stepControl]="consentGroup">
-    <ng-template matStepLabel>Disclaimer & Consent</ng-template>
+<div [formGroup]="consentGroup">
     <h3>Disclaimer</h3>
     <div></div>
     <h3>Consent</h3>
@@ -8,4 +7,4 @@
     <div>
         <button mat-button [disabled]="consentGroup.invalid" matStepperNext>Next</button>
     </div>
-</mat-step>
+</div>
