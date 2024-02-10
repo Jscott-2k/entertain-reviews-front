@@ -1,1 +1,28 @@
-<p>written-review-step works!</p>
+<div [formGroup]="writtenReviewGroup">
+    <!-- Your content for writtenReviewGroup step -->
+    <mat-form-field appearance="fill" hintLabel="Minimum 100 words, maximum 10000 characters" class="full-width">
+        <mat-label>Write your review</mat-label>
+        <textarea #reviewInput formControlName="WrittenReview" required matInput
+            placeholder="Ex. A slightly flawed masterpiece, but a..."
+            [errorStateMatcher]="errorStateMatcher"></textarea>
+
+        <mat-hint align="end"><span [ngClass]="{ 'red-text': !(reviewInput.value | wordCount).isFull,
+                        'green-text': (reviewInput.value | wordCount).isFull}">
+                {{ (reviewInput.value | wordCount).count }} /{{ writtenReviewWordCountRequired }} words</span>,
+            {{ reviewInput.value.length }} chars.
+        </mat-hint>
+        <mat-error *ngIf="isInvalid(writtenReviewGroup, 'WrittenReview')">
+            <div class="error-text">
+                <span>{{ getError(writtenReviewGroup,'WrittenReview') }}</span>
+                <span>
+                    <span>{{ (reviewInput.value | wordCount).count }} /{{ writtenReviewWordCountRequired }}
+                        words</span>,
+                    {{ reviewInput.value.length }} chars.
+                </span>
+            </div>
+        </mat-error>
+    </mat-form-field>
+    <div>
+        <button type="button" mat-button [disabled]="writtenReviewGroup.invalid" matStepperNext>Next</button>
+    </div>
+</div>

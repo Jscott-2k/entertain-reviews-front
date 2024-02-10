@@ -1,6 +1,5 @@
 <form [formGroup]="mainform" (ngSubmit)="postReview($event)">
     <mat-vertical-stepper [linear]="true">
-
         <!-- Step 1: Consent Group -->
         <mat-step [formGroup]="consentGroup" [stepControl]="consentGroup">
             <ng-template matStepLabel>Disclaimer & Consent</ng-template>

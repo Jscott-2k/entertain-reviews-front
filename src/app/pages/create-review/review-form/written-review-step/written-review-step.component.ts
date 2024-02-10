@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-written-review-step',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./written-review-step.component.scss']
 })
 export class WrittenReviewStepComponent {
-
+  @Input() writtenReviewGroup!: FormGroup;
+  constructor(){}
 }
