@@ -1,0 +1,113 @@
+<div [formGroup]="previewGroup">
+
+    <div class="preview-container">
+        <h2>Review Preview</h2>
+
+        <!-- Display game details -->
+        <div>
+            <h3>Game Details</h3>
+            <p><strong>Game:</strong> {{ SelectedGameName }}</p>
+            <p><strong>Platform:</strong> {{ SelectedPlatformName }}</p>
+            <p><strong>Total Playtime:</strong> {{ gameDetailsGroup.get('TotalPlaytime')?.value }} hours</p>
+        </div>
+
+        <!-- Display written review -->
+        <div>
+            <h3>Written Review</h3>
+            <p>{{ writtenReviewGroup.get('WrittenReview')?.value }}</p>
+        </div>
+
+        <!-- Display general scores -->
+        <div>
+            <h3>General Scores</h3>
+            <table mat-table [dataSource]="scoreSliderDataSource" class="mat-elevation-z8">
+                <!-- Aspect Column -->
+                <ng-container matColumnDef="aspect">
+                    <th mat-header-cell *matHeaderCellDef>Aspect</th>
+                    <td mat-cell *matCellDef="let scoreControlName">{{
+                        getGeneralScoreSliderLabelByControlName(scoreControlName) }}</td>
+                </ng-container>
+
+                <!-- Score Column -->
+                <ng-container matColumnDef="score">
+                    <th mat-header-cell *matHeaderCellDef>Score</th>
+                    <td mat-cell *matCellDef="let scoreControlName">{{
+                        generalScoreGroup.get(scoreControlName)?.value }}</td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="weight">
+                    <th mat-header-cell *matHeaderCellDef>Weight</th>
+                    <td mat-cell *matCellDef="let scoreControlName">
+                        {{ getWeightControlValue(scoreControlName) }}
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="['aspect', 'score', 'weight']"></tr>
+                <tr mat-row *matRowDef="let row; columns: ['aspect', 'score', 'weight']"></tr>
+            </table>
+
+            <p><strong>Weighted Average:</strong> {{ weightedAverageValue$ | async }}</p>
+            <p><strong>Unweighted Average:</strong> {{ unweightedAverageValue$ | async }}</p>
+
+            <!-- Display overall  -->
+            <p><strong>Overall Weighted Score:</strong> {{ overallWeightedScore}}</p>
+            <p><strong>Overall Unweighted Score:</strong> {{ overallUnweightedScore}}</p>
+        </div>
+
+        <!-- Display technical review -->
+        <div>
+            <h3>Technical Review</h3>
+            <p><strong>Technical Review:</strong> {{ technicalGroup.get('TechnicalReview')?.value }}</p>
+            <p><strong>Technical Score Modifier:</strong> {{
+                technicalGroup.get('TechnicalReviewScoreModifier')?.value }}
+            </p>
+        </div>
+
+        <!-- Display pros and cons -->
+        <div>
+            <h3>Pros and Cons</h3>
+            <div class="pros-cons-container">
+                <div class="pros">
+                    <h4>Pros</h4>
+                    <ng-container *ngIf="prosListControlsGroup.length > 0; else noProsPreview">
+                        <mat-card *ngFor="let proGroup of prosListControlsGroup">
+                            <mat-card-content>
+                                <p><strong>Description:</strong> {{
+                                    proGroup.get('description')?.value }} </p>
+                                <p> <strong>Modifier:</strong> {{
+                                    proGroup.get('modifier')?.value }} </p>
+                            </mat-card-content>
+                        </mat-card>
+                    </ng-container>
+                    <ng-template #noProsPreview>
+                        <p>No cons</p>
+                    </ng-template>
+                    <p><strong>Total Pros Modifier:</strong> {{ prosTotalModifier$ | async }}</p>
+
+                </div>
+                <div class="cons">
+                    <h4>Cons</h4>
+
+                    <ng-container *ngIf="consListControlsGroup.length > 0; else noConsPreview">
+                        <mat-card *ngFor="let conGroup of consListControlsGroup">
+                            <mat-card-content>
+                                <p><strong>Description:</strong> {{ conGroup.get('description')?.value }}
+                                </p>
+                                <p><strong>Modifier:</strong> {{ conGroup.get('modifier')?.value }}</p>
+                            </mat-card-content>
+                        </mat-card>
+                    </ng-container>
+
+                    <ng-template #noConsPreview>
+                        <p>No cons</p>
+                    </ng-template>
+                    <p><strong>Total Cons Modifier:</strong> {{ consTotalModifier$ | async }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <button mat-button type="button" matStepperNext>Next</button>
+    </div>
+</div>

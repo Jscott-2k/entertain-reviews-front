@@ -6,6 +6,7 @@
             <ng-template matStepLabel>Disclaimer & Consent</ng-template>
             <app-consent-step [consentGroup]="consentGroup"></app-consent-step>
         </mat-step>
+
         <!-- Step 2: Game Details Group -->
         <mat-step [formGroup]="gameDetailsGroup" [stepControl]="gameDetailsGroup" *ngIf="gameDetailsGroup">
             <ng-template matStepLabel>Select Game, Platform & Playtime</ng-template>
@@ -14,285 +15,41 @@
 
         <!-- Step 3: Written Review Group -->
         <mat-step [formGroup]="writtenReviewGroup" [stepControl]="writtenReviewGroup" *ngIf="writtenReviewGroup">
-            <ng-template matStepLabel>Write Review</ng-template>
-            <!-- Your content for writtenReviewGroup step -->
-            <mat-form-field appearance="fill" hintLabel="Minimum 100 words, maximum 10000 characters"
-                class="full-width">
-                <mat-label>Write your review</mat-label>
-                <textarea #reviewInput formControlName="WrittenReview" required matInput
-                    placeholder="Ex. A slightly flawed masterpiece, but a..."
-                    [errorStateMatcher]="errorStateMatcher"></textarea>
-
-                <mat-hint align="end"><span [ngClass]="{ 'red-text': !(reviewInput.value | wordCount).isFull,
-                        'green-text': (reviewInput.value | wordCount).isFull}">
-                        {{ (reviewInput.value | wordCount).count }} /{{ writtenReviewWordCountRequired }} words</span>,
-                    {{ reviewInput.value.length }} chars.
-                </mat-hint>
-                <mat-error *ngIf="isInvalid(writtenReviewGroup, 'WrittenReview')">
-                    <div class="error-text">
-                        <span>{{ getError(writtenReviewGroup,'WrittenReview') }}</span>
-                        <span>
-                            <span>{{ (reviewInput.value | wordCount).count }} /{{ writtenReviewWordCountRequired }}
-                                words</span>,
-                            {{ reviewInput.value.length }} chars.
-                        </span>
-                    </div>
-                </mat-error>
-            </mat-form-field>
-            <div>
-                <button type="button" mat-button [disabled]="writtenReviewGroup.invalid" matStepperNext>Next</button>
-            </div>
+            <ng-template matStepLabel>Write Review</ng-template>\
+            <app-written-review-step [writtenReviewGroup]="writtenReviewGroup"></app-written-review-step>
         </mat-step>
 
         <!-- Step 4: General Score Group -->
         <mat-step [formGroup]="generalScoreGroup" [stepControl]="generalScoreGroup" *ngIf="generalScoreGroup">
             <ng-template matStepLabel>General Scoring</ng-template>
-            <!-- Your content for generalScoreGroup step -->
-            <div *ngFor="let sliderName of generalScoreSliders; let i = index; let even = even">
-                <div *ngIf="even" class="flexbox review-sliders-container">
-                    <app-slider [sliderConfig]="ScoreSliderConfig" [formControlName]="sliderName"
-                        [labelName]="getGeneralScoreSliderLabel(i)" [defaultValue]="0"></app-slider>
-                    <app-slider [sliderConfig]="ScoreSliderConfig" [formControlName]="generalScoreSliders[i + 1]"
-                        [labelName]="getGeneralScoreSliderLabel(i + 1)" [defaultValue]="10"
-                        *ngIf="generalScoreSliders[i + 1]"></app-slider>
-                </div>
-                <ng-container *ngIf="!even">
-                    <mat-divider></mat-divider>
-                </ng-container>
-            </div>
-            <p>Weighted Average: {{ weightedAverageValue$ | async }}</p>
-            <p>Unweighted Average: {{ unweightedAverageValue$ | async }}</p>
-            <div>
-                <button type="button" mat-button [disabled]="generalScoreGroup.invalid" matStepperNext>Next</button>
-            </div>
+            <app-general-score-step [generalScoreGroup]="generalScoreGroup"> </app-general-score-step>
         </mat-step>
 
         <!-- Step 5: Pro Cons Group -->
-
         <mat-step [formGroup]="prosConsGroup" [stepControl]="prosConsGroup" *ngIf="prosConsGroup" [optional]="true">
             <ng-template matStepLabel>Pros & Cons</ng-template>
-            <!-- Your content for proConsGroup step -->
-            <h3>Pros List</h3>
-            <!-- Pros Section -->
-            <div formArrayName="prosList" *ngIf="prosListControlsGroup.length > 0">
-
-                <mat-divider></mat-divider>
-                <div *ngFor="let proGroup of prosListControlsGroup; let i = index" [formGroupName]="i">
-                    <div class="flexbox review-pros-cons-container">
-                        <mat-form-field>
-                            <textarea matInput placeholder="Describe Pro" formControlName="description"></textarea>
-                        </mat-form-field>
-                        <mat-form-field>
-                            <mat-label>Score Modifier</mat-label>
-                            <mat-select formControlName="modifier">
-                                <mat-option *appRange="{ start: 0, end: 1, step: 0.05 } let value" [value]="value">
-                                    {{ value }}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <button mat-icon-button color="warn" (click)="removePro(i)">
-                            <mat-icon>clear</mat-icon>
-                        </button>
-                    </div>
-                    <mat-divider *ngIf="i < prosListControlsGroup.length - 1"></mat-divider>
-                </div>
-            </div>
-
-            <!-- Cons Section -->
-            <h3>Cons List</h3>
-            <div formArrayName="consList" *ngIf="consListControlsGroup.length > 0">
-                <mat-divider></mat-divider>
-                <div *ngFor="let conGroup of consListControlsGroup; let i = index" [formGroupName]="i">
-                    <div class="flexbox review-pros-cons-container">
-                        <mat-form-field>
-                            <textarea matInput placeholder="Describe Con" formControlName="description"></textarea>
-
-                        </mat-form-field>
-                        <mat-form-field>
-                            <mat-label>Score Modifier</mat-label>
-                            <mat-select formControlName="modifier">
-                                <mat-option *appRange="{ start: 0, end: -1, step: -0.05 } let value" [value]="value">
-                                    {{ value }}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <button mat-icon-button color="warn" (click)="removeCon(i)">
-                            <mat-icon>clear</mat-icon>
-                        </button>
-                    </div>
-                    <mat-divider *ngIf="i < consListControlsGroup.length - 1"></mat-divider>
-                </div>
-            </div>
-
-            <button mat-button type="button" (click)="addPro()">Add Pro</button>
-            <button mat-button type="button" (click)="addCon()">Add Con</button>
-            <div>
-                <button mat-button type="button" [disabled]="prosConsGroup.invalid" matStepperNext>Next</button>
-            </div>
+            <app-pros-cons-step [prosConsGroup]="prosConsGroup"> </app-pros-cons-step>
         </mat-step>
 
         <!-- Step 6: Technical Group -->
         <mat-step [stepControl]="technicalGroup" [formGroup]="technicalGroup" *ngIf="technicalGroup" [optional]="true">
-            <ng-template matStepLabel>Techincal</ng-template>
-            <!-- Your content for technicalGroup step -->
-
-            <mat-form-field appearance="fill" hintLabel="optional, maximum 10000 characters" class="full-width">
-                <mat-label>Describe any technical observations</mat-label>
-                <textarea #technicalReviewInput formControlName="TechnicalReview" matInput
-                    placeholder="Ex. Frequent stuttering but ..." [errorStateMatcher]="errorStateMatcher"></textarea>
-
-                <mat-hint align="end">
-                    {{ technicalReviewInput.value.length }} chars.
-                </mat-hint>
-                <mat-error *ngIf="isInvalid(technicalGroup, 'TechnicalReview')">
-                    <div class="error-text">
-                        <span>{{ getError(technicalGroup,'TechnicalReview') }}</span>
-                        <span>
-                            {{ technicalReviewInput.value.length }} chars.
-                        </span>
-                    </div>
-                </mat-error>
-            </mat-form-field>
-
-            <mat-form-field>
-                <mat-label>Score Modifier</mat-label>
-                <mat-select formControlName="TechnicalReviewScoreModifier">
-                    <mat-option *appRange="{ start: 3, end: -3, step: -0.05 } let value" [value]="value">
-                        {{ value }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-
-            <div>
-                <button mat-button type="button" [disabled]="technicalGroup.invalid" matStepperNext>Next</button>
-            </div>
-
+            <ng-template matStepLabel>Technical</ng-template>
         </mat-step>
 
         <!-- Step 7: Preview Group -->
         <mat-step [stepControl]="previewGroup">
 
             <ng-template matStepLabel>Preview</ng-template>
-            <!-- Your content for configGroup step -->
             <ng-template matStepContent>
-                <div class="preview-container">
-                    <h2>Review Preview</h2>
-
-                    <!-- Display game details -->
-                    <div>
-                        <h3>Game Details</h3>
-                        <p><strong>Game:</strong> {{ SelectedGameName }}</p>
-                        <p><strong>Platform:</strong> {{ SelectedPlatformName }}</p>
-                        <p><strong>Total Playtime:</strong> {{ gameDetailsGroup.get('TotalPlaytime')?.value }} hours</p>
-                    </div>
-
-                    <!-- Display written review -->
-                    <div>
-                        <h3>Written Review</h3>
-                        <p>{{ writtenReviewGroup.get('WrittenReview')?.value }}</p>
-                    </div>
-
-                    <!-- Display general scores -->
-                    <div>
-                        <h3>General Scores</h3>
-                        <table mat-table [dataSource]="scoreSliderDataSource" class="mat-elevation-z8">
-                            <!-- Aspect Column -->
-                            <ng-container matColumnDef="aspect">
-                                <th mat-header-cell *matHeaderCellDef>Aspect</th>
-                                <td mat-cell *matCellDef="let scoreControlName">{{
-                                    getGeneralScoreSliderLabelByControlName(scoreControlName) }}</td>
-                            </ng-container>
-
-                            <!-- Score Column -->
-                            <ng-container matColumnDef="score">
-                                <th mat-header-cell *matHeaderCellDef>Score</th>
-                                <td mat-cell *matCellDef="let scoreControlName">{{
-                                    generalScoreGroup.get(scoreControlName)?.value }}</td>
-                            </ng-container>
-
-                            <!-- Weight Column -->
-                            <ng-container matColumnDef="weight">
-                                <th mat-header-cell *matHeaderCellDef>Weight</th>
-                                <td mat-cell *matCellDef="let scoreControlName">
-                                    {{ getWeightControlValue(scoreControlName) }}
-                                </td>
-                            </ng-container>
-
-                            <tr mat-header-row *matHeaderRowDef="['aspect', 'score', 'weight']"></tr>
-                            <tr mat-row *matRowDef="let row; columns: ['aspect', 'score', 'weight']"></tr>
-                        </table>
-
-                        <p><strong>Weighted Average:</strong> {{ weightedAverageValue$ | async }}</p>
-                        <p><strong>Unweighted Average:</strong> {{ unweightedAverageValue$ | async }}</p>
-
-                        <!-- Display overall  -->
-                        <p><strong>Overall Weighted Score:</strong> {{ overallWeightedScore}}</p>
-                        <p><strong>Overall Unweighted Score:</strong> {{ overallUnweightedScore}}</p>
-                    </div>
-
-                    <!-- Display technical review -->
-                    <div>
-                        <h3>Technical Review</h3>
-                        <p><strong>Technical Review:</strong> {{ technicalGroup.get('TechnicalReview')?.value }}</p>
-                        <p><strong>Technical Score Modifier:</strong> {{
-                            technicalGroup.get('TechnicalReviewScoreModifier')?.value }}
-                        </p>
-                    </div>
-
-                    <!-- Display pros and cons -->
-                    <div>
-                        <h3>Pros and Cons</h3>
-                        <div class="pros-cons-container">
-                            <div class="pros">
-                                <h4>Pros</h4>
-                                <ng-container *ngIf="prosListControlsGroup.length > 0; else noProsPreview">
-                                    <mat-card *ngFor="let proGroup of prosListControlsGroup">
-                                        <mat-card-content>
-                                            <p><strong>Description:</strong> {{
-                                                proGroup.get('description')?.value }} </p>
-                                            <p> <strong>Modifier:</strong> {{
-                                                proGroup.get('modifier')?.value }} </p>
-                                        </mat-card-content>
-                                    </mat-card>
-                                </ng-container>
-                                <ng-template #noProsPreview>
-                                    <p>No cons</p>
-                                </ng-template>
-                                <p><strong>Total Pros Modifier:</strong> {{ prosTotalModifier$ | async }}</p>
-
-                            </div>
-                            <div class="cons">
-                                <h4>Cons</h4>
-
-                                <ng-container *ngIf="consListControlsGroup.length > 0; else noConsPreview">
-                                    <mat-card *ngFor="let conGroup of consListControlsGroup">
-                                        <mat-card-content>
-                                            <p><strong>Description:</strong> {{ conGroup.get('description')?.value }}
-                                            </p>
-                                            <p><strong>Modifier:</strong> {{ conGroup.get('modifier')?.value }}</p>
-                                        </mat-card-content>
-                                    </mat-card>
-                                </ng-container>
-
-                                <ng-template #noConsPreview>
-                                    <p>No cons</p>
-                                </ng-template>
-                                <p><strong>Total Cons Modifier:</strong> {{ consTotalModifier$ | async }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <button mat-button type="button" matStepperNext>Next</button>
-                </div>
+                <app-preview-step [previewGroup]="previewGroup"></app-preview-step>
             </ng-template>
         </mat-step>
 
         <!-- Step 8: Submit Group -->
-            <mat-step [stepControl]="submitGroup" [formGroup]="submitGroup" *ngIf="submitGroup">
-                <ng-template matStepLabel>Submit</ng-template>
-                <button mat-button type="submit" [disabled]="mainform.invalid">Submit Review</button>
-            </mat-step>
-        
+        <mat-step [stepControl]="submitGroup" [formGroup]="submitGroup" *ngIf="submitGroup">
+            <ng-template matStepLabel>Submit</ng-template>
+            <button mat-button type="submit" [disabled]="mainform.invalid">Submit Review</button>
+        </mat-step>
+
     </mat-vertical-stepper>
 </form>

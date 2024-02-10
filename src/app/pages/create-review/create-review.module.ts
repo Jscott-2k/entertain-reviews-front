@@ -5,12 +5,22 @@ import { ConsentStepComponent } from './review-form/consent-step/consent-step.co
 import { GameDetailsStepComponent } from './review-form/game-details-step/game-details-step.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CoreModule } from 'src/app/core/core.module';
+import { WrittenReviewStepComponent } from './review-form/written-review-step/written-review-step.component';
+import { GeneralScoreStepComponent } from './review-form/general-score-step/general-score-step.component';
+import { ProsConsStepComponent } from './review-form/pros-cons-step/pros-cons-step.component';
+import { PreviewStepComponent } from './review-form/preview-step/preview-step.component';
+import { TechnicalReviewStepComponent } from './review-form/technical-review-step/technical-review-step.component';
 
 @NgModule({
   declarations: [
     CreateReviewComponent,
     ConsentStepComponent,
-    GameDetailsStepComponent
+    GameDetailsStepComponent,
+    WrittenReviewStepComponent,
+    GeneralScoreStepComponent,
+    ProsConsStepComponent,
+    TechnicalReviewStepComponent,
+    PreviewStepComponent,
   ],
   imports: [
     CoreModule,
@@ -20,7 +30,12 @@ import { CoreModule } from 'src/app/core/core.module';
   exports: [
     CreateReviewComponent,
     ConsentStepComponent,
-    GameDetailsStepComponent
+    GameDetailsStepComponent,
+    WrittenReviewStepComponent,
+    GeneralScoreStepComponent,
+    ProsConsStepComponent,
+    TechnicalReviewStepComponent,
+    PreviewStepComponent,
   ]
 })
 export class CreateReviewModule { }
