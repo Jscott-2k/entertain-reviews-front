@@ -2,10 +2,8 @@
     <mat-vertical-stepper [linear]="true">
 
         <!-- Step 1: Consent Group -->
-        <mat-step [formGroup]="consentGroup" [stepControl]="consentGroup">
+        <!-- <mat-step [formGroup]="consentGroup" [stepControl]="consentGroup">
             <ng-template matStepLabel>Disclaimer & Consent</ng-template>
-            <!-- Your content for consentGroup step -->
-            <!-- Disclaimer List -->
             <h3>Disclaimer</h3>
             <div></div>
             <h3>Consent</h3>
@@ -15,7 +13,9 @@
             <div>
                 <button type="button" mat-button [disabled]="consentGroup.invalid" matStepperNext>Next</button>
             </div>
-        </mat-step>
+        </mat-step> -->
+
+        <app-consent-step  [formGroup]="consentGroup"></app-consent-step>
 
         <!-- Step 2: Game Details Group -->
         <mat-step [formGroup]="gameDetailsGroup" [stepControl]="gameDetailsGroup" *ngIf="gameDetailsGroup">

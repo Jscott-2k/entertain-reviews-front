@@ -11,38 +11,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { GoogleLoginProvider, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { environment } from '../../environments/environment'; // Import the environment (make sure file env replacements are correct)
 
-import { 
-    AccountHistoryComponent,
-    AccountSettingsComponent,
-    AdvancedSearchComponent,
-    HomeComponent,
-    NewsComponent,
-    ReviewDetailedComponent,
-    ReviewListComponent } from './pages';
 import { CoreModule } from './core/core.module';
 import { CommonModule } from '@angular/common';
-import { ConsentStepComponent } from './pages/create-review/review-form/consent-step/consent-step.component';
-import { GameDetailsStepComponent } from './pages/create-review/review-form/game-details-step/game-details-step.component';
+import { PagesModule } from './pages/pages.module';
 
 @NgModule({
   declarations: [
-    CreateReviewComponent,
-    ProfileComponent,
-    HomeComponent,
-    NewsComponent,
-    ReviewListComponent,
-    ReviewDetailedComponent,
-    AccountHistoryComponent,
-    AccountSettingsComponent,
-    AdvancedSearchComponent,
-    ConsentStepComponent,
-    GameDetailsStepComponent
   ], 
   imports: [
     CommonModule,
     HttpClientModule,
     SharedModule,
-    CoreModule
+    CoreModule,
+    PagesModule,
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

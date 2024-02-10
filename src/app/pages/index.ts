@@ -12,3 +12,4 @@ export { ReviewDetailedComponent } from './review-detailed/review-detailed.compo
 export { AccountHistoryComponent } from './account-history/account-history.component';
 export { AccountSettingsComponent } from './account-settings/account-settings.component';
 export { AdvancedSearchComponent } from './advanced-search/advanced-search.component';
+export { CreateReviewComponent } from './create-review/create-review.component';
