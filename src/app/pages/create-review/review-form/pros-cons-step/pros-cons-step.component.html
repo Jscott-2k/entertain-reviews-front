@@ -1,4 +1,4 @@
-<div [formGroup]="prosConsGroup">
+<div [formGroup]="stepGroup">
     <!-- Your content for proConsGroup step -->
     <h3>Pros List</h3>
     <!-- Pros Section -->
@@ -55,7 +55,7 @@
     <button mat-button type="button" (click)="addPro()">Add Pro</button>
     <button mat-button type="button" (click)="addCon()">Add Con</button>
     <div>
-        <button mat-button type="button" [disabled]="prosConsGroup.invalid" matStepperNext>Next</button>
+        <button mat-button type="button" [disabled]="stepGroup.invalid" matStepperNext>Next</button>
     </div>
 
 </div>

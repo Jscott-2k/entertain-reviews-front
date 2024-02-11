@@ -16,10 +16,14 @@ export class FormStepComponent {
   /**
    * TODO
    */
-  @Input() errorStateMatcher!: ErrorStateMatcher
+  @Input() errorStateMatcher!: ErrorStateMatcher;
+  @Input() stepGroup!: FormGroup;
 
-  constructor() { }
-  
+  private _formService!: CreateReviewFormService;
+  constructor(formService:CreateReviewFormService) { 
+    this._formService = formService;
+  }
+
   getError(group: FormGroup, controlName: string) {
     if (!controlName || !group) {
       return "No group or name provided";
@@ -43,5 +47,35 @@ export class FormStepComponent {
   isInvalid(group: FormGroup, controlName: string) {
     return group.get(controlName)?.invalid;
   }
+  get generalScoreGroup(): FormGroup {
+    return this._formService.generalScoreGroup;
+  }
 
+  get writtenReviewGroup(): FormGroup {
+    return this._formService.writtenReviewGroup;
+  }
+
+  get consentGroup(): FormGroup {
+    return this._formService.consentGroup;
+  }
+
+  get gameDetailsGroup(): FormGroup {
+    return this._formService.gameDetailsGroup;
+  }
+
+  get prosConsGroup(): FormGroup {
+    return this._formService.prosConsGroup;
+  }
+  get technicalGroup(): FormGroup {
+    return this._formService.technicalGroup;
+  }
+  get prosListControlsGroup() {
+    return this._formService.prosListControlsGroup;
+  }
+  get consListControlsGroup() {
+    return this._formService.consListControlsGroup;
+  }
+  get submitGroup(): FormGroup {
+    return this._formService.submitGroup;
+  }
 }

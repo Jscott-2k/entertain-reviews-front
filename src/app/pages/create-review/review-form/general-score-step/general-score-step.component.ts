@@ -14,7 +14,7 @@ import { FormStepComponent } from '../form-step/form-step.component';
   styleUrls: ['./general-score-step.component.scss']
 })
 export class GeneralScoreStepComponent extends FormStepComponent implements OnInit, OnDestroy {
-  @Input() generalScoreGroup!: FormGroup;
+
   @Output() onScoreChange = new EventEmitter<string>();
 
   private _generalScoreLabelMap: { [key: string]: { label: string } } | null = null;
@@ -27,7 +27,7 @@ export class GeneralScoreStepComponent extends FormStepComponent implements OnIn
   constructor(
     private formService: CreateReviewFormService,
     private logicService:CreateReviewLogicService) { 
-      super();
+      super(formService);
     }
 
   ngOnInit(): void {

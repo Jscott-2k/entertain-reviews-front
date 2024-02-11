@@ -9,7 +9,7 @@ import { FormStepComponent } from '../form-step/form-step.component';
   styleUrls: ['./game-details-step.component.scss']
 })
 export class GameDetailsStepComponent extends FormStepComponent {
-  @Input() gameDetailsGroup!: FormGroup;
+
   
   /**
    * Update later with entries requested from igdb asynchronously 
@@ -18,7 +18,7 @@ export class GameDetailsStepComponent extends FormStepComponent {
   private _platformAutoCompleteConfig: string[] = ["My First Platform", "My Seconds Platform", "My Thirds Platform"];
 
   constructor(private formService: CreateReviewFormService) {
-    super();
+    super(formService);
    }
 
   private getGameAutoCompleteControl(): FormControl {

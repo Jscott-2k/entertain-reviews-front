@@ -2,14 +2,16 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } 
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { FormStepComponent } from '../form-step/form-step.component';
+import { CreateReviewFormService } from '../../services/create-review-form.service';
 
 @Component({
   selector: 'app-consent-step',
   templateUrl: './consent-step.component.html',
+  styleUrls:[]
 })
 export class ConsentStepComponent extends FormStepComponent{
-  @Input() consentGroup!: FormGroup;
-  constructor(){
-    super();
+  @Input() formGroup!: FormGroup;
+  constructor(private formService:CreateReviewFormService){
+    super(formService);
   }
 }

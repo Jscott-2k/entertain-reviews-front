@@ -1,4 +1,4 @@
-<div [formGroup]="gameDetailsGroup">
+<div [formGroup]="stepGroup">
     <app-auto-complete formControlName="GameAutoComplete" [options]="gameAutoCompleteConfig" labelName="Find your game"
         placeholder="The Legend of Zelda: Tears of the Kingdom">
     </app-auto-complete>
@@ -22,6 +22,6 @@
             formControlName="TotalPlaytime">
     </mat-form-field>
     <div>
-        <button type="button" mat-button [disabled]="gameDetailsGroup.invalid" matStepperNext>Next</button>
+        <button type="button" mat-button [disabled]="stepGroup.invalid" matStepperNext>Next</button>
     </div>
 </div>

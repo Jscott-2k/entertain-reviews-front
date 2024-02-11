@@ -13,7 +13,6 @@ import { FormStepComponent } from '../form-step/form-step.component';
   styleUrls: ['./preview-step.component.scss']
 })
 export class PreviewStepComponent extends FormStepComponent implements OnInit, OnDestroy {
-  @Input() previewGroup!: FormGroup;
   @Output() onOverallScoreChange = new EventEmitter<{ w: number, u: number }>();
 
   private _subscriptions: Subscription[] = [];
@@ -30,7 +29,7 @@ export class PreviewStepComponent extends FormStepComponent implements OnInit, O
   private _overallUnweightedScore: number = 0;
 
   constructor(private formService: CreateReviewFormService, private logicService: CreateReviewLogicService) {
-    super();
+    super(formService);
    }
 
   ngOnDestroy(): void {
@@ -93,38 +92,7 @@ export class PreviewStepComponent extends FormStepComponent implements OnInit, O
 
     return weightControl.value;
   }
-  get generalScoreGroup(): FormGroup {
-    return this.formService.generalScoreGroup;
-  }
 
-  get writtenReviewGroup(): FormGroup {
-    return this.formService.writtenReviewGroup;
-  }
-
-  get consentGroup(): FormGroup {
-    return this.formService.consentGroup;
-  }
-
-  get gameDetailsGroup(): FormGroup {
-    return this.formService.gameDetailsGroup;
-  }
-
-  get prosConsGroup(): FormGroup {
-    return this.formService.prosConsGroup;
-  }
-
-  get technicalGroup(): FormGroup {
-    return this.formService.technicalGroup;
-  }
-  get prosListControlsGroup(){
-    return this.formService.prosListControlsGroup;
-  }
-  get consListControlsGroup(){
-    return this.formService.consListControlsGroup;
-  }
-  get submitGroup(): FormGroup {
-    return this.formService.submitGroup;
-  }
   get SelectedGameName(): string {
     return this.getGameAutoCompleteControl()?.value;
   }

@@ -1,4 +1,4 @@
-<div [formGroup]="technicalGroup"> 
+<div [formGroup]="stepGroup"> 
     <!-- Your content for technicalGroup step -->
 
     <mat-form-field appearance="fill" hintLabel="optional, maximum 10000 characters" class="full-width">
@@ -9,9 +9,9 @@
         <mat-hint align="end">
             {{ technicalReviewInput.value.length }} chars.
         </mat-hint>
-        <mat-error *ngIf="isInvalid(technicalGroup, 'TechnicalReview')">
+        <mat-error *ngIf="isInvalid(stepGroup, 'TechnicalReview')">
             <div class="error-text">
-                <span>{{ getError(technicalGroup,'TechnicalReview') }}</span>
+                <span>{{ getError(stepGroup,'TechnicalReview') }}</span>
                 <span>
                     {{ technicalReviewInput.value.length }} chars.
                 </span>
@@ -29,6 +29,6 @@
     </mat-form-field>
 
     <div>
-        <button mat-button type="button" [disabled]="technicalGroup.invalid" matStepperNext>Next</button>
+        <button mat-button type="button" [disabled]="stepGroup.invalid" matStepperNext>Next</button>
     </div>
 </div>

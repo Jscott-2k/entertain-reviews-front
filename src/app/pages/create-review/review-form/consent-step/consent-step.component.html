@@ -1,10 +1,10 @@
-<div [formGroup]="consentGroup">
+<div [formGroup]="formGroup">
     <h3>Disclaimer</h3>
     <div></div>
     <h3>Consent</h3>
     <div></div>
     <app-checkbox formControlName="ConsentCheckbox" label="I hereby consent to the terms stated above"></app-checkbox>
     <div>
-        <button type="button" mat-button [disabled]="consentGroup.invalid" matStepperNext >Next</button>
+        <button type="button" mat-button [disabled]="formGroup.invalid" matStepperNext >Next</button>
     </div>
 </div>

@@ -5,6 +5,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { errorMessageMap } from 'src/app/shared/interfaces/error.interface';
 import { FormStepComponent } from '../form-step/form-step.component';
 import { WordCountPipe } from 'src/app/shared/pipes/word-count.pipe';
+import { CreateReviewFormService } from '../../services/create-review-form.service';
 
 @Component({
   selector: 'app-written-review-step',
@@ -12,9 +13,8 @@ import { WordCountPipe } from 'src/app/shared/pipes/word-count.pipe';
   styleUrls: ['./written-review-step.component.scss']
 })
 export class WrittenReviewStepComponent extends FormStepComponent{
-  @Input() writtenReviewGroup!: FormGroup;
-  constructor(){
-    super()
+  constructor(private formService:CreateReviewFormService){
+    super(formService);
   }
   get requiredWordCount(){
     return CreateReviewFormConfig.writtenReviewWordCountRequired; 

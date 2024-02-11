@@ -1,4 +1,4 @@
-<div [formGroup]="generalScoreGroup">
+<div [formGroup]="stepGroup">
     <!-- Your content for generalScoreGroup step -->
     <div *ngFor="let sliderName of generalScoreSliders; let i = index; let even = even">
         <div *ngIf="even" class="flexbox review-sliders-container">
@@ -15,6 +15,6 @@
     <p>Weighted Average: {{ weightedAverageValue$ | async }}</p>
     <p>Unweighted Average: {{ unweightedAverageValue$ | async }}</p>
     <div>
-        <button type="button" mat-button [disabled]="generalScoreGroup.invalid" matStepperNext>Next</button>
+        <button type="button" mat-button [disabled]="stepGroup.invalid" matStepperNext>Next</button>
     </div>
 </div>

@@ -13,14 +13,13 @@ import { FormStepComponent } from '../form-step/form-step.component';
   styleUrls: ['./technical-review-step.component.scss']
 })
 export class TechnicalReviewStepComponent extends FormStepComponent implements OnInit, OnDestroy {
-  @Input() technicalGroup!:FormGroup;
   @Output() onTechnicalModifierChange = new EventEmitter<string>();
 
   private _subscriptions: Subscription[] = [];
   constructor(
     private formService: CreateReviewFormService,
     private logicService:CreateReviewLogicService) {
-    super();
+    super(formService);
   }
 
   ngOnInit(): void {

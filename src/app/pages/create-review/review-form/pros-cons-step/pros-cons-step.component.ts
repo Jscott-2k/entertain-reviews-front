@@ -10,21 +10,14 @@ import { FormStepComponent } from '../form-step/form-step.component';
   styleUrls: ['./pros-cons-step.component.scss']
 })
 export class ProsConsStepComponent extends FormStepComponent implements OnInit, OnDestroy {
-  @Input() prosConsGroup!: FormGroup;
   @Output() onProConListChange:EventEmitter<string> =  new EventEmitter<string>();
 
   private _subscriptions: Subscription[] = [];
 
   constructor(private formBuilder:FormBuilder, private formService:CreateReviewFormService) { 
-    super();
+    super(formService);
   }
 
-  get prosListControlsGroup(){
-    return this.formService.prosListControlsGroup;
-  }
-  get consListControlsGroup(){
-    return this.formService.consListControlsGroup;
-  }
   ngOnInit(): void {
     this.subscribeToProConListChanges();  
   }
