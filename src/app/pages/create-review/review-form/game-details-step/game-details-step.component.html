@@ -8,7 +8,7 @@
     </div>
 
     <app-auto-complete formControlName="PlatformAutoComplete" [options]="platformAutoCompleteConfig"
-        labelName="Find your platform" placeholder="PS5">
+        labelName="Find your platform" placeholder="Nintendo Switch">
     </app-auto-complete>
 
 
@@ -16,7 +16,7 @@
         <h5>{{SelectedPlatformName}}</h5>
     </div>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
         <mat-label>Playtime (hours)</mat-label>
         <input type="text" placeholder="Enter total playtime (hours)" ariaLabel="total playtime" matInput
             formControlName="TotalPlaytime">

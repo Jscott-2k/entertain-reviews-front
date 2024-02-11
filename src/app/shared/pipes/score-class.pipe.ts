@@ -18,6 +18,6 @@ export class ScoreClassPipe implements PipeTransform {
   transform(score: number): string {
     const matchedRange = this.scoreRanges.find(range => score <= range.maxScore);
     const scoreClass = matchedRange ? matchedRange.class : 'default'; // Add a default class if necessary
-    return `score--${scoreClass}`;
+    return `er-score--${scoreClass}`;
   }
 }

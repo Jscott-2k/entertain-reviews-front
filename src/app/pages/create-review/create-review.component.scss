@@ -1,36 +1,9 @@
-.pros-cons-item {
-    margin-bottom: 8px;
-}
-
-
 .red-text {
     color: red;
 }
-
 .green-text {
     color: green;
 }
-
-.review-sliders-container app-slider {
-    width: 312px;
-    margin-right: 24px;
-}
-
-.error-text {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 mat-error::before {
     content: none;
-}
-
-::ng-deep .mat-list .mat-list-item .mat-line{
-    word-wrap: break-word;
-   white-space: pre-wrap;
-}
-
-::ng-deep  .mat-list .mat-list-item{
- height:initial!important;
 }

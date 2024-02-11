@@ -1,4 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+/* 
+  Global Styles
+
+  This file contains global styles and utility classes used throughout the application.
+
+  Reset Styles:
+  - Resets default margin and padding for all elements.
+  - Applies box-sizing: border-box to ensure consistent box model.
+
+  Typography:
+  - Sets the base font family and size for the HTML element.
+
+  Spacing Variables:
+  - Defines variables for spacing values used throughout the application.
+
+  Score Colors:
+  - Defines variables for background and text colors used for scoring elements.
+
+  Utility Classes:
+  - Provides a variety of utility classes for common styling needs.
+
+  Author: Jusitn
+  Date: 2.11.14
+*/
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -10,75 +34,23 @@ html {
     font-size: 1rem;
 }
 
-.text {
-    &--lg {
-        font-size: 1.67rem;
-    }
 
-    &--md {
-        font-size: 1.34rem;
-    }
+$spacing-xs: 4px; // Extra small spacing
+$spacing-sm: 8px; // Small spacing
+$spacing-md: 16px; // Medium spacing
+$spacing-lg: 24px; // Large spacing
+$spacing-xl: 32px; // Extra large spacing
 
-    &--sm {
-        font-size: 1rem;
-    }
-}
+$spacing-vertical: $spacing-md; // Vertical spacing between elements
+$spacing-horizontal: $spacing-md; // Horizontal spacing between elements
 
-.float {
-    &--right {
-        float: right;
-    }
+$spacing-section: $spacing-lg; // Spacing between sections or blocks of content
 
-    &--left {
-        float: left;
-    }
-}
-
-.flex-spacer {
-    &--5 {
-        flex: .05 1 auto;
-    }
-
-    &--25 {
-        flex: .25 1 auto;
-    }
-
-    &--100 {
-        flex: 1 1 auto;
-    }
-}
-
-
-.flexbox {
-    display: flex;
-
-    &--row {
-        flex-direction: row;
-    }
-
-    &--column {
-        flex-direction: column;
-    }
-
-    &--justify-center {
-        justify-content: center;
-    }
-
-    &--align-center {
-        align-items: center;
-    }
-
-    &--justify-space-between {
-        justify-content: space-between;
-    }
-}
-
-$score-background-default: red;
-$score-background-low: red;
+$score-background-default: rgb(255, 95, 95);
+$score-background-low: rgb(255, 95, 95);
 $score-background-mid: yellow;
 $score-background-high: green;
 $score-background-perfect: black;
-
 
 $score-text-default: white;
 $score-text-low: white;
@@ -86,31 +58,140 @@ $score-text-mid: black;
 $score-text-high: white;
 $score-text-perfect: white;
 
-.score {
-    &--default {
-        background-color: $score-background-default;
-        color: $score-text-default;
-    }
-    &--low {
-        background-color: $score-background-low;
-        color: $score-text-low;
+.er {
+
+    &-text {
+        &--lg {
+            font-size: 1.67rem;
+        }
+
+        &--md {
+            font-size: 1.34rem;
+        }
+
+        &--sm {
+            font-size: 1rem;
+        }
+
+        &--left {
+            text-align: left;
+        }
+
+        &--center {
+            text-align: center;
+        }
+
+        &--right {
+            text-align: right;
+        }
+
+        &--upper {
+            text-transform: uppercase;
+        }
+
+        &--lower {
+            text-transform: lowercase;
+        }
     }
 
-    &--mid {
-        background-color: $score-background-mid;
-        color: $score-text-mid;
-    }
-    &--high {
-        background-color: $score-background-high;
-        color: $score-text-high;
+    &-float {
+        &--right {
+            float: right;
+        }
+
+        &--left {
+            float: left;
+        }
     }
 
-    &--perfect {
-        background-color: $score-background-perfect;
-        color: $score-text-perfect;
+    &-flex-spacer {
+        flex-grow: 1;
     }
-}
 
-.full-width{
-    width: 100%;
+    &-flex {
+
+        display: flex;
+
+        &--row {
+            flex-direction: row;
+        }
+
+        &--column {
+            flex-direction: column;
+        }
+    }
+
+    &-justify-content {
+        &--center {
+            justify-content: center;
+        }
+
+        &--space-between {
+            justify-content: space-between;
+        }
+        &--end {
+            justify-content:flex-end;
+        }
+    }
+
+    &-align-items {
+        &--center {
+            align-items: center;
+        }
+    }
+    &-align-content {
+        &--center {
+            align-content: center;
+        }
+    }
+    &-block {
+        display: block;
+    }
+
+    &-inline {
+        display: inline;
+    }
+
+    &-inline-block {
+        display: inline-block;
+    }
+
+    &-p-0 {
+        padding: 0;
+    }
+
+    &-mt-0 {
+        margin-top: 0;
+    }
+
+    &-score {
+        &--default {
+            background-color: $score-background-default;
+            color: $score-text-default;
+        }
+
+        &--low {
+            background-color: $score-background-low;
+            color: $score-text-low;
+        }
+
+        &--mid {
+            background-color: $score-background-mid;
+            color: $score-text-mid;
+        }
+
+        &--high {
+            background-color: $score-background-high;
+            color: $score-text-high;
+        }
+
+        &--perfect {
+            background-color: $score-background-perfect;
+            color: $score-text-perfect;
+        }
+    }
+
+    &-full-width {
+        width: 100%;
+    }
 }

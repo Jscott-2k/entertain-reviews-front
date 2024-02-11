@@ -4,6 +4,7 @@ import { Observable, startWith, map } from 'rxjs';
 import { SliderComponent } from '../slider/slider.component';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
+import { AutoCompleteConfig, AutoCompleteOption } from '../../interfaces/auto-complete.interface';
 @Component({
   selector: 'app-auto-complete',
   templateUrl: './auto-complete.component.html',
@@ -19,11 +20,12 @@ import { MatInputModule } from '@angular/material/input';
 export class AutoCompleteComponent implements OnInit, ControlValueAccessor{
 
 
-  @Input() options: string[] = [];
+  @Input() options: AutoCompleteOption[] = []
   @Input() labelName:string = "label name";
   @Input() placeholder:string = "placeholder";
+
   userInput: string = '';
-  filteredOptions: string[] = [];
+  filteredOptions: AutoCompleteOption[] = [];
   selectedOption:string = '';
   
   private onChange: (value: string) => void = () => {};
@@ -33,15 +35,13 @@ export class AutoCompleteComponent implements OnInit, ControlValueAccessor{
     this.filteredOptions = this.options;
   }
 
-  private filterOptions(input: string): string[] {
+  private filterOptions(input: string): AutoCompleteOption[] {
     const filterValue = input.toLowerCase();
-    
     // If input is empty, return all options
     if (filterValue === '') {
       return this.options;
     }
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.options.filter(option => option.completed.toLowerCase().includes(filterValue));
   }
 
   onInput(event: any): void {

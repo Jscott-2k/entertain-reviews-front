@@ -10,7 +10,7 @@ import { CreateReviewFormService } from '../../services/create-review-form.servi
 @Component({
   selector: 'app-written-review-step',
   templateUrl: './written-review-step.component.html',
-  styleUrls: ['./written-review-step.component.scss']
+  styleUrls: ['./written-review-step.component.scss', '../../create-review.component.scss']
 })
 export class WrittenReviewStepComponent extends FormStepComponent{
   constructor(private formService:CreateReviewFormService){

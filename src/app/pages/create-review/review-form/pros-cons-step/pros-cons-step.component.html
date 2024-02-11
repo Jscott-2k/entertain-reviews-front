@@ -1,12 +1,15 @@
-<div [formGroup]="stepGroup">
+<div [formGroup]="stepGroup" class="pros-cons">
     <!-- Your content for proConsGroup step -->
-    <h3>Pros List</h3>
+    <div >
+        <h3>Pros List</h3>
+    </div>
+    <button mat-button type="button" (click)="addPro()">Add Pro</button>
     <!-- Pros Section -->
     <div formArrayName="prosList" *ngIf="prosListControlsGroup.length > 0">
 
         <mat-divider></mat-divider>
         <div *ngFor="let proGroup of prosListControlsGroup; let i = index" [formGroupName]="i">
-            <div class="flexbox review-pros-cons-container">
+            <div class="flexbox">
                 <mat-form-field>
                     <textarea matInput placeholder="Describe Pro" formControlName="description"></textarea>
                 </mat-form-field>
@@ -27,11 +30,14 @@
     </div>
 
     <!-- Cons Section -->
-    <h3>Cons List</h3>
+    <div>
+        <h3>Cons List</h3>
+        <button mat-button type="button" (click)="addCon()">Add Con</button>
+    </div>
     <div formArrayName="consList" *ngIf="consListControlsGroup.length > 0">
         <mat-divider></mat-divider>
         <div *ngFor="let conGroup of consListControlsGroup; let i = index" [formGroupName]="i">
-            <div class="flexbox review-pros-cons-container">
+            <div class="flexbox">
                 <mat-form-field>
                     <textarea matInput placeholder="Describe Con" formControlName="description"></textarea>
 
@@ -51,9 +57,6 @@
             <mat-divider *ngIf="i < consListControlsGroup.length - 1"></mat-divider>
         </div>
     </div>
-
-    <button mat-button type="button" (click)="addPro()">Add Pro</button>
-    <button mat-button type="button" (click)="addCon()">Add Con</button>
     <div>
         <button mat-button type="button" [disabled]="stepGroup.invalid" matStepperNext>Next</button>
     </div>

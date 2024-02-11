@@ -1191,3 +1191,4 @@ export const getPlatformByAbbreviation = function (abbreviation: string): IPlatf
         return undefined;
     }
 }
+export const getAllPlatforms = (): IPlatform[] => platforms;
