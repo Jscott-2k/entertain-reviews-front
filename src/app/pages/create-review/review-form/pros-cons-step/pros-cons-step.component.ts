@@ -2,19 +2,22 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateReviewFormService } from '../../services/create-review-form.service';
 import { Subscription } from 'rxjs';
+import { FormStepComponent } from '../form-step/form-step.component';
 
 @Component({
   selector: 'app-pros-cons-step',
   templateUrl: './pros-cons-step.component.html',
   styleUrls: ['./pros-cons-step.component.scss']
 })
-export class ProsConsStepComponent implements OnInit, OnDestroy {
+export class ProsConsStepComponent extends FormStepComponent implements OnInit, OnDestroy {
   @Input() prosConsGroup!: FormGroup;
   @Output() onProConListChange:EventEmitter<string> =  new EventEmitter<string>();
 
   private _subscriptions: Subscription[] = [];
 
-  constructor(private formBuilder:FormBuilder, private formService:CreateReviewFormService) { }
+  constructor(private formBuilder:FormBuilder, private formService:CreateReviewFormService) { 
+    super();
+  }
 
   get prosListControlsGroup(){
     return this.formService.prosListControlsGroup;
@@ -37,6 +40,7 @@ export class ProsConsStepComponent implements OnInit, OnDestroy {
       modifier: [0, Validators.required],
     });
     this.formService.prosList.push(newProControl);
+    
     this._subscriptions.forEach((subscription) => subscription.unsubscribe());
     this.subscribeToProConListChanges();
   }
@@ -48,6 +52,7 @@ export class ProsConsStepComponent implements OnInit, OnDestroy {
       modifier: [0, Validators.required],
     });
     this.formService.consList.push(newConControl);
+
     this._subscriptions.forEach((subscription) => subscription.unsubscribe());
     this.subscribeToProConListChanges();
   }

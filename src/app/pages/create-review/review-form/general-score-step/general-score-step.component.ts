@@ -6,13 +6,14 @@ import { CreateReviewFormService } from '../../services/create-review-form.servi
 import { SliderConfig } from 'src/app/shared/interfaces/slider-config.interface';
 import { Observable, Subscription } from 'rxjs';
 import { CreateReviewLogicService } from '../../services/create-review-logic.service';
+import { FormStepComponent } from '../form-step/form-step.component';
 
 @Component({
   selector: 'app-general-score-step',
   templateUrl: './general-score-step.component.html',
   styleUrls: ['./general-score-step.component.scss']
 })
-export class GeneralScoreStepComponent implements OnInit, OnDestroy {
+export class GeneralScoreStepComponent extends FormStepComponent implements OnInit, OnDestroy {
   @Input() generalScoreGroup!: FormGroup;
   @Output() onScoreChange = new EventEmitter<string>();
 
@@ -25,7 +26,9 @@ export class GeneralScoreStepComponent implements OnInit, OnDestroy {
 
   constructor(
     private formService: CreateReviewFormService,
-    private logicService:CreateReviewLogicService) { }
+    private logicService:CreateReviewLogicService) { 
+      super();
+    }
 
   ngOnInit(): void {
     this.initScoreSliderControls();

@@ -1,13 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CreateReviewFormService } from '../../services/create-review-form.service';
+import { FormStepComponent } from '../form-step/form-step.component';
 
 @Component({
   selector: 'app-game-details-step',
   templateUrl: './game-details-step.component.html',
   styleUrls: ['./game-details-step.component.scss']
 })
-export class GameDetailsStepComponent {
+export class GameDetailsStepComponent extends FormStepComponent {
   @Input() gameDetailsGroup!: FormGroup;
   
   /**
@@ -16,7 +17,9 @@ export class GameDetailsStepComponent {
   private _gameAutoCompleteConfig: string[] = ["My First Game", "My Seconds Game", "My Thirds Game"];
   private _platformAutoCompleteConfig: string[] = ["My First Platform", "My Seconds Platform", "My Thirds Platform"];
 
-  constructor(private formService: CreateReviewFormService) { }
+  constructor(private formService: CreateReviewFormService) {
+    super();
+   }
 
   private getGameAutoCompleteControl(): FormControl {
     return this.formService.gameDetailsGroup.get("GameAutoComplete") as FormControl;

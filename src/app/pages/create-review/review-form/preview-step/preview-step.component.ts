@@ -5,13 +5,14 @@ import { CreateReviewFormService } from '../../services/create-review-form.servi
 import { CreateReviewLogicService } from '../../services/create-review-logic.service';
 import { Observable, Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
+import { FormStepComponent } from '../form-step/form-step.component';
 
 @Component({
   selector: 'app-preview-step',
   templateUrl: './preview-step.component.html',
   styleUrls: ['./preview-step.component.scss']
 })
-export class PreviewStepComponent implements OnInit, OnDestroy {
+export class PreviewStepComponent extends FormStepComponent implements OnInit, OnDestroy {
   @Input() previewGroup!: FormGroup;
   @Output() onOverallScoreChange = new EventEmitter<{ w: number, u: number }>();
 
@@ -28,7 +29,9 @@ export class PreviewStepComponent implements OnInit, OnDestroy {
   private _overallWeightedScore: number = 0;
   private _overallUnweightedScore: number = 0;
 
-  constructor(private formService: CreateReviewFormService, private logicService: CreateReviewLogicService) { }
+  constructor(private formService: CreateReviewFormService, private logicService: CreateReviewLogicService) {
+    super();
+   }
 
   ngOnDestroy(): void {
     this._subscriptions.forEach((subscription) => subscription.unsubscribe());

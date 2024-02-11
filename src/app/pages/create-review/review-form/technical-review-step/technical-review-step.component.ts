@@ -5,21 +5,23 @@ import { errorMessageMap } from 'src/app/shared/interfaces/error.interface';
 import { CreateReviewFormService } from '../../services/create-review-form.service';
 import { CreateReviewLogicService } from '../../services/create-review-logic.service';
 import { Subscription } from 'rxjs';
+import { FormStepComponent } from '../form-step/form-step.component';
 
 @Component({
   selector: 'app-technical-review-step',
   templateUrl: './technical-review-step.component.html',
   styleUrls: ['./technical-review-step.component.scss']
 })
-export class TechnicalReviewStepComponent implements OnInit, OnDestroy {
+export class TechnicalReviewStepComponent extends FormStepComponent implements OnInit, OnDestroy {
   @Input() technicalGroup!:FormGroup;
-  @Input() errorStateMatcher!: ErrorStateMatcher
   @Output() onTechnicalModifierChange = new EventEmitter<string>();
 
   private _subscriptions: Subscription[] = [];
   constructor(
     private formService: CreateReviewFormService,
-    private logicService:CreateReviewLogicService) { }
+    private logicService:CreateReviewLogicService) {
+    super();
+  }
 
   ngOnInit(): void {
     this.subscribeToTechnicalModifierChanges();
@@ -38,29 +40,5 @@ export class TechnicalReviewStepComponent implements OnInit, OnDestroy {
     } else {
       console.error("Failed to get TechnicalReviewScoreModifier in subscribeToTechnicalModifierChanges call");
     }
-  }
-
-  getError(group: FormGroup, controlName: string) {
-    if (!controlName || !group) {
-      return "No group or name provided";
-    }
-    const control = group.get(controlName);
-
-    if (!control) {
-      return `Control "${controlName}" not found in the form group`;
-    }
-
-    if (control.errors) {
-      const errorKey = Object.keys(control.errors)[0] as keyof typeof errorMessageMap;
-      if (errorKey) {
-        const errorMessage = errorMessageMap[errorKey];
-        return errorMessage(control);
-      }
-    }
-
-    return "No error found";
-  }
-  isInvalid(group: FormGroup, controlName: string) {
-    return group.get(controlName)?.invalid;
   }
 }
