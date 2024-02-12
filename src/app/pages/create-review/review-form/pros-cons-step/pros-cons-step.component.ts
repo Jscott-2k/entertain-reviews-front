@@ -18,7 +18,7 @@ export class ProsConsStepComponent extends FormStepComponent implements OnInit, 
   constructor(private formBuilder:FormBuilder, private formService:CreateReviewFormService) { 
     super(formService);
   }
-  get characterLimit(){
+  get characterLimit(): number{
     return CreateReviewFormConfig.proConCharacterLimit; 
   }
 
@@ -31,7 +31,7 @@ export class ProsConsStepComponent extends FormStepComponent implements OnInit, 
   }
 
   // Add a new pro to the list
-  addPro() {
+  addPro(): void {
     const newProControl = this.formBuilder.group({
       description: ['', [Validators.required, Validators.maxLength(this.characterLimit)]],
       modifier: [0, Validators.required],
@@ -43,7 +43,7 @@ export class ProsConsStepComponent extends FormStepComponent implements OnInit, 
   }
 
   // Add a new con to the list
-  addCon() {
+  addCon(): void {
     const newConControl = this.formBuilder.group({
       description: ['', [Validators.required, Validators.maxLength(this.characterLimit)]],
       modifier: [0, Validators.required],
@@ -62,7 +62,7 @@ export class ProsConsStepComponent extends FormStepComponent implements OnInit, 
     this.formService.consList.removeAt(index);
   }
 
-  subscribeToProConListChanges() {
+  subscribeToProConListChanges(): void {
     this.formService.prosListControlsGroup.forEach((group) => {
       let modifier = group.get("modifier");
       if (modifier) {

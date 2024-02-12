@@ -1,3 +1,14 @@
-game-details-step > div  {
+.game-details>div {
     margin: 12px 0 12px 0;
+
+    h4 {
+        margin-left: 12px;
+
+        strong::after {
+            content: "\25BA";
+            /* Unicode for Black right-pointing triangle (►) */
+            margin-left: 4px;
+        }
+    }
+
 }

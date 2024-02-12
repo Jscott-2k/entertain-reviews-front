@@ -1,4 +1,4 @@
-<div [formGroup]="stepGroup" class="step-group">
+<section [formGroup]="stepGroup" class="step-group">
     <div class="written-review-step">
         <!-- Your content for writtenReviewGroup step -->
         <mat-form-field appearance="fill" hintLabel="Minimum 100 words, maximum 10000 characters" class="er-full-width">
@@ -12,9 +12,9 @@
                     {{ (reviewInput.value | wordCount).count }} /{{ requiredWordCount }} words</span>,
                 {{ reviewInput.value.length }} chars.
             </mat-hint>
-            <mat-error *ngIf="isInvalid(stepGroup, 'WrittenReview')">
+            <mat-error *ngIf="isInvalid('WrittenReview')">
                 <div class="error-text er-flex er-justify-content--space-between">
-                    <span>{{ getError(stepGroup,'WrittenReview') }}</span>
+                    <span>{{ getError('WrittenReview') }}</span>
                     <span>
                         <span>{{ (reviewInput.value | wordCount).count }} /{{ requiredWordCount }}
                             words</span>,
@@ -27,4 +27,4 @@
             <button type="button" mat-button [disabled]="stepGroup.invalid" matStepperNext>Next</button>
         </div>
     </div>
-</div>
+</section>

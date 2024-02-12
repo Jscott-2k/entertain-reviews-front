@@ -1,4 +1,4 @@
-<div [formGroup]="stepGroup" class="step-group">
+<section [formGroup]="stepGroup" class="step-group">
 
     <div class="preview-container">
         <h2>Review Preview</h2>
@@ -46,11 +46,10 @@
                 <tr mat-header-row *matHeaderRowDef="['aspect', 'score', 'weight']"></tr>
                 <tr mat-row *matRowDef="let row; columns: ['aspect', 'score', 'weight']"></tr>
             </table>
-
+            
             <p><strong>Weighted Average:</strong> {{ weightedAverageValue$ | async }}</p>
             <p><strong>Unweighted Average:</strong> {{ unweightedAverageValue$ | async }}</p>
 
-            <!-- Display overall  -->
             <p><strong>Overall Weighted Score:</strong> {{ overallWeightedScore}}</p>
             <p><strong>Overall Unweighted Score:</strong> {{ overallUnweightedScore}}</p>
         </div>
@@ -70,6 +69,7 @@
             <div class="pros-cons-container">
                 <div class="pros">
                     <h4>Pros</h4>
+                    <p><strong>Total Pros Modifier:</strong> {{ prosTotalModifier$ | async }}</p>
                     <ng-container *ngIf="prosListControlsGroup.length > 0; else noProsPreview">
                         <mat-card *ngFor="let proGroup of prosListControlsGroup">
                             <mat-card-content>
@@ -83,12 +83,12 @@
                     <ng-template #noProsPreview>
                         <p>No cons</p>
                     </ng-template>
-                    <p><strong>Total Pros Modifier:</strong> {{ prosTotalModifier$ | async }}</p>
+                    
 
                 </div>
                 <div class="cons">
                     <h4>Cons</h4>
-
+                    <p><strong>Total Cons Modifier:</strong> {{ consTotalModifier$ | async }}</p>
                     <ng-container *ngIf="consListControlsGroup.length > 0; else noConsPreview">
                         <mat-card *ngFor="let conGroup of consListControlsGroup">
                             <mat-card-content>
@@ -102,7 +102,7 @@
                     <ng-template #noConsPreview>
                         <p>No cons</p>
                     </ng-template>
-                    <p><strong>Total Cons Modifier:</strong> {{ consTotalModifier$ | async }}</p>
+
                 </div>
             </div>
         </div>
@@ -110,4 +110,4 @@
     <div>
         <button mat-button type="button" matStepperNext>Next</button>
     </div>
-</div>
+</section>

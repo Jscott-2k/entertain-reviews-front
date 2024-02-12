@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { errorMessageMap } from 'src/app/shared/interfaces/error.interface';
 import { CreateReviewFormService } from '../../services/create-review-form.service';
 import { CreateReviewLogicService } from '../../services/create-review-logic.service';
@@ -24,11 +24,18 @@ export class FormStepComponent {
     this._formService = formService;
   }
 
-  getError(group: FormGroup, controlName: string) {
-    if (!controlName || !group) {
+  getError(controlName: string) {
+    return this.getErrorInGroup(this.stepGroup, controlName);
+  }
+  isInvalid(controlName: string) {
+    return this.isInvalidInGroup(this.stepGroup, controlName);
+  }
+
+  getErrorInGroup(formGroup:AbstractControl, controlName: string) {
+    if (!controlName || !formGroup) {
       return "No group or name provided";
     }
-    const control = group.get(controlName);
+    const control = formGroup.get(controlName);
 
     if (!control) {
       return `Control "${controlName}" not found in the form group`;
@@ -44,9 +51,10 @@ export class FormStepComponent {
 
     return "No error found";
   }
-  isInvalid(group: FormGroup, controlName: string) {
-    return group.get(controlName)?.invalid;
+  isInvalidInGroup(formGroup:AbstractControl, controlName: string) {
+    return formGroup.get(controlName)?.invalid;
   }
+
   get generalScoreGroup(): FormGroup {
     return this._formService.generalScoreGroup;
   }

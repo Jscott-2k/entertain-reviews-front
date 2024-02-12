@@ -119,6 +119,9 @@ $score-text-perfect: white;
         &--column {
             flex-direction: column;
         }
+        &--1{
+            flex: 1;
+        }
     }
 
     &-justify-content {
@@ -129,14 +132,17 @@ $score-text-perfect: white;
         &--space-between {
             justify-content: space-between;
         }
+
         &--space-evenly {
             justify-content: space-evenly;
         }
+
         &--space-around {
             justify-content: space-around;
         }
+
         &--end {
-            justify-content:flex-end;
+            justify-content: flex-end;
         }
     }
 
@@ -144,12 +150,22 @@ $score-text-perfect: white;
         &--center {
             align-items: center;
         }
+
+        &--baseline {
+            align-items: baseline;
+        }
+
+        &--end {
+            align-items: end;
+        }
     }
+
     &-align-content {
         &--center {
             align-content: center;
         }
     }
+
     &-block {
         display: block;
     }

@@ -1,7 +1,7 @@
-<div [formGroup]="stepGroup" class="step-group">
+<section [formGroup]="stepGroup" class="step-group">
     <!-- Your content for technicalGroup step -->
     <div class="technical-review">
-        <div class="er-flex er-flex--column er-justify-content--space-evenly technical-review__item">
+        <div class="er-flex er-flex--column er-justify-content--space-evenly">
             <mat-form-field appearance="fill" hintLabel="optional, maximum 10000 characters" class="full-width">
                 <mat-label>Describe any technical observations</mat-label>
                 <textarea #technicalReviewInput formControlName="TechnicalReview" matInput
@@ -10,9 +10,9 @@
                 <mat-hint align="end">
                     {{ technicalReviewInput.value.length }} chars.
                 </mat-hint>
-                <mat-error *ngIf="isInvalid(stepGroup, 'TechnicalReview')">
+                <mat-error *ngIf="isInvalid('TechnicalReview')">
                     <div class="error-text">
-                        <span>{{ getError(stepGroup,'TechnicalReview') }}</span>
+                        <span>{{ getError('TechnicalReview') }}</span>
                         <span>
                             {{ technicalReviewInput.value.length }} chars.
                         </span>
@@ -33,4 +33,4 @@
             <button mat-button type="button" [disabled]="stepGroup.invalid" matStepperNext>Next</button>
         </div>
     </div>
-</div>
+</section>
