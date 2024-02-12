@@ -3,11 +3,12 @@ import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '
 import { CreateReviewFormService } from '../../services/create-review-form.service';
 import { Subscription } from 'rxjs';
 import { FormStepComponent } from '../form-step/form-step.component';
+import { CreateReviewFormConfig } from '../create-review-form-config';
 
 @Component({
   selector: 'app-pros-cons-step',
   templateUrl: './pros-cons-step.component.html',
-  styleUrls: ['./pros-cons-step.component.scss']
+  styleUrls: ['./pros-cons-step.component.scss', '../../create-review.component.scss']
 })
 export class ProsConsStepComponent extends FormStepComponent implements OnInit, OnDestroy {
   @Output() onProConListChange:EventEmitter<string> =  new EventEmitter<string>();
@@ -16,6 +17,9 @@ export class ProsConsStepComponent extends FormStepComponent implements OnInit, 
 
   constructor(private formBuilder:FormBuilder, private formService:CreateReviewFormService) { 
     super(formService);
+  }
+  get characterLimit(){
+    return CreateReviewFormConfig.proConCharacterLimit; 
   }
 
   ngOnInit(): void {
@@ -29,7 +33,7 @@ export class ProsConsStepComponent extends FormStepComponent implements OnInit, 
   // Add a new pro to the list
   addPro() {
     const newProControl = this.formBuilder.group({
-      description: ['', [Validators.required, Validators.maxLength(250)]],
+      description: ['', [Validators.required, Validators.maxLength(this.characterLimit)]],
       modifier: [0, Validators.required],
     });
     this.formService.prosList.push(newProControl);
@@ -41,7 +45,7 @@ export class ProsConsStepComponent extends FormStepComponent implements OnInit, 
   // Add a new con to the list
   addCon() {
     const newConControl = this.formBuilder.group({
-      description: ['', [Validators.required, Validators.maxLength(250)]],
+      description: ['', [Validators.required, Validators.maxLength(this.characterLimit)]],
       modifier: [0, Validators.required],
     });
     this.formService.consList.push(newConControl);

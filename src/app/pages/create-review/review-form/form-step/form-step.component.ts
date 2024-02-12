@@ -9,7 +9,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 @Component({
   selector: 'app-form-step',
   templateUrl: './form-step.component.html',
-  styleUrls: ['./form-step.component.scss']
+  styleUrls: ['./form-step.component.scss', '../../create-review.component.scss']
 })
 export class FormStepComponent {
 

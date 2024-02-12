@@ -11,7 +11,7 @@ import { FormStepComponent } from '../form-step/form-step.component';
 @Component({
   selector: 'app-general-score-step',
   templateUrl: './general-score-step.component.html',
-  styleUrls: ['./general-score-step.component.scss']
+  styleUrls: ['./general-score-step.component.scss', '../../create-review.component.scss']
 })
 export class GeneralScoreStepComponent extends FormStepComponent implements OnInit, OnDestroy {
 

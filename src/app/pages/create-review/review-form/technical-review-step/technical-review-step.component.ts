@@ -10,7 +10,7 @@ import { FormStepComponent } from '../form-step/form-step.component';
 @Component({
   selector: 'app-technical-review-step',
   templateUrl: './technical-review-step.component.html',
-  styleUrls: ['./technical-review-step.component.scss']
+  styleUrls: ['./technical-review-step.component.scss', '../../create-review.component.scss']
 })
 export class TechnicalReviewStepComponent extends FormStepComponent implements OnInit, OnDestroy {
   @Output() onTechnicalModifierChange = new EventEmitter<string>();

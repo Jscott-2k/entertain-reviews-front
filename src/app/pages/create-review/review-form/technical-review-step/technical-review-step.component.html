@@ -1,34 +1,36 @@
-<div [formGroup]="stepGroup"> 
+<div [formGroup]="stepGroup" class="step-group">
     <!-- Your content for technicalGroup step -->
+    <div class="technical-review">
+        <div class="er-flex er-flex--column er-justify-content--space-evenly technical-review__item">
+            <mat-form-field appearance="fill" hintLabel="optional, maximum 10000 characters" class="full-width">
+                <mat-label>Describe any technical observations</mat-label>
+                <textarea #technicalReviewInput formControlName="TechnicalReview" matInput
+                    placeholder="Ex. Frequent stuttering but ..." [errorStateMatcher]="errorStateMatcher"></textarea>
 
-    <mat-form-field appearance="fill" hintLabel="optional, maximum 10000 characters" class="full-width">
-        <mat-label>Describe any technical observations</mat-label>
-        <textarea #technicalReviewInput formControlName="TechnicalReview" matInput
-            placeholder="Ex. Frequent stuttering but ..." [errorStateMatcher]="errorStateMatcher"></textarea>
-
-        <mat-hint align="end">
-            {{ technicalReviewInput.value.length }} chars.
-        </mat-hint>
-        <mat-error *ngIf="isInvalid(stepGroup, 'TechnicalReview')">
-            <div class="error-text">
-                <span>{{ getError(stepGroup,'TechnicalReview') }}</span>
-                <span>
+                <mat-hint align="end">
                     {{ technicalReviewInput.value.length }} chars.
-                </span>
-            </div>
-        </mat-error>
-    </mat-form-field>
+                </mat-hint>
+                <mat-error *ngIf="isInvalid(stepGroup, 'TechnicalReview')">
+                    <div class="error-text">
+                        <span>{{ getError(stepGroup,'TechnicalReview') }}</span>
+                        <span>
+                            {{ technicalReviewInput.value.length }} chars.
+                        </span>
+                    </div>
+                </mat-error>
+            </mat-form-field>
 
-    <mat-form-field>
-        <mat-label>Score Modifier</mat-label>
-        <mat-select formControlName="TechnicalReviewScoreModifier">
-            <mat-option *appRange="{ start: 3, end: -3, step: -0.05 } let value" [value]="value">
-                {{ value }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <div>
-        <button mat-button type="button" [disabled]="stepGroup.invalid" matStepperNext>Next</button>
+            <mat-form-field>
+                <mat-label>Score Modifier</mat-label>
+                <mat-select formControlName="TechnicalReviewScoreModifier">
+                    <mat-option *appRange="{ start: 3, end: -3, step: -0.05 } let value" [value]="value">
+                        {{ value }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="next-button">
+            <button mat-button type="button" [disabled]="stepGroup.invalid" matStepperNext>Next</button>
+        </div>
     </div>
 </div>

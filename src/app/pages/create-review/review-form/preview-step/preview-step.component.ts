@@ -10,7 +10,7 @@ import { FormStepComponent } from '../form-step/form-step.component';
 @Component({
   selector: 'app-preview-step',
   templateUrl: './preview-step.component.html',
-  styleUrls: ['./preview-step.component.scss']
+  styleUrls: ['./preview-step.component.scss', '../../create-review.component.scss']
 })
 export class PreviewStepComponent extends FormStepComponent implements OnInit, OnDestroy {
   @Output() onOverallScoreChange = new EventEmitter<{ w: number, u: number }>();

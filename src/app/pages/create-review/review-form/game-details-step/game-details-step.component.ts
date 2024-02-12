@@ -8,7 +8,7 @@ import { AutoCompleteConfig, AutoCompleteOption } from 'src/app/shared/interface
 @Component({
   selector: 'app-game-details-step',
   templateUrl: './game-details-step.component.html',
-  styleUrls: ['./game-details-step.component.scss']
+  styleUrls: ['./game-details-step.component.scss', '../../create-review.component.scss']
 })
 export class GameDetailsStepComponent extends FormStepComponent {
 

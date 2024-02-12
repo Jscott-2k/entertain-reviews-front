@@ -61,4 +61,5 @@ export namespace CreateReviewFormConfig {
     // Exported constants
     export const scoreToWeightMapping: SliderMapping = createScoreToWeightMapping();
     export const writtenReviewWordCountRequired = 100;
+    export const proConCharacterLimit = 255;
 }

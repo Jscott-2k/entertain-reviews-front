@@ -1,26 +1,28 @@
-<div [formGroup]="stepGroup">
-    <app-auto-complete formControlName="GameAutoComplete" [options]="gameAutoCompleteConfig" labelName="Find your game"
-        placeholder="The Legend of Zelda: Tears of the Kingdom">
-    </app-auto-complete>
-
-    <div class="selected-game">
+<div [formGroup]="stepGroup" class="step-group game-details-step">
+    <div>
+        <app-auto-complete formControlName="GameAutoComplete" [options]="gameAutoCompleteConfig"
+            labelName="Find your game" placeholder="The Legend of Zelda: Tears of the Kingdom">
+        </app-auto-complete>
+    </div>
+    <div>
         <h5>{{SelectedGameName}}</h5>
     </div>
-
-    <app-auto-complete formControlName="PlatformAutoComplete" [options]="platformAutoCompleteConfig"
-        labelName="Find your platform" placeholder="Nintendo Switch">
-    </app-auto-complete>
-
-
-    <div class="selected-platform">
-        <h5>{{SelectedPlatformName}}</h5>
+    <div>
+        <app-auto-complete formControlName="PlatformAutoComplete" [options]="platformAutoCompleteConfig"
+            labelName="Find your platform" placeholder="Nintendo Switch">
+        </app-auto-complete>
     </div>
 
-    <mat-form-field appearance="outline">
-        <mat-label>Playtime (hours)</mat-label>
-        <input type="text" placeholder="Enter total playtime (hours)" ariaLabel="total playtime" matInput
-            formControlName="TotalPlaytime">
-    </mat-form-field>
+    <div>
+        <h5>{{SelectedPlatformName}}</h5>
+    </div>
+    <div>
+        <mat-form-field appearance="outline">
+            <mat-label>Playtime (hours)</mat-label>
+            <input type="text" placeholder="Enter total playtime (hours)" ariaLabel="total playtime" matInput
+                formControlName="TotalPlaytime">
+        </mat-form-field>
+    </div>
     <div>
         <button type="button" mat-button [disabled]="stepGroup.invalid" matStepperNext>Next</button>
     </div>

@@ -129,6 +129,12 @@ $score-text-perfect: white;
         &--space-between {
             justify-content: space-between;
         }
+        &--space-evenly {
+            justify-content: space-evenly;
+        }
+        &--space-around {
+            justify-content: space-around;
+        }
         &--end {
             justify-content:flex-end;
         }

@@ -7,10 +7,9 @@ import { CreateReviewFormService } from '../../services/create-review-form.servi
 @Component({
   selector: 'app-consent-step',
   templateUrl: './consent-step.component.html',
-  styleUrls:[]
+  styleUrls:[ './consent-step.component.scss', '../../create-review.component.scss']
 })
 export class ConsentStepComponent extends FormStepComponent{
-  @Input() formGroup!: FormGroup;
   constructor(private formService:CreateReviewFormService){
     super(formService);
   }

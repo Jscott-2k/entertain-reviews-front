@@ -1,10 +1,41 @@
-<div [formGroup]="stepGroup">
-    <h3>Disclaimer</h3>
-    <div></div>
+<div [formGroup]="stepGroup" class="step-group">
+    <h3>Review Submission Disclaimer</h3>
+    <div class="disclaimer">
+        <p>
+            By submitting your review, you acknowledge and agree to the following:
+        </p>
+        <ol>
+            <li>
+                <strong>Public Posting:</strong> Your review, including any text, images, or other content provided,
+                will be publicly visible on our website.
+            </li>
+            <li>
+                <strong>Database Publication:</strong> Your review will be stored in our database and may be used by us
+                for various purposes, including but not limited to, display on our website, promotional materials, and
+                analysis of user feedback.
+            </li>
+            <li>
+                <strong>Responsibility for Content:</strong> You are solely responsible for the accuracy, completeness,
+                and legality of the content you submit. We reserve the right to remove or modify any review that
+                violates our terms of service or community guidelines, including but not limited to, reviews containing
+                hateful, discriminatory, or offensive content.
+            </li>
+            <li>
+                <strong>Ownership of Content:</strong> You retain ownership of the content you submit, but by submitting
+                your review, you grant us a non-exclusive, royalty-free, perpetual, and worldwide license to use,
+                reproduce, modify, adapt, publish, translate, distribute, and display the content in any form and for
+                any purpose.
+            </li>
+            <li>
+                <strong>Privacy:</strong> We may collect and store personal information provided in your review
+                submission, such as your name or email address, in accordance with our privacy policy. However, personal
+                information will not be publicly displayed without your consent.
+            </li>
+        </ol>
+    </div>
     <h3>Consent</h3>
-    <div></div>
     <app-checkbox formControlName="ConsentCheckbox" label="I hereby consent to the terms stated above"></app-checkbox>
     <div>
-        <button type="button" mat-button [disabled]="stepGroup.invalid" matStepperNext >Next</button>
+        <button type="button" mat-button [disabled]="stepGroup.invalid" matStepperNext>Next</button>
     </div>
 </div>
