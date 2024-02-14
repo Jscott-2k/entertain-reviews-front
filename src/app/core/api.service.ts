@@ -14,6 +14,7 @@ export class ApiService {
 
   post<T>(endpoint:string, data?:any):Observable<T>{
     const url = `${this.backendBaseUrl}/${endpoint}`;
+    console.log('Sending POST request to:', url);
     return this.http.post<T>(url, data).pipe(catchError(this.handleError));
   }
 

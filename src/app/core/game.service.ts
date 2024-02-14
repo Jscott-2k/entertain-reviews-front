@@ -1,18 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GameScoreModel } from '../models/game-scores.model';
+import { GameScoresModel } from '../models/game-scores.model';
 import { GameModel } from '../models/game.model';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
-  getGame(id: number | null):Observable<GameModel> {
-    throw new Error('Method not implemented.');
+  constructor(private apiService: ApiService) { }
+
+  getGame(id: number | null): Observable<GameModel> {
+    let data = {
+      game: id
+    };
+    return this.apiService.post<GameModel>('game', data);
   }
-  getScores(id: number | null):Observable<GameScoreModel> {
-    throw new Error('Method not implemented.');
+  getScores(id: number | null): Observable<GameScoresModel> {
+    let data = {
+      game: id
+    };
+    return this.apiService.post<GameScoresModel>('game-scores', data);
   }
-  constructor() { }
 }

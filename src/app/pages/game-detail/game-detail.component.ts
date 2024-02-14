@@ -3,7 +3,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { GameService } from 'src/app/core/game.service';
 import { ReviewService } from 'src/app/core/review.service';
-import { GameScoreModel as GameScoresModel } from 'src/app/models/game-scores.model';
+import { GameScoresModel as GameScoresModel } from 'src/app/models/game-scores.model';
 import { GameModel } from 'src/app/models/game.model';
 import { ReviewModel } from 'src/app/models/review.model';
 
