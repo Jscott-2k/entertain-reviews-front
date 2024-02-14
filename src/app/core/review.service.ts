@@ -1,6 +1,5 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject, debounceTime, filter, flatMap, map, mergeMap, of, switchMap, tap } from 'rxjs';
+import { Observable, Subject, map, of } from 'rxjs';
 import { IGameCard } from 'src/app/shared/interfaces/game-card.interface';
 import { GameModel } from 'src/app/models/game.model';
 import { ApiService } from './api.service';
@@ -66,6 +65,13 @@ export class ReviewService {
     };
 
     return this.apiService.post<ReviewModel[]>('review-snippets', data);
+  }
+
+  getReview(reviewID:number):Observable<ReviewModel>{ 
+    let data = {
+      reviewID: reviewID
+    };
+    return this.apiService.post<ReviewModel>('review', data);
   }
 
   searchGameByName(){}
