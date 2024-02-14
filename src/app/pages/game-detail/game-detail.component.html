@@ -1,0 +1,39 @@
+<mat-card class="game-card" *ngIf="game && gameScores">
+    <mat-card-header>
+        <mat-card-title>{{game.name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="" alt="Game image">
+    <mat-card-content>
+        <p>Average play time: {{gameScores.playTime}} hours</p>
+        <p>Weighted score: {{gameScores.overallWeighted}} / 10</p>
+        <p>Unweighted score: {{gameScores.overallUnweighted}} / 10</p>
+        <p>Average gameplay score: {{gameScores.gameplay}} / 10</p>
+        <p>Graphics score: {{gameScores.graphics}} / 10</p>
+        <p>Music score: {{gameScores.music}} / 10</p>
+        <p>SFX score: {{gameScores.sfx}} / 10</p>
+        <p>UI/UX score: {{gameScores.uiux}} / 10</p>
+        <p>Story score: {{gameScores.story}} / 10</p>
+        <p>Technical: {{gameScores.technical}}</p>
+        <p>Platforms: {{game.platforms}}</p>
+        <p>Publisher: {{game.companies}}</p>
+        <p>Release date: {{game.first_release_date}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button (click)="share()">Share</button>
+        <button mat-button [routerLink]="['/write-review', game.id]">Write a review</button>
+    </mat-card-actions>
+</mat-card>
+
+<h2>Summary</h2>
+<div  *ngIf="game && gameScores">
+    <p>{{game.summary}}</p>
+</div>
+<h2>Screenshots</h2>
+<div></div>
+<h2>Reviews</h2>
+<div>
+
+    <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]" aria-label="Select page">
+    </mat-paginator>
+
+</div>

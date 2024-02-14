@@ -1170,8 +1170,11 @@ export const platforms: IPlatform[] =
         }
     ]
 
+export const commonPlatforms = ["PC","PlayStation 5", "Xbox Series X|S", "Nintendo Switch", "PC (Microsoft Windows)"]
 export const getPlatformsByCategory = (category: PlatformCategory): IPlatform[] =>
-    platforms.filter((platform) => platform.category === category);
+   platforms.filter((platform) => platform.category === category);
+
+export const getCommonPlatforms = () =>    platforms.filter((platform) => commonPlatforms.includes(platform.name ?? ""));
 
 // We do 'platform.category && ...' to make sure its not undefined
 export const getPlatformByCategories = (categories: PlatformCategory[]): IPlatform[] =>

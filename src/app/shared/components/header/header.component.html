@@ -23,6 +23,9 @@
 
       <mat-menu #GamesPlatformMenu="matMenu">
         <button mat-menu-item [routerLink]="'/entertainment/games'">All platforms</button>
+        <button mat-menu-item *ngFor="let platform of commonPlatforms | platformSort" [platformNavigation]="platform">
+          {{ platform.name }}
+        </button>
         <button mat-menu-item [matMenuTriggerFor]="GamesPlatformConsoleMenu">Consoles</button>
         <button mat-menu-item [matMenuTriggerFor]="GamesPlatformHandheldMenu">Handhelds</button>
         <button mat-menu-item [matMenuTriggerFor]="GamesPlatformOtherMenu">Other</button>
@@ -58,12 +61,12 @@
         <button mat-menu-item [routerLink]="'/profile/reviews'">Find User</button>
         <button mat-menu-item [routerLink]="'/profile/settings'">Settings</button>
       </mat-menu>
-      
+
       <div class="er-flex-spacer"></div>
 
       <div class="er-flex er-flex--row er-align-items--center er-justify-content--end">
         <div matTooltip="Please login to use this feature" matTooltipPosition="below" [matTooltipDisabled]="isLoggedIn">
-          <button mat-icon-button  [disabled]="!isLoggedIn" [routerLink]="'/create'">
+          <button mat-icon-button [disabled]="!isLoggedIn" [routerLink]="'/create'">
             <mat-icon>rate_review</mat-icon>
           </button>
         </div>
@@ -79,6 +82,6 @@
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
-<div class="er-flex er-flex--row er-justify-content--center er-align-items--center">
+<!-- <div class="er-flex er-flex--row er-justify-content--center er-align-items--center">
   <h1 class="pageTitle">{{title}}</h1>
-</div>
+</div> -->

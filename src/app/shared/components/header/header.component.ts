@@ -4,7 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/auth.service';
 import { IPlatform } from '../../interfaces/platform.interface';
-import { getPlatformByAbbreviation, getPlatformByCategories, getPlatformsByCategory } from '../../platform-data';
+import { getPlatformByAbbreviation, getPlatformByCategories, getPlatformsByCategory, getCommonPlatforms } from '../../platform-data';
 import { PlatformCategory } from '../../enums/platform-category.enum';
 import { NavigationService } from 'src/app/core/navigation.service';
 
@@ -24,7 +24,8 @@ export class HeaderComponent implements OnInit, OnDestroy{
               PlatformCategory.Arcade,
               PlatformCategory.OperatingSystem,
               PlatformCategory.Platform]);
-
+  
+  commonPlatforms:IPlatform[] = getCommonPlatforms();
   
   constructor (private router:  Router,
      private authService: AuthService,

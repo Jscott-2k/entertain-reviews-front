@@ -1,22 +1,25 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, debounceTime, filter, flatMap, map, mergeMap, of, switchMap, tap } from 'rxjs';
-import { IGameDisplay as IReviewedGameCardDisplay } from 'src/app/shared/interfaces/game-display.interface';
-import { IGameResponseObject } from 'src/app/shared/interfaces/game-response-object.interface';
+import { IGameCard } from 'src/app/shared/interfaces/game-card.interface';
+import { GameModel } from 'src/app/models/game.model';
 import { ApiService } from './api.service';
 import { IgdbImageService } from './igdb-image.service';
 import { IgdbImageSize } from '../shared/enums/igdb-image-size.enum';
+import { ReviewModel } from '../models/review.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService {
 
-  private reviewedGameDisplayListSubject = new Subject<IReviewedGameCardDisplay[]>();
+  private reviews: any[] = []; // Array to store reviews (replace with actual model)
+
+  private reviewedGameCardsSubject = new Subject<IGameCard[]>();
   
   constructor(private apiService:ApiService, private igdbImageService: IgdbImageService) {  }
   
-  private filterPlatform(selectedPlatforms:string[], responseArray:IGameResponseObject[]){
+  private filterPlatform(selectedPlatforms:string[], responseArray:GameModel[]){
     if(selectedPlatforms.length == 0 || selectedPlatforms.includes("any")){
 
       return responseArray;
@@ -31,11 +34,12 @@ export class ReviewService {
     
   }
 
-  private mapResponseToGameCard(response:IGameResponseObject[]):IReviewedGameCardDisplay[]{
+  private mapResponseToGameCard(response:GameModel[]):IGameCard[]{
 
     return response.map(
-      ({ name, summary, platforms, first_release_date, cover }) => ({
+      ({ name, summary, id, platforms, first_release_date, cover }) => ({
       title: name,
+      id:id,
       summary:summary,
       platforms: platforms?.flatMap(({ abbreviation }) => abbreviation ?? "") ?? [],
       firstReleaseDate: first_release_date,
@@ -44,42 +48,39 @@ export class ReviewService {
   }
 
   async getReviewedGames(selectedPlatforms:string[]):Promise<any> {
-    return this.apiService.post<IGameResponseObject[]>("review-games").pipe(
-      map((responseArray:IGameResponseObject[]) => this.filterPlatform(selectedPlatforms,responseArray))).subscribe((response:IGameResponseObject[]) => {
-        const gamesCards:IReviewedGameCardDisplay[] = this.mapResponseToGameCard(response);
-        this.reviewedGameDisplayListSubject.next(gamesCards);
+    return this.apiService.post<GameModel[]>("review-games").pipe(
+      map((responseArray:GameModel[]) => this.filterPlatform(selectedPlatforms,responseArray))).subscribe((response:GameModel[]) => {
+        const gamesCards:IGameCard[] = this.mapResponseToGameCard(response);
+        this.reviewedGameCardsSubject.next(gamesCards);
       });
   }
-  getReviewedGameCards$():Observable<IReviewedGameCardDisplay[]>{
-    return this.reviewedGameDisplayListSubject.asObservable();
+  getReviewedGameCards$():Observable<IGameCard[]>{
+    return this.reviewedGameCardsSubject.asObservable();
   }
 
+  getReviewsSnippet(gameID:number, pageIndex:number, pageSize:number):Observable<ReviewModel[]>{ 
+    let data = {
+      gameID: gameID,
+      pageIndex: pageIndex,
+      pageSize: pageSize
+    };
+
+    return this.apiService.post<ReviewModel[]>('review-snippets', data);
+  }
 
   searchGameByName(){}
   searchMovieByName(){}
   searchTVByName(){}
 
   deleteReview(){}
-  getReview(){}
-
-
-  private reviews: any[] = []; // Array to store reviews (replace with actual model)
-
+  
   createReview(reviewData: any): Observable<any> {
-    // Assuming you have an API endpoint for posting reviews
-    const apiEndpoint = 'https://api.example.com/reviews';
 
-    // For a real application, make an HTTP POST request to the server
-    // Example using Angular's HttpClient:
-    // return this.httpClient.post(apiEndpoint, reviewData);
-
-    // For simplicity, we'll just store the review locally in this example
-
-    this.apiService.post("create-review")
+    this.apiService.post("create-review");
 
     this.reviews.push(reviewData);
     console.info(reviewData);
-    // Simulate an asynchronous operation (replace with actual HTTP request)
+
     return of({ success: true, message: 'Review posted successfully' });
   }
 }

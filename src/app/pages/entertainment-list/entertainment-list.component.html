@@ -1,13 +1,15 @@
-<div class="grid-container">
+<app-banner 
+[title]="'Explore ' + cardTypeRep + ' Reviews'" >
+</app-banner>
+<div>
     <ng-container *ngFor="let game of reviewedGames$ | async">
         <app-entertainment-card 
-            [type]=cardTypes.Game
+            [type]="cardType"
             [title]="game.title"
+            [id]="game.id"
             [summary]="game.summary"
             [platforms]="game.platforms"
             [firstReleaseDate]="game.firstReleaseDate"
-            [coverImageURL]="game.coverImageURL"
-            class="grid-item"
-            > </app-entertainment-card>
+            [coverImageURL]="game.coverImageURL"> </app-entertainment-card>
     </ng-container>
 </div>

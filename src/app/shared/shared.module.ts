@@ -33,6 +33,7 @@ import { SelectComponent } from './components/select/select.component';
 import { AutoCompleteComponent } from './components/auto-complete/auto-complete.component';
 import { RangePipe } from './pipes/range.pipe';
 import { RangeDirective } from './directives/range/range.directive';
+import { BannerComponent } from './components/banner/banner.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { RangeDirective } from './directives/range/range.directive';
     AutoCompleteComponent,
     RangePipe,
     RangeDirective,
+    BannerComponent,
 
   ],
   imports: [
@@ -98,7 +100,9 @@ import { RangeDirective } from './directives/range/range.directive';
     SelectComponent,
     AutoCompleteComponent,
     RangePipe,
-    RangeDirective
+    RangeDirective,
+    BannerComponent,
+
   ]
 })
 export class SharedModule { }

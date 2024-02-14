@@ -3,8 +3,10 @@ div {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 1rem;
     margin: auto;
+    margin: 12px;
 }
 
 app-entertainment-card{
     height: 300px;
+    box-shadow: 10px;
 }

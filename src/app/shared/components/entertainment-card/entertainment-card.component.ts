@@ -4,7 +4,7 @@ import { GameCardComponent } from './game-card/game-card.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { TvCardComponent } from './tv-card/tv-card.component';
 import { EntertainmentCardDirective } from '../../directives/review-card/entertainment-card.directive';
-import { IGameDisplay } from '../../interfaces/game-display.interface';
+import { IGameCard } from '../../interfaces/game-card.interface';
 
 @Component({
   selector: 'app-entertainment-card',
@@ -16,6 +16,7 @@ export class EntertainmentCardComponent implements OnInit{
   @Input() type!: ReviewType;
   
   @Input() title: string = "title";
+  @Input() id: number = -1;
   @Input() summary: string = "summary";
   @Input() platforms: string[] = [];
   @Input() firstReleaseDate: number = 2019;
@@ -47,8 +48,9 @@ export class EntertainmentCardComponent implements OnInit{
 
     if(component){
       const componentRef = vfr.createComponent(component);
-      const game:IGameDisplay = {
+      const game:IGameCard = {
         title: this.title,
+        id: this.id,
         summary: this.summary,
         platforms: this.platforms,
         firstReleaseDate: this.firstReleaseDate,

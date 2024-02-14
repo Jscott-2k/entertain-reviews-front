@@ -7,6 +7,7 @@ import { AdvancedSearchComponent } from './pages/advanced-search/advanced-search
 import { CreateReviewComponent } from './pages/create-review/create-review.component';
 import { EntertainmentListComponent as EntertainmentListComponent } from './pages/entertainment-list/entertainment-list.component';
 import { AuthGuard } from './guards/auth.guard';
+import { GameDetailComponent, GameReviewComponent } from './pages';
 
 const routes: Routes = [{
   path:'news', component:NewsComponent
@@ -24,6 +25,10 @@ const routes: Routes = [{
   path:'entertainment/:type/platforms/:platforms/games', component:EntertainmentListComponent,
 },{
   path:'reviews/:type/platform/:platform/game/:game', component:EntertainmentListComponent,
+},{
+  path:'game/:game', component:GameDetailComponent,
+},{
+  path:'game/:game/review/id/:id', component:GameReviewComponent,
 },
 {
   path:'', component:HomeComponent 

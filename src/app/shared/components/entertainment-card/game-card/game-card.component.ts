@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IGameDisplay } from '../../../interfaces/game-display.interface';
+import { IGameCard } from '../../../interfaces/game-card.interface';
 
 @Component({
   selector: 'app-game-card',
@@ -7,7 +7,7 @@ import { IGameDisplay } from '../../../interfaces/game-display.interface';
   styleUrls: ['./game-card.component.scss']
 })
 export class GameCardComponent {
-  @Input() game!:IGameDisplay;
+  @Input() game!:IGameCard;
   @Input() score!:number;
 
   constructor(){

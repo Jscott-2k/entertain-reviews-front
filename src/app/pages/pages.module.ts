@@ -11,11 +11,12 @@ import {
   AdvancedSearchComponent,
   HomeComponent,
   NewsComponent,
-  ReviewDetailedComponent,
   ReviewListComponent
 } from './index';
 import { SharedModule } from '../shared/shared.module';
 import { CoreModule } from '../core/core.module';
+import { GameDetailComponent } from './game-detail/game-detail.component';
+import { GameReviewComponent } from './game-review/game-review.component';
 
 @NgModule({
   declarations: [
@@ -23,10 +24,11 @@ import { CoreModule } from '../core/core.module';
     HomeComponent,
     NewsComponent,
     ReviewListComponent,
-    ReviewDetailedComponent,
     AccountHistoryComponent,
     AccountSettingsComponent,
-    AdvancedSearchComponent
+    AdvancedSearchComponent,
+    GameDetailComponent,
+    GameReviewComponent
   ],
   imports: [
     CoreModule,
@@ -39,7 +41,6 @@ import { CoreModule } from '../core/core.module';
     HomeComponent,
     NewsComponent,
     ReviewListComponent,
-    ReviewDetailedComponent,
     AccountHistoryComponent,
     AccountSettingsComponent,
     AdvancedSearchComponent,

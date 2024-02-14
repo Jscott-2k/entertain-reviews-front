@@ -20,7 +20,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipsModule} from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -44,7 +44,9 @@ import { MatTableModule } from '@angular/material/table';
     MatCheckboxModule,
     MatAutocompleteModule,
     MatChipsModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
+
   ],
   exports:[
     MatMenuModule, 
@@ -66,7 +68,9 @@ import { MatTableModule } from '@angular/material/table';
     MatCheckboxModule,
     MatAutocompleteModule,
     MatChipsModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule
+ 
   ]
 })
 export class SharedMaterialModule { }
