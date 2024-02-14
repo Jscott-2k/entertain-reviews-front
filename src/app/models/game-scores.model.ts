@@ -13,5 +13,5 @@ export interface GameScoresModel{
     music:number,
     playtime:number,
     overall_weighted:number,
-    overall_wnweighted:number,
+    overall_unweighted:number,
 }
