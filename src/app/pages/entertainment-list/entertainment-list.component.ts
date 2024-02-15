@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable, of, switchMap } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  NavigationStart,
+  ParamMap,
+  Router,
+} from '@angular/router';
+import { Observable, Subject, filter, of, switchMap, takeUntil } from 'rxjs';
 import {
   EntertainmentType,
   isEntertainment,
@@ -21,10 +27,11 @@ import { MovieStrategy } from 'src/app/core/strategies/movie.strategy';
   templateUrl: './entertainment-list.component.html',
   styleUrls: ['./entertainment-list.component.scss'],
 })
-export class EntertainmentListComponent {
+export class EntertainmentListComponent implements OnInit, OnDestroy {
   cardType!: EntertainmentType;
   reviewedEntertainmentCards: IEntertainmentCard[] = [];
   entertainmentTypeParam: string = '';
+
   private _strategy!: IEntertainmentStrategy<
     IEntertainmentResponseModel,
     IFetchRequestParams
@@ -33,9 +40,11 @@ export class EntertainmentListComponent {
   constructor(
     private reviewService: ReviewService,
     private route: ActivatedRoute,
-    private igdbImageService: IgdbImageService
+    private igdbImageService: IgdbImageService,
+    private router: Router
   ) {}
 
+  private _destroy$ = new Subject<void>();
   private readonly _reviewStrategies: Record<
     EntertainmentType,
     IEntertainmentStrategy<IEntertainmentResponseModel, IFetchRequestParams>
@@ -46,16 +55,34 @@ export class EntertainmentListComponent {
   };
 
   ngOnInit() {
+    this.initEntertainmentList();
+
+    // Subscribe to route changes
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntil(this._destroy$)
+      )
+      .subscribe(() => {
+        this.initEntertainmentList(); // Reinitialize the entertainment list to coincide the route change
+      });
+  }
+  ngOnDestroy(): void {
+    this._destroy$.next();
+    this._destroy$.complete();
+  }
+
+  private initEntertainmentList() {
     this.route.paramMap
       .pipe(
         switchMap((routeParams: ParamMap) =>
           this.fetchReviewedList(routeParams)
-        )
+        ),
+        takeUntil(this._destroy$)
       )
       .subscribe({
         next: (data: any) => {
-          this.reviewedEntertainmentCards =
-            this._strategy.getCards(data);
+          this.reviewedEntertainmentCards = this._strategy.getCards(data);
         },
         error: (error: any) => {
           console.error('Error fetching reviewed data:', error);
@@ -63,12 +90,24 @@ export class EntertainmentListComponent {
       });
   }
 
-  private fetchReviewedList(routeParams: ParamMap): Observable<IEntertainmentResponseModel[]> {
-    if (!routeParams) throw new Error(`Invalid route paramters. 'type' required`);
+  /**
+   * Fetches the reviewed entertainment list based on the route parameters.
+   * @param routeParams Route parameters containing the type of entertainment.
+   * @returns Observable of the reviewed entertainment list.
+   */
+  private fetchReviewedList(
+    routeParams: ParamMap
+  ): Observable<IEntertainmentResponseModel[]> {
+    if (!routeParams)
+      throw new Error(`Invalid route paramters. 'type' required`);
     this.configureReviewListStrategy(routeParams);
     return this._strategy ? this._strategy.fetchReviewed() : of([]);
   }
 
+  /**
+   * Configures the review list strategy based on the route parameters.
+   * @param routeParams Route parameters containing the type of entertainment.
+   */
   private configureReviewListStrategy(routeParams: ParamMap) {
     this.entertainmentTypeParam = routeParams.get('type')?.slice(0, -1) || ''; // Ignore last character 's'
     if (!isEntertainment(this.entertainmentTypeParam)) {
@@ -81,6 +120,10 @@ export class EntertainmentListComponent {
     this._strategy.setDefaultParams(this.getFetchParams());
   }
 
+  /**
+   * Retrieves the fetch parameters based on the entertainment type.
+   * @returns Fetch parameters for the entertainment type.
+   */
   private getFetchParams(): IFetchRequestParams {
     if (!this.cardType)
       throw new Error(
@@ -95,6 +138,11 @@ export class EntertainmentListComponent {
     }
     return {};
   }
+
+  /**
+   * Retrieves the platforms from the route query parameters.
+   * @returns Array of platforms.
+   */
   private getPlatforms(): string[] {
     return this.route.snapshot.queryParamMap.get('platforms')?.split(';') ?? [];
   }
