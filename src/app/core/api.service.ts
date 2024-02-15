@@ -17,6 +17,12 @@ export class ApiService {
     console.log('Sending POST request to:', url);
     return this.http.post<T>(url, data).pipe(catchError(this.handleError));
   }
+  
+  get<T>(endpoint: string): Observable<T> {
+    const url = `${this.backendBaseUrl}/${endpoint}`;
+    console.log('Sending GET request to:', url);
+    return this.http.get<T>(url).pipe(catchError(this.handleError));
+  }
 
   private handleError(error:HttpErrorResponse):Observable<never>{
     console.error('API Error:', error);

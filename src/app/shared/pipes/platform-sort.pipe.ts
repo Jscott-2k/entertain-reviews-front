@@ -1,12 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IPlatform } from '../interfaces/platform.interface';
+import { PlatformModel } from '../../models/platform.model';
 
 @Pipe({
   name: 'platformSort'
 })
 export class PlatformSortPipe implements PipeTransform {
 
-  transform(platforms: IPlatform[]): IPlatform[] {
+  transform(platforms: PlatformModel[]): PlatformModel[] {
 
     return platforms
         .slice()

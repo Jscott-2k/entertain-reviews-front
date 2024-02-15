@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges, Type, ViewChild, ViewContainerRef, createComponent } from '@angular/core';
-import { ReviewType } from 'src/app/shared/enums/review-type.enum';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, Type, ViewChild, ViewContainerRef, createComponent } from '@angular/core';
+import { EntertainmentType } from 'src/app/shared/entertainment.type';
 import { GameCardComponent } from './game-card/game-card.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { TvCardComponent } from './tv-card/tv-card.component';
 import { EntertainmentCardDirective } from '../../directives/review-card/entertainment-card.directive';
-import { IGameCard } from '../../interfaces/game-card.interface';
+import { IEntertainmentCard } from '../../interfaces/entertainment-strategy.interface';
 
 @Component({
   selector: 'app-entertainment-card',
@@ -13,51 +13,33 @@ import { IGameCard } from '../../interfaces/game-card.interface';
 })
 export class EntertainmentCardComponent implements OnInit{
 
-  @Input() type!: ReviewType;
+  @Input() card!:IEntertainmentCard
+  @Input() type!: EntertainmentType;
   
-  @Input() title: string = "title";
-  @Input() id: number = -1;
-  @Input() summary: string = "summary";
-  @Input() platforms: string[] = [];
-  @Input() firstReleaseDate: number = 2019;
-  @Input() coverImageURL: string = "";
+  @ViewChild(EntertainmentCardDirective, { static: true }) cardComponent!: EntertainmentCardDirective;
   
-  averageScore:number = 0; // update later to get from ApiSerivce 
+  private readonly components: Record<EntertainmentType, Type<any>> = {
+    game: GameCardComponent,
+    movie: MovieCardComponent,
+    tv: TvCardComponent,
+  };
 
-  @ViewChild(EntertainmentCardDirective, { static: true }) reviewCard!: EntertainmentCardDirective;
-  cardTypes = ReviewType;
-  
   constructor() {}
   
   ngOnInit(): void {
-    this.loadDynamicComponent(this.type);
+    this.loadDynamicComponent();
   }
 
-  loadDynamicComponent(type: ReviewType) {
+  loadDynamicComponent() {
 
-    const vfr = this.reviewCard.viewContainerRef;
+    const vfr = this.cardComponent.viewContainerRef;
     vfr.clear();
 
-    const componentMap = new Map<ReviewType, Type<any>>([
-      [ReviewType.Game, GameCardComponent],
-      [ReviewType.TV, TvCardComponent],
-      [ReviewType.Movie, MovieCardComponent],
-    ]);
+    const componentType = this.components[this.type];
 
-    const component = componentMap.get(type);
-
-    if(component){
-      const componentRef = vfr.createComponent(component);
-      const game:IGameCard = {
-        title: this.title,
-        id: this.id,
-        summary: this.summary,
-        platforms: this.platforms,
-        firstReleaseDate: this.firstReleaseDate,
-        coverImageURL: this.coverImageURL
-      }
-      componentRef.setInput("game",game);
-      componentRef.setInput("score",this.averageScore)
+    if(componentType){
+      const componentRef = vfr.createComponent(componentType);
+      componentRef.setInput("card",this.card);
     }
   }
 }

@@ -42,7 +42,7 @@ export class GameDetailComponent {
   }
 
   getReviews(): void {
-    this.reviewService.getReviewsSnippet(this.gameID,this.pageEvent.pageIndex, this.pageEvent.pageSize) // get the reviews array from the service
+    this.reviewService.fetchReviewsSnippet(this.gameID,this.pageEvent.pageIndex, this.pageEvent.pageSize) // get the reviews array from the service
     .subscribe(reviews => this.reviews = reviews); // assign the reviews array to the component property
   }
   share(): void {

@@ -1,15 +1,8 @@
 <app-banner 
-[title]="'Explore ' + cardTypeRep + ' Reviews'" >
+[title]="'Explore ' + entertainmentTypeParam + ' Reviews'" >
 </app-banner>
 <div>
-    <ng-container *ngFor="let game of reviewedGames$ | async">
-        <app-entertainment-card 
-            [type]="cardType"
-            [title]="game.title"
-            [id]="game.id"
-            [summary]="game.summary"
-            [platforms]="game.platforms"
-            [firstReleaseDate]="game.firstReleaseDate"
-            [coverImageURL]="game.coverImageURL"> </app-entertainment-card>
+    <ng-container *ngFor="let card of reviewedEntertainmentCards">
+        <app-entertainment-card [type]="cardType" [card]="card"> </app-entertainment-card>
     </ng-container>
 </div>

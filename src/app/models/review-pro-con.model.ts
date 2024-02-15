@@ -1,4 +1,4 @@
-export interface ReviewProModel {
+export interface ReviewProConModel {
     id:number,
     review_id:number,
     description:number,

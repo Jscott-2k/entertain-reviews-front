@@ -15,13 +15,11 @@
  * 
  */
 
-
-
 import { PlatformCategory } from "./enums/platform-category.enum";
-import { IPlatform } from "./interfaces/platform.interface";
+import { PlatformModel } from "../models/platform.model";
 
 
-export const platforms: IPlatform[] =
+export const mockPlatforms: PlatformModel[] =
     [
         {
             "id": 158,
@@ -1170,19 +1168,18 @@ export const platforms: IPlatform[] =
         }
     ]
 
-export const commonPlatforms = ["PC","PlayStation 5", "Xbox Series X|S", "Nintendo Switch", "PC (Microsoft Windows)"]
-export const getPlatformsByCategory = (category: PlatformCategory): IPlatform[] =>
-   platforms.filter((platform) => platform.category === category);
+export const commonPlatformNames = ["PC","PlayStation 5", "Xbox Series X|S", "Nintendo Switch", "PC (Microsoft Windows)"];
+export const getPlatformsByCategory = (category: PlatformCategory): PlatformModel[] =>
+   mockPlatforms.filter((platform) => platform.category === category);
 
-export const getCommonPlatforms = () =>    platforms.filter((platform) => commonPlatforms.includes(platform.name ?? ""));
+export const getCommonPlatforms = () =>  mockPlatforms.filter((platform) => commonPlatformNames.includes(platform.name ?? ""));
 
-// We do 'platform.category && ...' to make sure its not undefined
-export const getPlatformByCategories = (categories: PlatformCategory[]): IPlatform[] =>
-    platforms.filter((platform) => platform.category && categories.includes(platform.category));
+export const getPlatformByCategories = (categories: PlatformCategory[]): PlatformModel[] =>
+    mockPlatforms.filter((platform) => platform.category && categories.includes(platform.category));
     
-export const getPlatformByAbbreviation = function (abbreviation: string): IPlatform | undefined {
+export const getPlatformByAbbreviation = function (abbreviation: string): PlatformModel | undefined {
     try {
-        const platform = platforms.find((platform) => platform.abbreviation === abbreviation.toUpperCase());
+        const platform = mockPlatforms.find((platform) => platform.abbreviation === abbreviation.toUpperCase());
 
         if (!platform) {
             throw new Error(`Platform with abbreviation "${abbreviation}" not found.`);
@@ -1190,8 +1187,8 @@ export const getPlatformByAbbreviation = function (abbreviation: string): IPlatf
 
         return platform;
     } catch (error) {
-        console.error('Error in getPlatformByAbbreviation:', error);
+        console.error('Error getting platform by abbreviation:', error);
         return undefined;
     }
 }
-export const getAllPlatforms = (): IPlatform[] => platforms;
+export const getAllMockPlatforms = (): PlatformModel[] => mockPlatforms;

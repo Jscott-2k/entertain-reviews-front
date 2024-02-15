@@ -3,10 +3,10 @@ import { Component, OnDestroy, OnInit, SkipSelf } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/auth.service';
-import { IPlatform } from '../../interfaces/platform.interface';
-import { getPlatformByAbbreviation, getPlatformByCategories, getPlatformsByCategory, getCommonPlatforms } from '../../platform-data';
+import { PlatformModel } from '../../../models/platform.model';
 import { PlatformCategory } from '../../enums/platform-category.enum';
 import { NavigationService } from 'src/app/core/navigation.service';
+import { PlatformService } from 'src/app/core/platform.service';
 
 @Component({
   selector: 'app-header',
@@ -17,21 +17,37 @@ export class HeaderComponent implements OnInit, OnDestroy{
   title = "title";
   private routerEventsSubscription!:Subscription;
 
-  consolePlatforms:IPlatform[] = getPlatformsByCategory(PlatformCategory.Console);
-  handheldPlatforms:IPlatform[] = getPlatformsByCategory(PlatformCategory.PortableConsole);
-  otherPlatforms:IPlatform[] = getPlatformByCategories([
-              PlatformCategory.Computer,
-              PlatformCategory.Arcade,
-              PlatformCategory.OperatingSystem,
-              PlatformCategory.Platform]);
-  
-  commonPlatforms:IPlatform[] = getCommonPlatforms();
+  consolePlatforms:PlatformModel[] = [];
+  handheldPlatforms:PlatformModel[] = [];
+  otherPlatforms:PlatformModel[] = [];
+  commonPlatforms:PlatformModel[] = [];
   
   constructor (private router:  Router,
      private authService: AuthService,
-     private navigationService:NavigationService) {}
+     private navigationService:NavigationService, private platformService:PlatformService) {}
 
   ngOnInit(){
+    this.platformService.fetchPlatformsByCategory(PlatformCategory.Console).subscribe(consolePlatforms => {
+      this.consolePlatforms = consolePlatforms;
+    });
+    
+    this.platformService.fetchPlatformsByCategory(PlatformCategory.PortableConsole).subscribe(handheldPlatforms => {
+      this.handheldPlatforms = handheldPlatforms;
+    });
+    
+    this.platformService.fetchPlatformsByCategory(
+      PlatformCategory.Computer,
+      PlatformCategory.Arcade,
+      PlatformCategory.OperatingSystem,
+      PlatformCategory.Platform
+    ).subscribe(otherPlatforms => {
+      this.otherPlatforms = otherPlatforms;
+    });
+  
+    this.platformService.fetchCommonPlatforms().subscribe(commonPlatforms => {
+      this.commonPlatforms = commonPlatforms;
+    });
+
     this.routerEventsSubscription = this.router.events.subscribe( (event) => (event instanceof NavigationEnd)  && this.handleRouteChange());
   }
   ngOnDestroy(){

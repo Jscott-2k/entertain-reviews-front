@@ -1,5 +1,5 @@
 import { GameCoverModel } from "./game-cover.model"
-import { IPlatform } from "../shared/interfaces/platform.interface"
+import { PlatformModel } from "./platform.model"
 
 
 export interface GameScoresModel{

@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { GameModel } from 'src/app/models/game.model';
-import { ReviewConModel } from 'src/app/models/review-con.model';
-import { ReviewProModel } from 'src/app/models/review-pro.model';
+import { ReviewProConModel } from 'src/app/models/review-pro-con.model';
 import { ReviewModel } from 'src/app/models/review.model';
 
 @Component({
@@ -20,8 +19,8 @@ export class GameReviewComponent {
   review!: ReviewModel; // the array of reviews for the game
   pageEvent!: PageEvent; // the pagination event object
 
-  pros!:ReviewProModel[];
-  cons!:ReviewConModel[];
+  pros!:ReviewProConModel[];
+  cons!:ReviewProConModel[];
 
   share() {
     throw new Error('Method not implemented.');

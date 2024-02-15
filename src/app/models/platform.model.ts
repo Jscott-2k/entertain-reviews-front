@@ -1,6 +1,6 @@
-import { PlatformCategory } from "../enums/platform-category.enum";
+import { PlatformCategory } from "../shared/enums/platform-category.enum";
 
-export interface IPlatform{
+export interface PlatformModel{
     id:string | number,
     abbreviation?:string,
     name?:string,

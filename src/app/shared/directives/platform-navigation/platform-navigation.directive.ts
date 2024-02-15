@@ -1,13 +1,13 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 import { NavigationService } from 'src/app/core/navigation.service';
-import { IPlatform } from '../../interfaces/platform.interface';
+import { PlatformModel } from '../../../models/platform.model';
 
 @Directive({
   selector: '[platformNavigation]'
 })
 export class PlatformNavigationDirective {
 
-  @Input('platformNavigation') platform!: IPlatform
+  @Input('platformNavigation') platform!: PlatformModel
 
   constructor(private el: ElementRef, private navigationService: NavigationService) {}
 

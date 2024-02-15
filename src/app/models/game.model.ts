@@ -1,5 +1,5 @@
 import { GameCoverModel } from "./game-cover.model"
-import { IPlatform } from "../shared/interfaces/platform.interface"
+import { PlatformModel } from "./platform.model"
 
 
 export interface GameModel{
@@ -7,7 +7,7 @@ export interface GameModel{
     first_release_date:number,
     cover:GameCoverModel
     name:string,
-    platforms:IPlatform[],
+    platforms:PlatformModel[],
     summary:string,
     companies:string
   }

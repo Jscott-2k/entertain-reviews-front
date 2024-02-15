@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 
-
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from '../app-routing.module';
@@ -11,7 +10,7 @@ import { EntertainmentCardComponent } from './components/entertainment-card/ente
 import { GameCardComponent } from './components/entertainment-card/game-card/game-card.component';
 import { MovieCardComponent } from './components/entertainment-card/movie-card/movie-card.component';
 import { TvCardComponent } from './components/entertainment-card/tv-card/tv-card.component';
-import { EntertainmentCardDirective } from './directives/review-card/entertainment-card.directive'
+import { EntertainmentCardDirective } from './directives/review-card/entertainment-card.directive';
 import { SocialLoginModule } from '@abacritt/angularx-social-login';
 import { AvatarComponent } from './components/avatar/avatar.component';
 import { LayoutComponent } from './components/layout/layout.component';
@@ -37,6 +36,7 @@ import { BannerComponent } from './components/banner/banner.component';
 
 @NgModule({
   declarations: [
+    // Components
     AppComponent,
     RatingComponent,
     EntertainmentCardComponent,
@@ -48,23 +48,26 @@ import { BannerComponent } from './components/banner/banner.component';
     LayoutComponent,
     FooterComponent,
     AuthWrapperComponent,
-    PlatformSortPipe,
-    PlatformNavigationDirective,
-    EntertainmentCardDirective,
+    CheckboxComponent,
+    SelectComponent,
     TextAreaComponent,
     ToggleComponent,
     SliderComponent,
+    AutoCompleteComponent,
+    BannerComponent,
+
+    // Pipes
+    PlatformSortPipe,
     ScoreClassPipe,
     TextTruncatePipe,
     AbsPipe,
     WordCountPipe,
-    CheckboxComponent,
-    SelectComponent,
-    AutoCompleteComponent,
     RangePipe,
-    RangeDirective,
-    BannerComponent,
 
+    // Directives
+    PlatformNavigationDirective,
+    EntertainmentCardDirective,
+    RangeDirective,
   ],
   imports: [
     BrowserModule,
@@ -75,11 +78,17 @@ import { BannerComponent } from './components/banner/banner.component';
     SocialLoginModule,
     SharedMaterialModule,
   ],
-  exports:[
+  exports: [
+    // Modules
     BrowserModule,
     AppRoutingModule,
-    CheckboxComponent,
     BrowserAnimationsModule,
+    SocialLoginModule,
+    SharedMaterialModule,
+    ReactiveFormsModule,
+
+    // Components
+    CheckboxComponent,
     AppComponent,
     RatingComponent,
     EntertainmentCardComponent,
@@ -87,22 +96,22 @@ import { BannerComponent } from './components/banner/banner.component';
     MovieCardComponent,
     TvCardComponent,
     HeaderComponent,
-    EntertainmentCardDirective,
-    SocialLoginModule,
     AvatarComponent,
     AuthWrapperComponent,
     ToggleComponent,
     SliderComponent,
-    SharedMaterialModule,
-    ReactiveFormsModule,
-    AbsPipe,
-    WordCountPipe,
     SelectComponent,
     AutoCompleteComponent,
-    RangePipe,
-    RangeDirective,
     BannerComponent,
 
-  ]
+    // Pipes
+    AbsPipe,
+    RangePipe,
+    WordCountPipe,
+
+    // Directives
+    EntertainmentCardDirective,
+    RangeDirective,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, map, of } from 'rxjs';
-import { IGameCard } from 'src/app/shared/interfaces/game-card.interface';
+import { BehaviorSubject, Observable, catchError, map, of } from 'rxjs';
 import { GameModel } from 'src/app/models/game.model';
 import { ApiService } from './api.service';
-import { IgdbImageService } from './igdb-image.service';
-import { IgdbImageSize } from '../shared/enums/igdb-image-size.enum';
 import { ReviewModel } from '../models/review.model';
 
 @Injectable({
@@ -13,14 +10,14 @@ import { ReviewModel } from '../models/review.model';
 export class ReviewService {
 
   private reviews: any[] = []; // Array to store reviews (replace with actual model)
+  private reviewedGamesSubject: BehaviorSubject<GameModel[]> = new BehaviorSubject<GameModel[]>([]);
+  reviewedGames$:Observable<GameModel[]> = this.reviewedGamesSubject.asObservable();
 
-  private reviewedGameCardsSubject = new Subject<IGameCard[]>();
-  
-  constructor(private apiService:ApiService, private igdbImageService: IgdbImageService) {  }
+  constructor(private apiService:ApiService) {  }
   
   private filterPlatform(selectedPlatforms:string[], responseArray:GameModel[]){
-    if(selectedPlatforms.length == 0 || selectedPlatforms.includes("any")){
 
+    if(!selectedPlatforms || selectedPlatforms.length == 0 || selectedPlatforms.includes("any")){
       return responseArray;
     }
     return responseArray.filter((responseObj) => {
@@ -33,31 +30,17 @@ export class ReviewService {
     
   }
 
-  private mapResponseToGameCard(response:GameModel[]):IGameCard[]{
-
-    return response.map(
-      ({ name, summary, id, platforms, first_release_date, cover }) => ({
-      title: name,
-      id:id,
-      summary:summary,
-      platforms: platforms?.flatMap(({ abbreviation }) => abbreviation ?? "") ?? [],
-      firstReleaseDate: first_release_date,
-      coverImageURL: this.igdbImageService.getImageUrl(cover?.image_id,IgdbImageSize.CoverBig)
-    }));
-  }
-
-  async getReviewedGames(selectedPlatforms:string[]):Promise<any> {
+  fetchReviewedGames(selectedPlatforms: string[]): Observable<GameModel[]>{
     return this.apiService.post<GameModel[]>("review-games").pipe(
-      map((responseArray:GameModel[]) => this.filterPlatform(selectedPlatforms,responseArray))).subscribe((response:GameModel[]) => {
-        const gamesCards:IGameCard[] = this.mapResponseToGameCard(response);
-        this.reviewedGameCardsSubject.next(gamesCards);
-      });
-  }
-  getReviewedGameCards$():Observable<IGameCard[]>{
-    return this.reviewedGameCardsSubject.asObservable();
+      map((responseArray: GameModel[]) => this.filterPlatform(selectedPlatforms, responseArray)),
+      catchError(error => {
+        console.error('Error fetching reviewed games:', error);
+        throw error;
+      })
+    );
   }
 
-  getReviewsSnippet(gameID:number, pageIndex:number, pageSize:number):Observable<ReviewModel[]>{ 
+  fetchReviewsSnippet(gameID:number, pageIndex:number, pageSize:number):Observable<ReviewModel[]>{ 
     let data = {
       gameID: gameID,
       pageIndex: pageIndex,
@@ -67,7 +50,7 @@ export class ReviewService {
     return this.apiService.post<ReviewModel[]>('review-snippets', data);
   }
 
-  getReview(reviewID:number):Observable<ReviewModel>{ 
+  fetchReview(reviewID:number):Observable<ReviewModel>{ 
     let data = {
       reviewID: reviewID
     };

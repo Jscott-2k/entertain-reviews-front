@@ -1,5 +1,5 @@
 import { Component, Optional, SkipSelf } from '@angular/core';
-import { ReviewType } from 'src/app/shared/enums/review-type.enum';
+import { EntertainmentType } from 'src/app/shared/entertainment.type';
 import { ReviewService } from './core/review.service';
 import { Observable } from 'rxjs';
 
