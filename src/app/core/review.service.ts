@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, catchError, map, of } from 'rxjs';
 import { GameModel } from 'src/app/models/game.model';
 import { ApiService } from './api.service';
 import { ReviewModel } from '../models/review.model';
+import { ReviewedGameModel } from '../models/reviewed-game.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,24 +16,25 @@ export class ReviewService {
 
   constructor(private apiService:ApiService) {  }
   
-  private filterPlatform(selectedPlatforms:string[], responseArray:GameModel[]){
+  private filterPlatform(selectedPlatforms:string[], responseArray:ReviewedGameModel[]){
 
-    if(!selectedPlatforms || selectedPlatforms.length == 0 || selectedPlatforms.includes("any")){
+    if (!selectedPlatforms || selectedPlatforms.length === 0 || selectedPlatforms.includes("any")) {
       return responseArray;
     }
+    const selectedPlatformNumbers = selectedPlatforms.map(Number);
     return responseArray.filter((responseObj) => {
-      
       if (responseObj.platforms) {
-        return responseObj.platforms.some((platform) => platform.id && selectedPlatforms.some(selectedPlatform=>selectedPlatform == platform.id));
+        // Check if any of the selected platform numbers exist in the responseObj.platforms array
+        return responseObj.platforms.some((platform) => selectedPlatformNumbers.includes(platform.id));
       }
       return false;
     });
     
   }
 
-  fetchReviewedGames(selectedPlatforms: string[]): Observable<GameModel[]>{
-    return this.apiService.post<GameModel[]>("reviewed-games").pipe(
-      map((responseArray: GameModel[]) => this.filterPlatform(selectedPlatforms, responseArray)),
+  fetchReviewedGames(selectedPlatforms: string[]): Observable<ReviewedGameModel[]>{
+    return this.apiService.post<ReviewedGameModel[]>("reviewed-games").pipe(
+      map((responseArray: ReviewedGameModel[]) => this.filterPlatform(selectedPlatforms, responseArray)),
       catchError(error => {
         console.error('Error fetching reviewed games:', error);
         throw error;

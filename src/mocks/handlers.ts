@@ -3,6 +3,7 @@ import platforms from './data/platforms.json'
 import gameScores from './data/game-scores.json'
 import game from './data/game.json'
 import reviewedGames from './data/reviewed-games.json'
+import reviews from './data/reviews.json'
 
 export const handlers = [
   http.post('/platforms', () => {
@@ -19,5 +20,8 @@ export const handlers = [
   }),
   http.post('/review', () => {
     return HttpResponse.json()
+  }),
+  http.post('/review-snippets', () => {
+    return HttpResponse.json(reviews)
   })
 ]

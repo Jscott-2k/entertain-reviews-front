@@ -20,7 +20,7 @@ export class TVStrategy implements IEntertainmentStrategy<TVModel, ITVFetchReque
   fetchReviewed(data:ITVFetchRequestParams): Observable<TVModel[]> {
     throw new Error('Method not implemented.');
   }
-  getCards(response:TVModel[]):IEntertainmentCard[] {
+  fetchCards(response:TVModel[]): Observable<IEntertainmentCard[]> {
     throw new Error('Method not implemented.');
   }
 }

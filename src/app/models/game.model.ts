@@ -5,9 +5,9 @@ import { PlatformModel } from "./platform.model"
 export interface GameModel{
     id:number,
     first_release_date:number,
-    cover:GameCoverModel
+    cover:number
     name:string,
-    platforms:PlatformModel[],
+    platforms:number[]
     summary:string,
-    companies:string
+    involved_companies:string
   }

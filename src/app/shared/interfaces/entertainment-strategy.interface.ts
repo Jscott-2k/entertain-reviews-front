@@ -12,6 +12,6 @@ T extends IEntertainmentResponseModel,
 P extends IFetchRequestParams
 > {
     fetchReviewed(data?: P): Observable<T[]>;
-    getCards(response:T[]):IEntertainmentCard[];
+    fetchCards(response:T[]):Observable<IEntertainmentCard[]>;
     setDefaultParams(data:P):void;
 }

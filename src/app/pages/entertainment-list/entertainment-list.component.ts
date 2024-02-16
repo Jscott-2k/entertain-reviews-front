@@ -6,7 +6,7 @@ import {
   ParamMap,
   Router,
 } from '@angular/router';
-import { Observable, Subject, filter, of, switchMap, takeUntil } from 'rxjs';
+import { Observable, Subject, catchError, filter, of, switchMap, takeUntil, throwError } from 'rxjs';
 import {
   EntertainmentType,
   isEntertainment,
@@ -21,6 +21,7 @@ import IEntertainmentStrategy, {
 import { GameStrategy } from 'src/app/core/strategies/game.strategy';
 import { TVStrategy } from 'src/app/core/strategies/tv.strategy';
 import { MovieStrategy } from 'src/app/core/strategies/movie.strategy';
+import { PlatformService } from 'src/app/core/platform.service';
 
 @Component({
   selector: 'app-entertainment-list',
@@ -41,6 +42,7 @@ export class EntertainmentListComponent implements OnInit, OnDestroy {
     private reviewService: ReviewService,
     private route: ActivatedRoute,
     private igdbImageService: IgdbImageService,
+    private platformService:PlatformService,
     private router: Router
   ) {}
 
@@ -49,7 +51,7 @@ export class EntertainmentListComponent implements OnInit, OnDestroy {
     EntertainmentType,
     IEntertainmentStrategy<IEntertainmentResponseModel, IFetchRequestParams>
   > = {
-    game: new GameStrategy(this.reviewService, this.igdbImageService),
+    game: new GameStrategy(this.reviewService, this.platformService, this.igdbImageService),
     movie: new TVStrategy(this.reviewService),
     tv: new MovieStrategy(this.reviewService),
   };
@@ -73,21 +75,27 @@ export class EntertainmentListComponent implements OnInit, OnDestroy {
   }
 
   private initEntertainmentList() {
-    this.route.paramMap
-      .pipe(
-        switchMap((routeParams: ParamMap) =>
-          this.fetchReviewedList(routeParams)
-        ),
-        takeUntil(this._destroy$)
-      )
-      .subscribe({
-        next: (data: any) => {
-          this.reviewedEntertainmentCards = this._strategy.getCards(data);
-        },
-        error: (error: any) => {
-          console.error('Error fetching reviewed data:', error);
-        },
-      });
+    this.route.paramMap.pipe(
+      switchMap((routeParams: ParamMap) => this.fetchReviewedList(routeParams)),
+      switchMap((data: any) => this.fetchEntertainmentCards(data)),
+      takeUntil(this._destroy$)
+    ).subscribe({
+      next: (cards) => {
+        this.reviewedEntertainmentCards = cards;
+      },
+      error: (error) => {
+        console.error('Error initializing entertainment list:', error);
+      }
+    });
+  }
+  
+  private fetchEntertainmentCards(data: any): Observable<any> {
+    return this._strategy.fetchCards(data).pipe(
+      catchError((error: any) => {
+        console.error('Error fetching cards:', error);
+        return throwError(() => error);
+      })
+    );
   }
 
   /**

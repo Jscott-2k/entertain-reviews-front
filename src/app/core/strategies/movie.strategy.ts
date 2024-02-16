@@ -17,7 +17,7 @@ export class MovieStrategy implements IEntertainmentStrategy<MovieModel, IMovieF
   setDefaultParams(data: IMovieFetchRequestParams): void {
     throw new Error('Method not implemented.');
   }
-  getCards(response: MovieModel[]): IEntertainmentCard[] {
+  fetchCards(response: MovieModel[]): Observable<IEntertainmentCard[]> {
     throw new Error('Method not implemented.');
   }
   fetchReviewed(data: IMovieFetchRequestParams): Observable<MovieModel[]> {
