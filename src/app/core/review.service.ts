@@ -31,7 +31,7 @@ export class ReviewService {
   }
 
   fetchReviewedGames(selectedPlatforms: string[]): Observable<GameModel[]>{
-    return this.apiService.post<GameModel[]>("review-games").pipe(
+    return this.apiService.post<GameModel[]>("reviewed-games").pipe(
       map((responseArray: GameModel[]) => this.filterPlatform(selectedPlatforms, responseArray)),
       catchError(error => {
         console.error('Error fetching reviewed games:', error);

@@ -11,13 +11,13 @@ export class GameService {
 
   constructor(private apiService: ApiService) { }
 
-  getGame(id: number | null): Observable<GameModel> {
+  fetchGame(id: number | null): Observable<GameModel> {
     let data = {
       game: id
     };
     return this.apiService.post<GameModel>('game', data);
   }
-  getScores(id: number | null): Observable<GameScoresModel> {
+  fetchScores(id: number | null): Observable<GameScoresModel> {
     let data = {
       game: id
     };

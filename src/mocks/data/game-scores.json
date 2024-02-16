@@ -1,0 +1,13 @@
+{
+    "game": 12345,
+    "technical": 8.5,
+    "story": 7.2,
+    "uiux": 9.0,
+    "sfx": 8.8,
+    "graphics": 9.5,
+    "gameplay": 9.2,
+    "music": 8.7,
+    "playtime": 25,
+    "overall_weighted": 8.6,
+    "overall_unweighted": 8.3
+}

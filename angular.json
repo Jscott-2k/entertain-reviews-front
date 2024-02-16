@@ -31,7 +31,8 @@
                 "glob": "**/*",
                 "input": "src/assets/",
                 "output": "/assets/"
-              }
+              },
+              "src/mockServiceWorker.js"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",

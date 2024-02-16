@@ -27,17 +27,20 @@ export class GameDetailComponent {
 
   ngOnInit(): void {
     this.getGameDetails(); // get the game data on initialization
+    this.getGame();
   }
 
   getGame(): void {
-    this.gameID = parseInt( this.route.snapshot.paramMap.get('id') ?? "-1" ); // get the game id from the route
-    this.gameService.getGame(this.gameID) // get the game object from the service
+    const gameIdParam = this.route.snapshot.paramMap.get('game');
+    this.gameID = gameIdParam ? parseInt(gameIdParam) : -1;
+    this.gameService.fetchGame(this.gameID) // get the game object from the service
       .subscribe(game => this.game = game); // assign the game object to the component property
   }
 
   getGameDetails(): void {
-    this.gameID = parseInt( this.route.snapshot.paramMap.get('id') ?? "-1" ); // get the game id from the route
-    this.gameService.getScores(this.gameID) // get the game object from the service
+    const gameIdParam = this.route.snapshot.paramMap.get('game');
+    this.gameID = gameIdParam ? parseInt(gameIdParam) : -1;
+    this.gameService.fetchScores(this.gameID) // get the game object from the service
       .subscribe(gameScore => this.gameScores = gameScore); // assign the game object to the component property
   }
 
