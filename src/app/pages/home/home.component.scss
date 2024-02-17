@@ -1,8 +1,21 @@
 article {
     background: linear-gradient(0deg, rgb(22, 177, 224), rgb(4, 20, 68));
+    position: relative;
+
+}
+article::after{
+    background-image: url("../../../assets/texture-bg.jpg");
+    background-size: cover; /* Adjust to your preference */
+    background-position: center; /* Adjust to your preference */
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: .2;
+    position: absolute;
     /* Apply gradient background for odd sections */
 }
-
 section {
     display: flex;
     flex-direction: column;

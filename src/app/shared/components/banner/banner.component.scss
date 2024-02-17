@@ -9,11 +9,13 @@
     .banner-image {
         flex: 1;
         height: 100%;
-        overflow: hidden;
-        filter: blur(100);
+        position: relative;
+        filter: blur(3px);
         img {
             width: 100%;
-            height: 100%;
+            position: absolute;
+            bottom:0;
+            transition: bottom 0.5s ease; 
         }
         &::before {
             content: "";
@@ -23,9 +25,10 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.25); 
-            filter: blur(25px);
-            transition: filter 0.5s ease; 
+            filter: blur(10px);
+            transition: filter 0.25s ease; 
         }
+        transition: filter 0.5s ease; 
     }
 
     .banner-content {
@@ -47,7 +50,10 @@
         }
     }
 
-    &:hover .banner-image::before {
-        filter: blur(0); /* Remove blur on hover */
+    &:hover .banner-image {
+        filter: blur(0px); /* Remove blur on hover */
+        img{
+            bottom:-20;
+        }
     }
 }

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { GameScoresModel } from '../models/game-scores.model';
 import { GameModel } from '../models/game.model';
 import { ApiService } from './api.service';
+import { GameCoverModel } from '../models/game-cover.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,11 @@ export class GameService {
       game: id
     };
     return this.apiService.post<GameScoresModel>('game-scores', data);
+  }
+  fetchCover(id:number):Observable<GameCoverModel>{
+    let data = {
+      id:id
+    }
+    return this.apiService.post<GameCoverModel>("cover",data);
   }
 }

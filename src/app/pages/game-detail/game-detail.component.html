@@ -1,42 +1,127 @@
 <ng-container *ngIf="gameDetails$ | async as details">
-    <mat-card class="game-card">
-      <mat-card-header>
-        <mat-card-title>{{ details.game.name }}</mat-card-title>
-      </mat-card-header>
-      <!-- <img mat-card-image [src]="game.image" alt="Game image"> -->
-      <mat-card-content>
-        <p>Average play time: {{ details.gameScores.playtime }} hours</p>
-        <p>Weighted score: {{ details.gameScores.overall_weighted }} / 10</p>
-        <p>Unweighted score: {{ details.gameScores.overall_unweighted }} / 10</p>
-        <p>Average gameplay score: {{ details.gameScores.gameplay }} / 10</p>
-        <p>Graphics score: {{ details.gameScores.graphics }} / 10</p>
-        <p>Music score: {{ details.gameScores.music }} / 10</p>
-        <p>SFX score: {{ details.gameScores.sfx }} / 10</p>
-        <p>UI/UX score: {{ details.gameScores.uiux }} / 10</p>
-        <p>Story score: {{ details.gameScores.story }} / 10</p>
-        <p>Technical: {{ details.gameScores.technical }}</p>
-        <p>Platforms: {{ details.game.platforms }}</p>
-        <p>Publisher: {{ details.game.involved_companies }}</p>
-        <p>Release date: {{ details.game.first_release_date * 1000 | date}}</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button (click)="share()">Share</button>
-        <button mat-button [routerLink]="['/write-review', details.game.id]">Write a review</button>
-      </mat-card-actions>
-    </mat-card>
-  
+  <div class="game-details">
+    <div class="game-card-score-container er-flex  er-align-items--center">
+
+      <div class="game-card er-flex--1">
+        <mat-card>
+
+          <mat-card-header>
+            <mat-card-title>{{ details.game.name }}</mat-card-title>
+            <mat-card-subtitle>
+              <p><strong>Publisher:</strong> {{ details.game.involved_companies }}</p>
+            </mat-card-subtitle>
+          </mat-card-header>
+
+          <img mat-card-image [src]="imageCoverURL" alt="Game image">
+
+          <mat-card-content>
+            <div class="card-info">
+              <p><strong>Platforms:</strong> {{ details.game.platforms }}</p>
+              <p><strong>Release date:</strong> {{ details.game.first_release_date * 1000 | date}}</p>
+              <p><strong>Average play time:</strong> {{ details.gameScores.playtime }} hours</p>
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions>
+            <button mat-button color="primary" (click)="share()">Share</button>
+            <button mat-button color="accent" [routerLink]="['/write-review', details.game.id]">Write a review</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div class="er-flex--1">
+        <div class="score-container">
+          <div class="score-item">
+            <div class="score-label">Weighted score:</div>
+            <div class="score-bar-container">
+              <div class="score-bar" [style.width.%]="details.gameScores.overall_weighted * 10"></div>
+            </div>
+            <div class="score-value">{{ details.gameScores.overall_weighted }}</div>
+          </div>
+
+          <div class="score-item">
+            <div class="score-label">Unweighted score:</div>
+            <div class="score-bar-container">
+              <div class="score-bar" [style.width.%]="details.gameScores.overall_unweighted * 10"></div>
+            </div>
+            <div class="score-value">{{ details.gameScores.overall_unweighted }}</div>
+          </div>
+
+          <div class="score-item">
+            <div class="score-label">Gameplay score:</div>
+            <div class="score-bar-container">
+              <div class="score-bar" [style.width.%]="details.gameScores.gameplay * 10"></div>
+            </div>
+            <div class="score-value">{{ details.gameScores.gameplay }}</div>
+          </div>
+
+          <div class="score-item">
+            <div class="score-label">Graphics score:</div>
+            <div class="score-bar-container">
+              <div class="score-bar" [style.width.%]="details.gameScores.graphics * 10"></div>
+            </div>
+            <div class="score-value">{{ details.gameScores.graphics }}</div>
+          </div>
+
+          <div class="score-item">
+            <div class="score-label">Music score:</div>
+            <div class="score-bar-container">
+              <div class="score-bar" [style.width.%]="details.gameScores.music * 10"></div>
+            </div>
+            <div class="score-value">{{ details.gameScores.music }}</div>
+          </div>
+
+          <div class="score-item">
+            <div class="score-label">SFX score:</div>
+            <div class="score-bar-container">
+              <div class="score-bar" [style.width.%]="details.gameScores.sfx * 10"></div>
+            </div>
+            <div class="score-value">{{ details.gameScores.sfx }}</div>
+          </div>
+
+          <div class="score-item">
+            <div class="score-label">UI/UX score:</div>
+            <div class="score-bar-container">
+              <div class="score-bar" [style.width.%]="details.gameScores.uiux * 10"></div>
+            </div>
+            <div class="score-value">{{ details.gameScores.uiux }}</div>
+          </div>
+
+          <div class="score-item">
+            <div class="score-label">Story score:</div>
+            <div class="score-bar-container">
+              <div class="score-bar" [style.width.%]="details.gameScores.story * 10"></div>
+            </div>
+            <div class="score-value">{{ details.gameScores.story }}</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">Technical score:</div>
+            <div class="score-bar-negative-container">
+              <div class="score-bar-negative" [style.width.%]="((details.gameScores.technical) | abs) * 16.67" [ngClass]="{'positive':(details.gameScores.technical > 0), 'negative':(details.gameScores.technical < 0)}"></div>
+            </div>
+            <div class="score-value">{{ details.gameScores.technical }}</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <h2>Summary</h2>
     <div *ngIf="details.game.summary">
       <p>{{ details.game.summary }}</p>
     </div>
-  
+
     <h2>Screenshots</h2>
     <div><!-- Add logic to display screenshots here --></div>
-  
+
     <h2>Reviews</h2>
     <div><!-- Add logic to display reviews here --></div>
-  </ng-container>
-  
-  <mat-paginator *ngIf="reviews$ | async as reviews"
-      [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]" aria-label="Select page">
+
+  </div>
+
+
+  <mat-paginator *ngIf="reviews$ | async as reviews" [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]"
+    aria-label="Select page">
   </mat-paginator>
+
+
+</ng-container>

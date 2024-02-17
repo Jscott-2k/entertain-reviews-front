@@ -28,7 +28,7 @@ const routes: Routes = [{
 },{
   path:'game/:game', component:GameDetailComponent,
 },{
-  path:'game/:game/review/id/:review', component:GameReviewComponent,
+  path:'game/:game/review/:review', component:GameReviewComponent,
 },
 {
   path:'', component:HomeComponent 
