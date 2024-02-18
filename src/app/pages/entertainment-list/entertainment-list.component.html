@@ -1,5 +1,5 @@
 <app-banner 
-[title]="'Explore ' + entertainmentTypeParam + ' Reviews'" >
+[title]="('Explore ' + entertainmentTypeParam + ' Reviews') | titlecase " >
 </app-banner>
 <div>
     <ng-container *ngFor="let card of reviewedEntertainmentCards">

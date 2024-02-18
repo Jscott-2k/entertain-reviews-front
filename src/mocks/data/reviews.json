@@ -11,10 +11,13 @@
       "overall_unweighted": 9,
       "general_weighted": 9,
       "general_unweighted": 9,
-      "technical_score": 9.5,
+      "technical_score": 0.75,
       "technical_written": "Impressive graphics and immersive gameplay.",
       "pros_total_modifier": 1.5,
-      "cons_total_modifier": 0.5
+      "cons_total_modifier": 0.5,
+      "likes":29,
+      "dislikes":0,
+      "helpfuls":0
     },
     {
       "game": 176032,
@@ -28,10 +31,13 @@
       "overall_unweighted": 9.5,
       "general_weighted": 9,
       "general_unweighted": 10,
-      "technical_score": 8.5,
+      "technical_score": 0.75,
       "technical_written": "Some minor performance issues, but overall great experience.",
       "pros_total_modifier": 1,
-      "cons_total_modifier": 0.5
+      "cons_total_modifier": 0.5,
+      "likes":2,
+      "dislikes":23,
+      "helpfuls":0
     },
     {
       "game": 176032,
@@ -45,10 +51,13 @@
       "overall_unweighted": 10,
       "general_weighted": 10,
       "general_unweighted": 10,
-      "technical_score": 9.5,
+      "technical_score":  -0.5,
       "technical_written": "Stunning visuals and deep gameplay mechanics.",
       "pros_total_modifier": 2,
-      "cons_total_modifier": 0
+      "cons_total_modifier": 0,
+      "likes":0,
+      "dislikes":1,
+      "helpfuls":23
     },
     {
         "game": 176032,
@@ -62,10 +71,13 @@
         "overall_unweighted": 10,
         "general_weighted": 10,
         "general_unweighted": 10,
-        "technical_score": 9.6,
+        "technical_score":  -0.5,
         "technical_written": "Smooth performance and beautiful art direction.",
         "pros_total_modifier": 2,
-        "cons_total_modifier": 0
+        "cons_total_modifier": 0,
+        "likes":1,
+        "dislikes":1,
+        "helpfuls":1
       },
       {
         "game": 176032,
@@ -79,10 +91,13 @@
         "overall_unweighted": 9,
         "general_weighted": 9,
         "general_unweighted": 9,
-        "technical_score": 9.5,
+        "technical_score":  -0.5,
         "technical_written": "Outstanding graphics and engaging gameplay.",
         "pros_total_modifier": 1.5,
-        "cons_total_modifier": 0.5
+        "cons_total_modifier": 0.5,
+        "likes":1,
+        "dislikes":1,
+        "helpfuls":1
       },
       {
         "game": 176032,
@@ -96,10 +111,13 @@
         "overall_unweighted": 10,
         "general_weighted": 10,
         "general_unweighted": 10,
-        "technical_score": 9.8,
+        "technical_score":  -0.5,
         "technical_written": "Top-notch visuals and addictive gameplay.",
         "pros_total_modifier": 2,
-        "cons_total_modifier": 0
+        "cons_total_modifier": 0,
+        "likes":1,
+        "dislikes":1,
+        "helpfuls":1
       },
       {
         "game": 176032,
@@ -113,10 +131,13 @@
         "overall_unweighted": 9,
         "general_weighted": 9,
         "general_unweighted": 9,
-        "technical_score": 9.8,
+        "technical_score": -0.5,
         "technical_written": "Amazing attention to detail and smooth gameplay.",
         "pros_total_modifier": 1.8,
-        "cons_total_modifier": 0.1
+        "cons_total_modifier": 0.1,
+        "likes":1,
+        "dislikes":1,
+        "helpfuls":1
       },
       {
         "game": 176032,
@@ -130,10 +151,13 @@
         "overall_unweighted": 10,
         "general_weighted": 10,
         "general_unweighted": 10,
-        "technical_score": 10,
+        "technical_score": 3,
         "technical_written": "Flawless execution and immersive world.",
         "pros_total_modifier": 2,
-        "cons_total_modifier": 0
+        "cons_total_modifier": 0,
+        "likes":1,
+        "dislikes":1,
+        "helpfuls":1
       },
       {
         "game": 176032,
@@ -147,10 +171,13 @@
         "overall_unweighted": 9,
         "general_weighted": 9,
         "general_unweighted": 9,
-        "technical_score": 9.8,
+        "technical_score": 0.5,
         "technical_written": "Impressive visuals and captivating gameplay.",
         "pros_total_modifier": 1.7,
-        "cons_total_modifier": 0.2
+        "cons_total_modifier": 0.2,
+        "likes":1,
+        "dislikes":1,
+        "helpfuls":1
       },
       {
         "game": 176032,
@@ -164,9 +191,52 @@
         "overall_unweighted": 10,
         "general_weighted": 10,
         "general_unweighted": 10,
-        "technical_score": 9.8,
+        "technical_score": 0.8,
         "technical_written": "Beautiful graphics and addictive gameplay.",
         "pros_total_modifier": 2,
-        "cons_total_modifier": 0
+        "cons_total_modifier": 0,
+        "likes":1,
+        "dislikes":1,
+        "helpfuls":1
+      },
+      {
+        "game": 176032,
+        "id": 11,
+        "author": "Michael Davis",
+        "date": "2024-01-16",
+        "playtime": 20,
+        "platform": 6,
+        "written": "At first glance, this game appears to be just another generic open-world adventure. However, upon delving deeper into its intricacies, one realizes the depth and complexity it offers. The narrative is gripping, weaving together themes of love, betrayal, and redemption seamlessly. The characters are well-developed, each with their own motivations and arcs. The gameplay mechanics are innovative, keeping players engaged for hours on end. From breathtaking vistas to intense combat sequences, every aspect of this game is meticulously crafted to perfection. It's a masterpiece that deserves all the praise it receives.",
+        "overall_weighted": 9.8,
+        "overall_unweighted": 9.5,
+        "general_weighted": 10,
+        "general_unweighted": 9,
+        "technical_score": 3.5,
+        "technical_written": "The technical aspects of this game are outstanding. The graphics are stunning, pushing the boundaries of what we thought possible in gaming. The sound design is immersive, drawing players into the world effortlessly. The controls are responsive, allowing for precise movements in even the most chaotic of situations. Overall, the technical excellence displayed here sets a new standard for the industry.",
+        "pros_total_modifier": 2,
+        "cons_total_modifier": 0.2,
+        "likes": 45,
+        "dislikes": 1,
+        "helpfuls": 12
+      },
+      {
+        "game": 176032,
+        "id": 12,
+        "author": "Emily Thompson",
+        "date": "2024-01-15",
+        "playtime": 30,
+        "platform": 6,
+        "written": "As a long-time fan of the franchise, I had high hopes for this installment. Unfortunately, it fell short of my expectations in almost every aspect. The story felt disjointed, with plot holes big enough to drive a truck through. The characters lacked depth, making it hard to care about their fates. The gameplay was riddled with bugs and glitches, causing frustration at every turn. Even the graphics, once a highlight of the series, looked dated and uninspired. Overall, this game left me feeling disappointed and disillusioned.",
+        "overall_weighted": 5.2,
+        "overall_unweighted": 5,
+        "general_weighted": 5,
+        "general_unweighted": 6,
+        "technical_score": -2.5,
+        "technical_written": "From a technical standpoint, this game is a disaster. The graphics are muddy, with textures popping in and out constantly. The audio is equally lackluster, with voice acting that ranges from mediocre to downright cringeworthy. The controls are clunky, leading to many frustrating moments where simple tasks become Herculean challenges. It's clear that corners were cut in the development process, resulting in a product that feels unfinished and unpolished.",
+        "pros_total_modifier": 0.5,
+        "cons_total_modifier": -1.2,
+        "likes": 3,
+        "dislikes": 17,
+        "helpfuls": 2
       }
   ]

@@ -4,6 +4,7 @@ import { GameScoresModel } from '../models/game-scores.model';
 import { GameModel } from '../models/game.model';
 import { ApiService } from './api.service';
 import { GameCoverModel } from '../models/game-cover.model';
+import { GameScreenshotModel } from '../models/game-screenshot.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +30,11 @@ export class GameService {
       id:id
     }
     return this.apiService.post<GameCoverModel>("cover",data);
+  }
+  fetchScreenshots(id:number):Observable<GameCoverModel[]>{
+    let data = {
+      id:id
+    }
+    return this.apiService.post<GameScreenshotModel[]>("screenshots",data);
   }
 }

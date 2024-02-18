@@ -13,5 +13,8 @@ export interface ReviewModel {
     technical_score:number,
     technical_written:string,
     pros_total_modifier:number,
-    cons_total_modifier:number
+    cons_total_modifier:number,
+    likes:number,
+    dislikes:number,
+    helpfuls:number,
 }

@@ -33,6 +33,7 @@ import { AutoCompleteComponent } from './components/auto-complete/auto-complete.
 import { RangePipe } from './pipes/range.pipe';
 import { RangeDirective } from './directives/range/range.directive';
 import { BannerComponent } from './components/banner/banner.component';
+import { ImageCarouselComponent } from './components/image-carousel/image-carousel.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { BannerComponent } from './components/banner/banner.component';
     SliderComponent,
     AutoCompleteComponent,
     BannerComponent,
+    ImageCarouselComponent,
 
     // Pipes
     PlatformSortPipe,
@@ -103,11 +105,13 @@ import { BannerComponent } from './components/banner/banner.component';
     SelectComponent,
     AutoCompleteComponent,
     BannerComponent,
+    ImageCarouselComponent,
 
     // Pipes
     AbsPipe,
     RangePipe,
     WordCountPipe,
+    TextTruncatePipe,
 
     // Directives
     EntertainmentCardDirective,
