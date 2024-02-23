@@ -31,79 +31,95 @@
           </mat-card>
         </div>
         <div class="er-flex--1">
-          <div class="score-container">
-            <div class="score-item">
-              <div class="score-label">Weighted score:</div>
-              <div class="score-bar-container">
-                <div class="score-bar" [style.width.%]="details.gameScores.overall_weighted * 10"></div>
-              </div>
-              <div class="score-value">{{ details.gameScores.overall_weighted }}</div>
-            </div>
+          <div class="score-container er-flex er-align-items--flex-start">
 
-            <div class="score-item">
-              <div class="score-label">Unweighted score:</div>
-              <div class="score-bar-container">
-                <div class="score-bar" [style.width.%]="details.gameScores.overall_unweighted * 10"></div>
-              </div>
-              <div class="score-value">{{ details.gameScores.overall_unweighted }}</div>
-            </div>
-
-            <div class="score-item">
-              <div class="score-label">Gameplay score:</div>
-              <div class="score-bar-container">
-                <div class="score-bar" [style.width.%]="details.gameScores.gameplay * 10"></div>
-              </div>
-              <div class="score-value">{{ details.gameScores.gameplay }}</div>
-            </div>
-
-            <div class="score-item">
-              <div class="score-label">Graphics score:</div>
-              <div class="score-bar-container">
-                <div class="score-bar" [style.width.%]="details.gameScores.graphics * 10"></div>
-              </div>
-              <div class="score-value">{{ details.gameScores.graphics }}</div>
-            </div>
-
-            <div class="score-item">
-              <div class="score-label">Music score:</div>
-              <div class="score-bar-container">
-                <div class="score-bar" [style.width.%]="details.gameScores.music * 10"></div>
-              </div>
-              <div class="score-value">{{ details.gameScores.music }}</div>
-            </div>
-
-            <div class="score-item">
-              <div class="score-label">SFX score:</div>
-              <div class="score-bar-container">
-                <div class="score-bar" [style.width.%]="details.gameScores.sfx * 10"></div>
-              </div>
-              <div class="score-value">{{ details.gameScores.sfx }}</div>
-            </div>
-
-            <div class="score-item">
-              <div class="score-label">UI/UX score:</div>
-              <div class="score-bar-container">
-                <div class="score-bar" [style.width.%]="details.gameScores.uiux * 10"></div>
-              </div>
-              <div class="score-value">{{ details.gameScores.uiux }}</div>
-            </div>
-
-            <div class="score-item">
-              <div class="score-label">Story score:</div>
-              <div class="score-bar-container">
-                <div class="score-bar" [style.width.%]="details.gameScores.story * 10"></div>
-              </div>
-              <div class="score-value">{{ details.gameScores.story }}</div>
-            </div>
-            <div class="score-item">
-              <div class="score-label">Technical score:</div>
-              <div class="score-bar-negative-container">
-                <div class="score-bar-negative" [style.width.%]="((details.gameScores.technical) | abs) * 16.67"
-                  [ngClass]="{'positive':(details.gameScores.technical > 0), 'negative':(details.gameScores.technical < 0)}">
+            <div class="er-flex er-flex--column ">
+              <div class="score-item">
+                <div class="score-label">Weighted:</div>
+                <div class="score-bar-container">
+                  <div class="score-bar" [style.width.%]="details.gameScores.overall_weighted * 10"></div>
                 </div>
+                <div class="score-value">{{ details.gameScores.overall_weighted }}</div>
               </div>
-              <div class="score-value">{{ details.gameScores.technical }}</div>
+
+              <div class="score-item">
+                <div class="score-label">Unweighted:</div>
+                <div class="score-bar-container">
+                  <div class="score-bar" [style.width.%]="details.gameScores.overall_unweighted * 10"></div>
+                </div>
+                <div class="score-value">{{ details.gameScores.overall_unweighted }}</div>
+              </div>
+              <div class="score-item">
+                <div class="score-label">Technical:</div>
+                <div class="score-bar-negative-container">
+                  <div class="score-bar-negative" [style.width.%]="((details.gameScores.technical) | abs) * 16.67"
+                    [ngClass]="{'positive':(details.gameScores.technical > 0), 'negative':(details.gameScores.technical < 0)}">
+                  </div>
+                </div>
+                <div class="score-value">{{ details.gameScores.technical }}</div>
+              </div>
+
+              <div class="score-item">
+                <div class="score-label">Pro / Con:</div>
+                <div class="score-bar-negative-container">
+                  <div class="score-bar-negative"
+                    [style.width.%]="(( details.gameScores.pros + details.gameScores.cons) | abs) * 5"
+                    [ngClass]="{'positive':((details.gameScores.pros + details.gameScores.cons)  > 0), 'negative':((details.gameScores.pros + details.gameScores.cons) < 0)}">
+                  </div>
+                </div>
+                <div class="score-value">{{details.gameScores.pros + details.gameScores.cons}}</div>
+              </div>
             </div>
+            <div class="er-flex er-flex--column">
+              <div class="score-item">
+                <div class="score-label">Gameplay:</div>
+                <div class="score-bar-container">
+                  <div class="score-bar" [style.width.%]="details.gameScores.gameplay * 10"></div>
+                </div>
+                <div class="score-value">{{ details.gameScores.gameplay }}</div>
+              </div>
+
+              <div class="score-item">
+                <div class="score-label">Graphics:</div>
+                <div class="score-bar-container">
+                  <div class="score-bar" [style.width.%]="details.gameScores.graphics * 10"></div>
+                </div>
+                <div class="score-value">{{ details.gameScores.graphics }}</div>
+              </div>
+
+              <div class="score-item">
+                <div class="score-label">Music:</div>
+                <div class="score-bar-container">
+                  <div class="score-bar" [style.width.%]="details.gameScores.music * 10"></div>
+                </div>
+                <div class="score-value">{{ details.gameScores.music }}</div>
+              </div>
+
+              <div class="score-item">
+                <div class="score-label">SFX:</div>
+                <div class="score-bar-container">
+                  <div class="score-bar" [style.width.%]="details.gameScores.sfx * 10"></div>
+                </div>
+                <div class="score-value">{{ details.gameScores.sfx }}</div>
+              </div>
+
+              <div class="score-item">
+                <div class="score-label">UI/UX:</div>
+                <div class="score-bar-container">
+                  <div class="score-bar" [style.width.%]="details.gameScores.uiux * 10"></div>
+                </div>
+                <div class="score-value">{{ details.gameScores.uiux }}</div>
+              </div>
+
+              <div class="score-item">
+                <div class="score-label">Story:</div>
+                <div class="score-bar-container">
+                  <div class="score-bar" [style.width.%]="details.gameScores.story * 10"></div>
+                </div>
+                <div class="score-value">{{ details.gameScores.story }}</div>
+              </div>
+            </div>
+
           </div>
 
         </div>
@@ -112,19 +128,19 @@
       <div class="er-text--center">
         <h2 class="section-title">Summary</h2>
         <div *ngIf="details.game.summary">
-          <p class="summary">{{ details.game.summary }}</p>
+          <p class="game-summary">{{ details.game.summary }}</p>
         </div>
- 
-        <div class="screenshots-container">
-        <h2 class="section-title">Screenshots</h2>
 
-        <div *ngIf="screenshotURLs && screenshotURLs.length > 0" class="screenshots">
-          <!-- <div *ngFor="let url of screenshotURLs">
+        <div class="screenshots-container">
+          <h2 class="section-title">Screenshots</h2>
+
+          <div *ngIf="screenshotURLs && screenshotURLs.length > 0" class="screenshots">
+            <!-- <div *ngFor="let url of screenshotURLs">
         <img [src]="url" alt="Screenshot">
       </div> -->
-          <app-image-carousel [imageUrls]="screenshotURLs"></app-image-carousel>
+            <app-image-carousel [imageUrls]="screenshotURLs"></app-image-carousel>
+          </div>
         </div>
-      </div>
         <div *ngIf="!screenshotURLs || screenshotURLs.length === 0">
           <p>No screenshots available.</p>
         </div>
@@ -143,12 +159,14 @@
           </mat-card-header>
           <mat-card-content>
             <div class="review-snippet">
-              <p> <strong>Overall Weighted Score:</strong> {{ review.overall_weighted }}</p>
-              <p> <strong>Likes:</strong> {{ review.likes }}</p>
-              <p><strong>Dislikes:</strong> {{ review.dislikes }}</p>
-              <p><strong>Helpfuls:</strong> {{ review.helpfuls }}</p>
+              <div class="er-flex er-justify-content--space-evenly">
+                <p> <strong>Overall Weighted Score:</strong> {{ review.overall_weighted }}</p>
+                <p> <strong>Likes:</strong> {{ review.likes }}</p>
+                <p><strong>Dislikes:</strong> {{ review.dislikes }}</p>
+                <p><strong>Helpfuls:</strong> {{ review.helpfuls }}</p>
+              </div>
               <div class="written-review">
-                <p class="summary"><strong>Review Summary:</strong> {{ review.written | textTruncate: 100 }}</p>
+                <p class="summary">{{ review.written | textTruncate: 80 }}</p>
               </div>
             </div>
           </mat-card-content>

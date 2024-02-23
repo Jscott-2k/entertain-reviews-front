@@ -16,10 +16,8 @@ export class ImageCarouselComponent implements OnInit {
 
   nextSlide() {
     this.activeIndex = (this.activeIndex  + 1) % this.imageUrls.length;
-    console.log("active:", this.activeIndex);
   }
   prevSlide() {
     this.activeIndex = (this.activeIndex - 1 + this.imageUrls.length) % this.imageUrls.length;
-    console.log("active:", this.activeIndex);
   }
 }

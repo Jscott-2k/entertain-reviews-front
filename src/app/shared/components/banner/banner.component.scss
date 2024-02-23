@@ -13,9 +13,7 @@
         filter: blur(3px);
         img {
             width: 100%;
-            position: absolute;
-            bottom:0;
-            transition: bottom 0.5s ease; 
+            transition: top 0.5s ease; 
         }
         &::before {
             content: "";
@@ -52,8 +50,5 @@
 
     &:hover .banner-image {
         filter: blur(0px); /* Remove blur on hover */
-        img{
-            bottom:-20;
-        }
     }
 }

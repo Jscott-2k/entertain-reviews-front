@@ -5,6 +5,8 @@ import { PlatformModel } from "./platform.model"
 export interface GameScoresModel{
     game:number,
     technical:number,
+    pros:number,
+    cons:number,
     story:number,
     uiux:number,
     sfx:number,

@@ -1,6 +1,8 @@
 {
     "game": 12345,
     "technical": 2.5,
+    "pros":0,
+    "cons":-0.5,
     "story": 7.2,
     "uiux": 9.0,
     "sfx": 8.8,

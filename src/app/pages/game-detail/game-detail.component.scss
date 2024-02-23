@@ -16,14 +16,16 @@ mat-card-actions button {
 }
 
 .score-label {
-  flex: 0 0 150px;
+  flex: 0 0 170px;
   margin-right: 10px;
   font-weight: bold;
+  font-size: 28px;
+  text-align: left;
 }
 
 .score-bar {
   height: 22px;
-  background-color: #424fff;
+  background-color: #085528;
 }
 .score-bar-container {
   flex: 1 1 250px;
@@ -48,12 +50,14 @@ mat-card-actions button {
   flex: 0 0 50px;
   margin-left: 10px;
   font-weight: bold;
+  font-size: 22px;
 }
 .score-container {
-  max-width: 612px;
+  justify-content: space-evenly;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
+  margin: 0px 12px 0 12px;
 }
 .score-item {
   display: flex;
@@ -66,12 +70,12 @@ mat-card-actions button {
 }
 .game-details-container{
     background-color: rgb(27, 60, 90);
-    color: antiquewhite;
+    color: rgb(150, 6, 85);
 }
 .game-details {
   margin: auto;
   width: 85%;
-  background-color: rgb(39, 3, 3);
+  background-color: rgb(233, 231, 232);
 }
 .screenshots-container{
     text-align: center;
@@ -90,7 +94,7 @@ mat-card-actions button {
   width: 3px;
   height: 15px;
   justify-self: center;
-  background-color: black;
+  background-color: rgb(243, 31, 172);
   z-index: 2;
 }
 .screenshots {
@@ -114,6 +118,17 @@ mat-card {
 mat-card{
     color: black;
 }
-.summary{
+.game-summary{
     font-size: 22px;
+    margin: auto;
+    width: 60%;
+    text-align: left;
+}
+
+.summary{
+    font-size: 24px;
+    height: 70%;
+    line-height: normal;
+    text-overflow: ellipsis;
+    overflow-y: auto;
 }

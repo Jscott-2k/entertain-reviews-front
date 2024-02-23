@@ -158,6 +158,9 @@ $score-text-perfect: white;
         &--end {
             align-items: end;
         }
+        &--flex-start {
+            align-items: flex-start;
+        }
     }
 
     &-align-content {
