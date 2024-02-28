@@ -1,6 +1,7 @@
 import { GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription, catchError, map, shareReplay, throwError } from 'rxjs';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class AuthService {
         return throwError(() => new Error('An error occurred while processing authState.'))
       })
     ).subscribe((user: SocialUser | null) => {
-      this.user$.next(user);
       this.isLoggedIn$.next(user !== null);
+      this.user$.next(user);
     });
   }
   refreshToken(): void {

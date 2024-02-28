@@ -1,4 +1,6 @@
-import { AfterViewInit, Component, OnChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Observable, Subscription, map } from 'rxjs';
+import { UserModel } from 'src/app/models/user.model';
 import { AuthWrapperComponent } from 'src/app/shared/components/auth-wrapper/auth-wrapper.component';
 
 
@@ -14,25 +16,25 @@ export interface Tile {
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent{
+export class ProfileComponent implements OnInit, OnDestroy{
+ 
+  user!:UserModel | null;
+  userSub!:Subscription;
+  @ViewChild(AuthWrapperComponent, { static: true }) authWrapperRef!: AuthWrapperComponent;
+  constructor(){
 
-  powerlevel:number = 0;
-  avatarIndex:number = 1;
-  totalPlaytime:number=0;
-  accountAge:number = 0;
-  gameBacklog:number[] = [];
-  totalReviews:number = 0;
-  helpfuls:number = 0;
-  lastReview:number = 0;
-
-  @ViewChild(AuthWrapperComponent,{static:true}) authWrapperRef!: AuthWrapperComponent;
-  
-  get displayName(){
-
-    if(!this.authWrapperRef.user || !this.authWrapperRef.user.firstName){
-      return "No Name";
-    }
-    return this.authWrapperRef.user.firstName;
   }
+  ngOnInit() {
+    this.user = null;
+    this.userSub = this.authWrapperRef.user$.subscribe((user) => {
+      console.log("Recieved user ", user);
+      this.user = user;
+    });
+  }
+  ngOnDestroy(): void {
+    this.user = null;
+    this.userSub.unsubscribe();
+  }
+
 
 }

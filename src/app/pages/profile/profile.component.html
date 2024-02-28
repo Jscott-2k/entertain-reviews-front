@@ -1,27 +1,27 @@
 <app-auth-wrapper>
-  <mat-grid-list cols="4" rowHeight="52px" role="list">
-    
+
+  <mat-grid-list cols="4" rowHeight="52px" role="list" *ngIf="!!user">
     <mat-grid-tile [colspan]="4" [rowspan]="1" role="listitem">
-      power level: {{powerlevel}}
+      power level: {{user.power_level}}
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="2" [rowspan]="4" role="listitem">
-      <app-avatar [index]="avatarIndex"></app-avatar>
+      <app-avatar [index]="user.avatar"></app-avatar>
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="1" [rowspan]="1" role="listitem">
-      total reviews: {{totalReviews}}
+      total reviews: {{0}}
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="1" [rowspan]="1" role="listitem">
-      helpfuls: {{helpfuls}}
+      helpfuls: {{0}}
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1" role="listitem">
-      account age: {{accountAge}}
+      account age: {{0}}
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="1" [rowspan]="1" role="listitem">
-      total playtime: {{totalPlaytime}}
+      total playtime: {{user.total_playtime}}
     </mat-grid-tile>
 
     <mat-grid-tile [colspan]="2" [rowspan]="2" role="listitem">
@@ -29,7 +29,7 @@
     </mat-grid-tile>
     <mat-grid-tile [colspan]="2" [rowspan]="1" role="listitem">
 
-      {{displayName}}
+      {{user.display}}
 
     </mat-grid-tile>
 

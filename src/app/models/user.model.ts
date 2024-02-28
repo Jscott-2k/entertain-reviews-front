@@ -1,5 +1,5 @@
 export interface UserModel {
-    google_id:number,
+    google_id:string,
     email:string,
     power_level:number,
     display:string,

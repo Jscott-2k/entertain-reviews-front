@@ -1,0 +1,15 @@
+[
+    {
+        "id": "ENTER ID HERE",
+        "email":"ENTER EMAIL HERE",
+        "power_level": 0,
+        "display": "ENTER NAME HERE",
+        "date": "2024-02-28",
+        "avatar": 1,
+        "reviews": [],
+        "total_playtime": 1000,
+        "likes": [1, 2],
+        "dislikes": [3],
+        "helpfuls": [1, 2, 3]
+    }
+]
