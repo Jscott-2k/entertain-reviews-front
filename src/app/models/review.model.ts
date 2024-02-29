@@ -2,7 +2,7 @@ export interface ReviewModel {
     game:number,
     id:number,
     author:string,
-    date:string,
+    date:number,
     playtime:number,
     platform:string,
     written:string,

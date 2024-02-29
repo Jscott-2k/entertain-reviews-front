@@ -24,14 +24,13 @@ export class GameDetailsStepComponent
   /**
    * Update later with entries requested from igdb asynchronously
    */
-  private _gameAutoCompleteConfig: AutoCompleteOption[] = [
-    'My First Game',
-    'My Seconds Game',
-    'My Thirds Game',
-  ].map((game) => {
-    return { completed: game, value: game };
-  });
-
+  private _gameAutoCompleteMap: Map<string, string> = new Map([
+    ["My First Game", "My First Game"],
+    ["My Second Game", "My Second Game"],
+    ["My Third Game", "My Third Game"],
+  ]);
+  private _gameAutoCompleteConfig: AutoCompleteOption[] = Array.from(this._gameAutoCompleteMap.entries()).map(([value, completed]) => ({ value, completed }));
+  
   private _platformAutoCompleteConfig: AutoCompleteOption[] = [];
 
   constructor(
@@ -64,7 +63,8 @@ export class GameDetailsStepComponent
     ) as FormControl;
   }
   get SelectedGameName(): string {
-    return this.getGameAutoCompleteControl()?.value;
+    //return this.getGameAutoCompleteControl()?.value;
+    return this._gameAutoCompleteMap.get(this.getGameAutoCompleteControl()?.value) ?? "";
   }
   get SelectedPlatformName(): string {
     return this.getPlatformAutoCompleteControl()?.value;

@@ -32,6 +32,15 @@ export namespace CreateReviewFormConfig {
         'SFXSlider': 'SFX Score',
         'UIUXSlider': 'UI/UX Score',
     };
+    // Create a mapping for scores
+    export const scoreAspectMapping: SliderMapping = {
+        'GraphicsSlider': 'Graphics',
+        'GameplaySlider': 'Gameplay',
+        'StorySlider': 'Story',
+        'MusicSlider': 'Music',
+        'SFXSlider': 'SFX',
+        'UIUXSlider': 'UI/UX',
+    };
 
     // Create a mapping for weights
     export const weightLabelMapping: SliderMapping = {

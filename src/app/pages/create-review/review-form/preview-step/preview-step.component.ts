@@ -49,11 +49,11 @@ export class PreviewStepComponent extends FormStepComponent implements OnInit, O
   }
 
   calculateProsModifier(): number {
-    return this.logicService.updateProsModifier(this.formService.prosListControlsGroup);
+    return this.logicService.updateProsModifier(this.formService.prosControls);
   }
 
   calculateConsModifier(): number {
-    return this.logicService.updateConsModifier(this.formService.consListControlsGroup);
+    return this.logicService.updateConsModifier(this.formService.consControls);
   }
 
   subscribeToLogicService() {

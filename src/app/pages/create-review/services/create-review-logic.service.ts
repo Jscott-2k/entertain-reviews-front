@@ -10,7 +10,6 @@ import { CreateReviewFormService } from './create-review-form.service';
 })
 export class CreateReviewLogicService {
 
-
   private unweightedAverageValueSubject = new BehaviorSubject<number>(0);
   private weightedAverageValueSubject = new BehaviorSubject<number>(0);
 
@@ -38,8 +37,8 @@ export class CreateReviewLogicService {
   updateScores() {
     let technicalModiferControl = this.formService.technicalGroup.get("TechnicalReviewScoreModifier");
     let generalScoreGroup = this.formService.generalScoreGroup;
-    let prosListControls = this.formService.prosListControlsGroup;
-    let consListControls = this.formService.consListControlsGroup;
+    let prosListControls = this.formService.prosControls;
+    let consListControls = this.formService.consControls;
     this.updateGeneralScoreAverages(generalScoreGroup);
     this.updateProsModifier(prosListControls);
     this.updateConsModifier(consListControls);
@@ -164,4 +163,22 @@ export class CreateReviewLogicService {
     return { unweightedAverage: unweightedAverageValue, weightedAverage: weightedAverageValue };
   }
 
+  get overallUnweighted(): number {
+    return this.overallUnweightedScoreSubject.getValue();
+  }
+  get overallWeighted(): number {
+    return this.overallWeightedScoreSubject.getValue();
+  }
+  get generalWeighted(): number {
+    return this.weightedAverageValueSubject.getValue();
+  }
+  get generalUnweighted(): number {
+    return this.unweightedAverageValueSubject.getValue();
+  }
+  get totalProsModifier(): number {
+    return this.prosModifierSubject.getValue();
+  }
+  get totalConsModifier(): number {
+    return this.consModifierSubject.getValue();
+  }
 }

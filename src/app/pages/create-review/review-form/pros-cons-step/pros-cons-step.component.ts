@@ -36,7 +36,7 @@ export class ProsConsStepComponent extends FormStepComponent implements OnInit, 
       description: ['', [Validators.required, Validators.maxLength(this.characterLimit)]],
       modifier: [0, Validators.required],
     });
-    this.formService.prosList.push(newProControl);
+    this.formService.prosArray.push(newProControl);
     
     this._subscriptions.forEach((subscription) => subscription.unsubscribe());
     this.subscribeToProConListChanges();
@@ -48,22 +48,22 @@ export class ProsConsStepComponent extends FormStepComponent implements OnInit, 
       description: ['', [Validators.required, Validators.maxLength(this.characterLimit)]],
       modifier: [0, Validators.required],
     });
-    this.formService.consList.push(newConControl);
+    this.formService.consArray.push(newConControl);
 
     this._subscriptions.forEach((subscription) => subscription.unsubscribe());
     this.subscribeToProConListChanges();
   }
 
   removePro(index: number): void {
-    this.formService.prosList.removeAt(index);
+    this.formService.prosArray.removeAt(index);
   }
 
   removeCon(index: number): void {
-    this.formService.consList.removeAt(index);
+    this.formService.consArray.removeAt(index);
   }
 
   subscribeToProConListChanges(): void {
-    this.formService.prosListControlsGroup.forEach((group) => {
+    this.formService.prosControls.forEach((group) => {
       let modifier = group.get("modifier");
       if (modifier) {
         const subscription = modifier.valueChanges.subscribe(() => {
@@ -73,7 +73,7 @@ export class ProsConsStepComponent extends FormStepComponent implements OnInit, 
       }
     });
 
-    this.formService.consListControlsGroup.forEach((group) => {
+    this.formService.consControls.forEach((group) => {
       let modifier = group.get("modifier");
       if (modifier) {
         const subscription = modifier.valueChanges.subscribe(() => {

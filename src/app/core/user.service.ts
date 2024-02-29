@@ -126,7 +126,7 @@ export class UserService {
   private deleteUser(id: string) {
     return this.apiService.delete<void>(`users/${id}`);
   }
-  private updateUser(user: UserModel): Observable<UserModel> {
-    return this.apiService.put<UserModel>(`users/${user.google_id}`, user);
+  updateUser(user: UserModel): Observable<UserModel> {
+    return this.apiService.put<UserModel>(`users`, user);
   }
 }

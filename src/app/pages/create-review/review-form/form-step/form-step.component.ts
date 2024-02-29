@@ -78,10 +78,10 @@ export class FormStepComponent {
     return this._formService.technicalGroup;
   }
   get prosListControlsGroup() {
-    return this._formService.prosListControlsGroup;
+    return this._formService.prosControls;
   }
   get consListControlsGroup() {
-    return this._formService.consListControlsGroup;
+    return this._formService.consControls;
   }
   get submitGroup(): FormGroup {
     return this._formService.submitGroup;

@@ -171,9 +171,10 @@
             </div>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-button>Like</button>
-            <button mat-button>Dislike</button>
-            <button mat-button>Helpful</button>
+            <button mat-button (click)="share()" color="primary">Share</button>
+            <button mat-button [disabled]="!hasUser() || isDisliked(review.id)" (click)="toggleLike(review.id)"  [color]="isLiked(review.id) ? 'accent' : ''">{{ isLiked(review.id) ? 'Unlike' : 'Like' }}</button>
+            <button mat-button [disabled]="!hasUser() || isLiked(review.id)" (click)="toggleDislike(review.id)" [color]="isDisliked(review.id) ? 'accent' : ''">Dislike</button>
+            <button mat-button [disabled]="!hasUser()" (click)="toggleMarkHelpful(review.id)" [color]="isHelpful(review.id) ? 'accent' : ''">Helpful</button>
             <button mat-button color="primary">View Full Review</button>
           </mat-card-actions>
         </mat-card>

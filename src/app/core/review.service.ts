@@ -4,6 +4,9 @@ import { GameModel } from 'src/app/models/game.model';
 import { ApiService } from './api.service';
 import { ReviewModel } from '../models/review.model';
 import { ReviewedGameModel } from '../models/reviewed-game.model';
+import { ReviewScoreModel } from '../models/review-score.model';
+import { ReviewProConModel } from '../models/review-pro-con.model';
+import { CreateReviewDTO } from '../shared/interfaces/create-review-dto.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -65,12 +68,13 @@ export class ReviewService {
 
   deleteReview(){}
   
-  createReview(reviewData: any): Observable<any> {
+  createReview(
+    createReviewData: CreateReviewDTO): Observable<any> {
+    
+    this.apiService.post("create-review", createReviewData);
 
-    this.apiService.post("create-review");
-
-    this.reviews.push(reviewData);
-    console.info(reviewData);
+    this.reviews.push(createReviewData.reviewData);
+    console.info(createReviewData.reviewData);
 
     return of({ success: true, message: 'Review posted successfully' });
   }
